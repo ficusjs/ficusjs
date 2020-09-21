@@ -1,0 +1,3 @@
+# Ficus documentation
+
+Coming soon!

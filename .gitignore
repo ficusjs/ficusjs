@@ -1,13 +1,6 @@
 node_modules
 test/snapshots
-<<<<<<< HEAD
-.idea
-.vscode
-*.log
-.DS_Store
-=======
 .DS_Store
 .idea
 .vscode
 *.log
->>>>>>> feat: add scaffold

@@ -1,6 +1,8 @@
+/* global HTMLElement */
 import { collateObservedAttrs } from './util/collate-observed-attrs.js'
 import { toKebabCase } from './util/to-kebab-case.js'
 import { isPromise } from './util/is-promise.js'
+import { emit } from './util/emit.js'
 
 function createComponent (tagName, props) {
   const observedAttrs = collateObservedAttrs(props.props)
@@ -9,12 +11,10 @@ function createComponent (tagName, props) {
   window.customElements.define(
     tagName,
     class FicusComponent extends HTMLElement {
+      /* standard HTMLElement props and lifecycle hooks */
+
       static get observedAttributes () {
         return observedAttrs
-      }
-
-      get initialised () {
-        return this._props && this._state && this._computed && this.templateRenderer
       }
 
       connectedCallback () {
@@ -39,6 +39,12 @@ function createComponent (tagName, props) {
       attributeChangedCallback () {
         this._checkInit()
         this._preprocess()
+      }
+
+      /* custom props and methods */
+
+      get initialised () {
+        return this._props && this._state && this._computed && this.templateRenderer
       }
 
       _checkInit () {

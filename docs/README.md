@@ -1,3 +1,6 @@
-# Ficus documentation
+# FicusJS documentation
 
-Coming soon!
+- [Getting started](getting-started.md)
+- [Component](component.md)
+- [Store](store.md)
+- [Event](event.md)

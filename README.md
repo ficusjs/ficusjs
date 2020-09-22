@@ -1,8 +1,6 @@
 # FicusJS
 
-<p style="text-align: center">
-  <img src="img/ficusjs.svg" alt="FicusJS" width="200">
-</p>
+<img src="img/ficusjs.svg" alt="FicusJS" width="200" align="right">
 
 FicusJS is a set of lightweight functions for developing applications using web components.
 

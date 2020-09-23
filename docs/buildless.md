@@ -1,4 +1,4 @@
-# Build-less
+# Going build-less
 
 Browsers have improved a lot over the past years. It's now possible to do web development without requiring any build tools, using the native module loader of the browser. We think this is a great fit for FicusJS, and we recommend this as a general starting point.
 

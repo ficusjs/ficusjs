@@ -327,6 +327,32 @@ There are a number of renderers available and can be added to suit your requirem
 - [uhtml](https://www.npmjs.com/package/uhtml)
 - [htm and Preact](https://www.npmjs.com/package/htm)
 
+### Renderer function
+
+The `renderer` function can be any function that creates HTML from the result of the `render` function.
+
+The renderer function will be invoked with the following arguments in order:
+
+| Argument | Description |
+| --- | --- |
+| `what` | The result returned from the `render` function |
+| `where` | The DOM node to render into |
+
+```js
+renderer (what, where)
+```
+
+If your `renderer` function accepts a different argument order, simply pass a wrapper function to the component:
+
+```js
+createComponent('test-comp', {
+  renderer (what, where) {
+    // the uhtml renderer requires a different argument order
+    renderer(where, what)
+  }
+}
+```
+
 ### Rendering props
 
 Props can be rendered in the template.

@@ -11,7 +11,7 @@ function createComponent (tagName, props) {
   window.customElements.define(
     tagName,
     class FicusComponent extends HTMLElement {
-      /* standard HTMLElement props and lifecycle hooks */
+      // standard HTMLElement props and lifecycle hooks
 
       static get observedAttributes () {
         return observedAttrs
@@ -19,6 +19,8 @@ function createComponent (tagName, props) {
 
       connectedCallback () {
         this._checkInit()
+        this._subscribeToStores(false)
+        this._subscribeToEventBus()
         this._preprocess()
         if (typeof this.mounted === 'function' && !this.isMountedCalled) {
           this.mounted()
@@ -30,6 +32,8 @@ function createComponent (tagName, props) {
       }
 
       disconnectedCallback () {
+        this._unsubscribeFromStores()
+        this._unsubscribeFromEventBus()
         if (typeof this.removed === 'function') {
           this.removed()
           this.isRemovedCalled = true
@@ -41,7 +45,7 @@ function createComponent (tagName, props) {
         this._preprocess()
       }
 
-      /* custom props and methods */
+      // custom props and private methods
 
       get initialised () {
         return this._props && this._state && this._computed && this.templateRenderer
@@ -62,7 +66,7 @@ function createComponent (tagName, props) {
         if (options.state && typeof options.state !== 'function') throw new Error('State must be a function!')
         this._state = options.state || {}
 
-        // create a getter cache for the computed functions
+        // create a cache for the computed functions
         this.computedCache = {}
 
         // create a subscription callback
@@ -73,6 +77,12 @@ function createComponent (tagName, props) {
           // Run the render processor now that there's changes
           this._processRender()
         }
+
+        // If we have a store, use it
+        this.setStore(props.store || null)
+
+        // if we have pub/sub event bus use it
+        this.setEventBus(props.eventBus || null)
 
         // Run passed props through the props processor
         this.props = this._processProps()
@@ -188,12 +198,12 @@ function createComponent (tagName, props) {
 
       _processInitProps (props) {
         const self = this
-        const protectedMethods = ['state', 'created', 'mounted', 'updated', 'removed', 'render']
+        const protectedMethods = ['state', 'created', 'mounted', 'updated', 'removed', 'render', 'renderer', 'setStore', 'setEventBus']
         const keys = Object.keys(props)
         if (!keys.length) return
         // Run through and bind to the component instance
         keys.forEach(key => {
-          if (!self[key] && typeof props[key] === 'function' && !protectedMethods.includes(key)) {
+          if (!self[key] && !protectedMethods.includes(key) && typeof props[key] === 'function') {
             self[key] = props[key].bind(self)
           }
           if (key === 'computed') {
@@ -354,7 +364,101 @@ function createComponent (tagName, props) {
           }
         }
       }
+
+      _subscribeToStores (invokeSubscribeCallback = true) {
+        if (this.store && this.store.subscribe && typeof this.store.subscribe === 'function' && !this.unsubscribe) {
+          this.unsubscribe = this.store.subscribe(this.subscribeCallback)
+          if (invokeSubscribeCallback) this.subscribeCallback()
+        } else if (this.store && typeof this.store === 'object' && !this.store.subscribe) {
+          this.unsubscribe = {}
+          const keys = Object.keys(this.store)
+          keys.forEach(k => {
+            if (this.store[k] && this.store[k].subscribe && typeof this.store[k].subscribe === 'function' && !this.unsubscribe[k]) {
+              this.unsubscribe[k] = this.store[k].subscribe(this.subscribeCallback)
+            }
+          })
+          if (invokeSubscribeCallback) this.subscribeCallback()
+        }
+      }
+
+      _unsubscribeFromStores () {
+        if (this.store && this.unsubscribe && typeof this.unsubscribe === 'object') {
+          const keys = Object.keys(this.unsubscribe)
+          keys.forEach(k => {
+            this.unsubscribe[k]()
+          })
+          this.unsubscribe = null
+        } else if (this.store && this.unsubscribe && typeof this.unsubscribe === 'function') {
+          this.unsubscribe()
+          this.unsubscribe = null
+        }
+      }
+
+      _subscribeToEventBus () {
+        for (const k in this._eventSubscriptions) {
+          const { unsubscribe, callback } = this._eventSubscriptions[k]
+          if (!unsubscribe) {
+            this._eventSubscriptions[k].unsubscribe = this._eventBus.subscribe(k, callback)
+          }
+        }
+      }
+
+      _unsubscribeFromEventBus () {
+        for (const k in this._eventSubscriptions) {
+          const { unsubscribe } = this._eventSubscriptions[k]
+          unsubscribe && unsubscribe()
+          this._eventSubscriptions[k].unsubscribe = null
+        }
+      }
+
+      /* instance methods for components */
+
+      /**
+       * Set a store for this component so changes to the store
+       * are monitored and reactive DOM changes are made
+       * @param {Object|Store} store
+       */
+      setStore (store) {
+        this.store = store
+        this._subscribeToStores()
+      }
+
+      /**
+       * Set an event bus instance for this component to use
+       * @param {Events} eventBus
+       */
+      setEventBus (eventBus) {
+        const self = this
+        this._eventBus = eventBus
+        this._eventSubscriptions = {}
+        this.eventBus = {
+          subscribe (event, callback) {
+            self._eventSubscriptions[event] = { unsubscribe: self._eventBus.subscribe(event, callback), callback }
+            return function () {
+              const { unsubscribe } = self._eventSubscriptions[event]
+              unsubscribe && unsubscribe()
+              self._eventSubscriptions[event].unsubscribe = null
+            }
+          },
+          publish (event, data = {}) {
+            self._eventBus.publish(event, data)
+          }
+        }
+      }
     })
 }
 
-export { createComponent }
+/**
+ * Function to use a FicusJS module of components
+ * @param {Object} module
+ */
+function use (module) {
+  if (module.create && typeof module.create === 'function') {
+    module.create({
+      createComponent,
+      use
+    })
+  }
+}
+
+export { createComponent, use }

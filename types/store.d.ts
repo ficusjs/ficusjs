@@ -29,6 +29,8 @@ export interface StoreOptions<S> {
   persist?: string | Persist<S>
 }
 
+export type Store<S> = StoreOfStores<S> | StoreClass<S>
+
 declare class StoreClass<S> {
   constructor(options: StoreOptions<S>)
   dispatch (actionKey: keyof StoreActionTree<S>, payload: any): StoreDispatch<S>

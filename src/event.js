@@ -1,12 +1,12 @@
 class Events {
   constructor () {
-    if (typeof window !== 'undefined' && window.__ficusjs__ && window.__ficusjs__.events) {
-      return window.__ficusjs__.events
+    if (typeof window !== 'undefined' && window.__ficusjs__ && window.__ficusjs__.eventBus) {
+      return window.__ficusjs__.eventBus
     }
     this.events = {}
     if (typeof window !== 'undefined') {
       window.__ficusjs__ = window.__ficusjs__ || {}
-      window.__ficusjs__.events = window.__ficusjs__.events || this
+      window.__ficusjs__.eventBus = window.__ficusjs__.eventBus || this
     }
   }
 
@@ -66,7 +66,7 @@ class Events {
  * Function to create an Events instance
  * @returns {Events}
  */
-export function createEvents () {
+export function createEventBus () {
   return new Events()
 }
 
@@ -74,6 +74,6 @@ export function createEvents () {
  * Function to get the running Events instance
  * @returns {Events}
  */
-export function getEvents () {
-  return createEvents()
+export function getEventBus () {
+  return createEventBus()
 }

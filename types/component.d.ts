@@ -1,4 +1,10 @@
-export interface FicusComponent extends HTMLElement {}
+import { Events } from './event'
+import { Store } from './store'
+
+export interface FicusComponent<S, D> extends HTMLElement {
+  setStore: (store: Store<S>) => void
+  setEvents: (events: Events<D>) => void
+}
 
 export type ComponentGetter = () => any
 export type ComponentMethod = (...args: any[]) => void
@@ -18,7 +24,7 @@ export interface ComponentPropertyTree {
   [key: string]: ComponentProperty
 }
 
-export type ComponentOptions<S, T> = {
+export type ComponentOptions<I, T, D, S> = {
   render: () => T
   computed?: ComponentComputedTree
   props?: ComponentPropertyTree
@@ -26,9 +32,11 @@ export type ComponentOptions<S, T> = {
   mounted?: () => void
   updated?: () => void
   removed?: () => void
-  state?: () => S
+  state?: () => I,
+  eventBus?: Events<D>
+  store?: Store<S>
 } & {
   [key: string]: ComponentMethod
 }
 
-export declare function createComponent<S, T>(tagName: string, options: ComponentOptions<S, T>): void
+export declare function createComponent<I, T, D, S>(tagName: string, options: ComponentOptions<I, T, D, S>): void

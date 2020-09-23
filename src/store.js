@@ -93,9 +93,6 @@ class Store {
       self.mutations = options.mutations
     }
 
-    // if we have a router, use it
-    self.router = options.router || null
-
     // initial state values
     let initialState = options.initialState || {}
     self.copyOfInitialState = self._copyValue(initialState)

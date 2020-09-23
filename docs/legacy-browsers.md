@@ -1,0 +1,5 @@
+# Legacy browsers
+
+FicusJS uses modern Javascript (ES6+) but can be transpiled to work with legacy browsers.
+
+See [the examples](https://github.com/ducksoupdev/ficusjs/examples) directory.

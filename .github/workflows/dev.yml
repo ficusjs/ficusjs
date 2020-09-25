@@ -14,13 +14,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Installing Surge
-        run: npm install -g surge
-      - name: Installing NPM packages
-        run: npm install
+      - run: npm install -g surge
+      - run: npm install
         working-directory: ./site/app
-      - name: Building site
-        run: npm run build
+      - run: npm run build
         working-directory: ./site/app
-      - name: Deploying to Surge
       - run: surge ./site/app/dist ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}

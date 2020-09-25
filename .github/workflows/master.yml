@@ -16,11 +16,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Installing NPM packages
-        run: npm install
+      - run: npm install
         working-directory: ./site/app
-      - name: Building site
-        run: npm run build
+      - run: npm run build
         working-directory: ./site/app
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3

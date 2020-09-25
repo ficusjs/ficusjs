@@ -4,3 +4,5 @@ test
 examples
 img
 .editorconfig
+.idea
+.vscode

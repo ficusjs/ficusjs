@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploying to Surge
     steps:
-      - name: Checkout
       - uses: actions/checkout@v2
       - name: Set-up NodeJS
         uses: actions/setup-node@v1

@@ -10,4 +10,4 @@ FicusJS is a set of lightweight functions for developing applications using web 
 
 ## Documentation
 
-See the [full documentation](https://github.com/ducksoupdev/ficusjs/wiki).
+See the [full documentation](https://docs.ficusjs.org).

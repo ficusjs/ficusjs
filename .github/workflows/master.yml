@@ -1,0 +1,30 @@
+name: Deploy to Github pages
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploying to Github pages
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Set-up NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Installing NPM packages
+        run: npm install
+        working-directory: ./site/app
+      - name: Building site
+        run: npm run build
+        working-directory: ./site/app
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: master
+          FOLDER: ./site/app/dist

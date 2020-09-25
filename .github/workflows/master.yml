@@ -25,4 +25,5 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: master
-          FOLDER: ./site/app/dist
+          FOLDER: site/app/dist
+          CLEAN: false

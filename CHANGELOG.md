@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2020-09-25
+
+- Initial release
+
 ## [0.2.0] - 2020-09-23
 
 ### Added
@@ -19,4 +23,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2020-09-22
 
 ### Added
-- Initial release
+- Alpha release

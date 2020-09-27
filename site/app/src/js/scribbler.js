@@ -113,3 +113,12 @@ function checkBackToTop () {
   (windowTop > offsetOpacity) && backTop.classList.add('cd-top--fade-out')
   scrolling = false
 }
+
+['https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap'].forEach(function (f) {
+  const gf = document.createElement('link')
+  gf.rel = 'stylesheet'
+  gf.href = f
+  gf.type = 'text/css'
+  const gd = document.getElementsByTagName('link')[0]
+  gd.parentNode.insertBefore(gf, gd)
+})

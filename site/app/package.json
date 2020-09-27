@@ -5,9 +5,11 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production eleventy --input=src --output=dist",
     "build:css": "postcss src/css --dir dist/css",
+    "postbuild:css": "run-p concat:css:*",
+    "concat:css:home": "concat-cli -f dist/css/scribbler-global.css dist/css/scribbler-landing.css -o dist/css/home.css",
+    "concat:css:doc": "concat-cli -f dist/css/scribbler-global.css dist/css/scribbler-doc.css dist/css/darcula.css -o dist/css/doc.css",
     "build:js": "terser -c -m -o dist/js/scribbler.js src/js/scribbler.js",
     "postbuild": "run-p build:* copy:*",
-    "copy:css": "ncp src/css dist/css",
     "copy:js": "ncp src/js dist/js",
     "copy:favicon": "ncp src/favicon.ico dist/favicon.ico",
     "copy:img": "ncp src/img dist/img",
@@ -19,6 +21,7 @@
   "author": "Matt Levy",
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0",
+    "concat-cli": "4.0.0",
     "cssnano": "4.1.10",
     "cross-env": "7.0.2",
     "ncp": "2.0.0",

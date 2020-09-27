@@ -110,6 +110,6 @@ function checkBackToTop () {
     backTop.classList.remove('cd-top--is-visible')
     backTop.classList.remove('cd-top--fade-out')
   }
-  ( windowTop > offsetOpacity ) && backTop.classList.add('cd-top--fade-out')
+  (windowTop > offsetOpacity) && backTop.classList.add('cd-top--fade-out')
   scrolling = false
 }

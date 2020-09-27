@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{title}}</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap">
   <link rel="stylesheet" href="css/darcula.css">
   <link rel="stylesheet" href="css/scribbler-global.css">
   <link rel="stylesheet" href="css/scribbler-doc.css">
@@ -43,25 +43,30 @@
 </svg>
 <div class="doc__bg"></div>
 <nav class="header">
-  <div class="logo">FicusJS <span class="logo__thin">Doc</span></div>
-  <ul class="menu">
-    <div class="menu__item toggle"><span></span></div>
-    <li class="menu__item"><a href="https://github.com/ducksoupdev/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
-    <li class="menu__item"><a href="index.html" class="link link--dark"><svg class="icon"><use xlink:href="#icon_home" /></svg> Home</a></li>
-  </ul>
+  <div class="wrapper">
+    <div class="logo">FicusJS <span class="logo__thin">Doc</span></div>
+    <ul class="menu">
+      <div class="menu__item toggle"><span></span></div>
+      <li class="menu__item"><a href="https://github.com/ducksoupdev/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
+      <li class="menu__item"><a href="index.html" class="link link--dark"><svg class="icon"><use xlink:href="#icon_home" /></svg> Home</a></li>
+    </ul>
+  </div>
 </nav>
 <div class="wrapper">
-  <aside class="doc__nav">
-    {{> doc_nav}}
-  </aside>
-  <article class="doc__content">
-    {{{ content }}}
-  </article>
+  <div class="wrapper__content">
+    <aside class="doc__nav">
+      {{> doc_nav}}
+    </aside>
+    <article class="doc__content">
+      {{{ content }}}
+    </article>
+  </div>
 </div>
 <a href="#" class="cd-top text-replace"></a>
 
 <script src="js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <script type="module" src="js/scribbler.js"></script>
+{{{ serviceWorker }}}
 </body>
 </html>

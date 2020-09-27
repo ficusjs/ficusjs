@@ -3,6 +3,7 @@
   background: url('../img/logo.svg') no-repeat;
   background-size: contain;
   margin: 1rem 0 0 1rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 nav {
@@ -14,6 +15,7 @@ nav {
   text-align: center;
   background-color: var(--bg-color);
   padding: 2rem 0 10rem 0;
+  line-height: 1.5;
 }
 
 .hero__title {
@@ -32,6 +34,7 @@ nav {
 .hero__description {
   margin: -1rem auto 2rem auto;
   font-size: 120%;
+  width: 90%;
 }
 
 .hero__terminal {
@@ -102,7 +105,8 @@ nav {
 .checkmark {
   list-style: none;
   padding: 0;
-  margin: 0 0 3rem;
+  margin: 0 auto 3rem auto;
+  width: 90%;
 }
 
 .checkmark li:before {
@@ -115,7 +119,7 @@ nav {
 
 @media (max-width: 750px) {
   .hero__terminal {
-    width: 70%;
+    width: 90%;
   }
   .tab__container > ul {
     right: auto;

@@ -19,11 +19,15 @@
 html, body {
   padding: 0;
   margin: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: sans-serif;
   background-color: white;
 }
 
-p {
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+p, li {
   font-weight: 300;
   color: #4A4A4A;
 }
@@ -232,9 +236,22 @@ table td:first-child {
   white-space: nowrap;
 }
 
-@media screen and (max-width: 600px) {
-  nav {
-    grid-template-columns: 70px auto;
+/* layout */
+.wrapper {
+  margin: 0 auto;
+  width: 70%;
+}
+
+.footer {
+  text-align: center;
+  background-color: var(--primary-color);
+  padding: 2rem;
+  color: white;
+}
+
+@media screen and (max-width: 980px) {
+  .wrapper {
+    width: 90%;
   }
 
   .menu__item{
@@ -258,19 +275,6 @@ table td:first-child {
     display: block;
     padding: 0 0 0.5rem 0;
   }
-}
-
-/* layout */
-.wrapper {
-  margin: 0 auto;
-  width: 70%;
-}
-
-.footer {
-  text-align: center;
-  background-color: var(--primary-color);
-  padding: 2rem;
-  color: white;
 }
 
 @keyframes fadeUp {

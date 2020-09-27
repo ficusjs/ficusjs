@@ -10,6 +10,7 @@
     "concat:css:doc": "concat-cli -f dist/css/scribbler-global.css dist/css/scribbler-doc.css dist/css/darcula.css -o dist/css/doc.css",
     "build:js": "terser -c -m -o dist/js/scribbler.js src/js/scribbler.js",
     "postbuild": "mkdirp dist/js && run-s build:* copy:* workbox:gen",
+    "clean": "rimraf dist",
     "copy:js": "ncp src/js dist/js",
     "copy:favicon": "ncp src/favicon.ico dist/favicon.ico",
     "copy:img": "ncp src/img dist/img",
@@ -30,6 +31,7 @@
     "npm-run-all": "4.1.5",
     "postcss": "8.0.9",
     "postcss-cli": "8.0.0",
+    "rimraf": "3.0.2",
     "standard": "14.3.4",
     "terser": "5.3.2",
     "workbox-cli": "5.1.4"

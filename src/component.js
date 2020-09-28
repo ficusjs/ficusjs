@@ -318,9 +318,10 @@ function createComponent (tagName, props) {
         // set instance properties for any defined props
         if (props) {
           keys.forEach(key => {
+            let existingPropValue
             if (self[key]) {
-              console.warn(`Instance property '${key}' already exists on the component instance`)
-              return
+              existingPropValue = self[key]
+              delete self[key]
             }
             Object.defineProperty(self, key, {
               get () {
@@ -342,6 +343,7 @@ function createComponent (tagName, props) {
               },
               enumerable: true
             })
+            if (existingPropValue) self[key] = existingPropValue
           })
         }
       }

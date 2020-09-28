@@ -1,4 +1,4 @@
-# IE11 FicusJS example
+# IE11 example
 
 This example builds a bundle specifically for IE11. This would also apply to other legacy browsers that do not support ES6 or web components natively.
 
@@ -16,4 +16,4 @@ Build the bundle and serve:
 npm start
 ```
 
-Visit http://localhost:5000 in IE11
+Visit [http://localhost:5000](http://localhost:5000)

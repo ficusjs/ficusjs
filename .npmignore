@@ -2,7 +2,10 @@
 site
 test
 examples
+cypress
 img
 .editorconfig
 .idea
 .vscode
+cypress.json
+favicon.ico

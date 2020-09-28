@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>FicusJS basic example</title>
+</head>
+<body>
+<hello-world></hello-world>
+<script type="module">
+  import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+  import { createComponent } from 'https://unpkg.com/ficusjs@1.0.0/dist/component.js?module'
+
+  createComponent('hello-world', {
+    renderer,
+    handleClick (e) {
+      window.alert('Hello to you!')
+    },
+    render () {
+      return html`
+      <div>
+        <p>FicusJS hello world</p>
+        <button type="button" @click="${this.handleClick}">Click me</button>
+      </div>
+    `
+    }
+  })
+</script>
+</body>
+</html>

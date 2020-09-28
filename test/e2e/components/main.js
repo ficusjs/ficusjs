@@ -1,0 +1,8 @@
+import './async-render.js'
+import './basic.js'
+import './computed.js'
+import './lifecycle.js'
+import './methods.js'
+import './props.js'
+import './slots.js'
+import './state.js'

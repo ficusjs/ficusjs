@@ -1,0 +1,9 @@
+{
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "cypress/reports/junit/ci-test-output-[hash].xml",
+    "jenkinsMode": true,
+    "rootSuiteTitle": "FicusJS Integration Tests",
+    "testsuitesTitle": "Cypress Tests"
+  }
+}

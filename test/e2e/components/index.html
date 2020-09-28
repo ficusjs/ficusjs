@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Components</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="page">
+  <h1>Components</h1>
+  <mock-basic class="instance"></mock-basic>
+
+  <mock-async-render class="instance"></mock-async-render>
+
+  <mock-computed class="instance"></mock-computed>
+  <mock-cached-computed class="instance"></mock-cached-computed>
+
+  <div class="instance">
+    <div id="lifecycle-container"></div>
+    <button type="button" id="add-lifecycle">Add lifecycle component</button>
+    <button type="button" id="remove-lifecycle">Remove lifecycle component</button>
+  </div>
+
+  <mock-methods class="instance"></mock-methods>
+  <div class="instance">
+    <mock-method-event></mock-method-event>
+    <span class="d-none" id="event-emit-message"><code>has-clicked</code> event has fired</span>
+  </div>
+
+  <mock-props class="instance" display-string="the holy grail"></mock-props>
+  <mock-props-default class="instance"></mock-props-default>
+  <mock-props-default class="instance" display-string=""></mock-props-default>
+
+  <mock-props-default-number class="instance"></mock-props-default-number>
+  <mock-props-default-number class="instance" count="1.6"></mock-props-default-number>
+
+  <mock-props-default-boolean-true class="instance"></mock-props-default-boolean-true>
+  <mock-props-default-boolean-true class="instance" has-loaded="false"></mock-props-default-boolean-true>
+
+  <mock-props-default-object class="instance"></mock-props-default-object>
+  <mock-props-default-object class="instance" config='{ "color": "danger" }'></mock-props-default-object>
+
+  <div class="instance">
+    <div id="required-container"></div>
+    <button type="button" id="add-required">Add required props component</button>
+  </div>
+
+  <div class="instance">
+    <mock-props-observed display-string="the holy grail"></mock-props-observed>
+    <button type="button" id="change-observed-prop">Change observed prop</button>
+  </div>
+
+  <div class="instance">
+    <mock-props-not-observed display-string="the holy grail"></mock-props-not-observed>
+    <button type="button" id="change-not-observed-prop">Change not observed prop</button>
+  </div>
+
+  <mock-slots class="instance">Marty McFly</mock-slots>
+
+  <mock-slot-named class="instance">
+    <span slot="first" class="text-info">Marty McFly</span>
+    <span slot="second" class="text-success">Doc Brown</span>
+  </mock-slot-named>
+
+  <mock-state class="instance"></mock-state>
+  <mock-state class="instance"></mock-state>
+  <mock-state class="instance"></mock-state>
+
+  <mock-prop-state class="instance"></mock-prop-state>
+  <mock-prop-state dummy="Dumb dumb" class="instance"></mock-prop-state>
+
+  <mock-string-state class="instance"></mock-string-state>
+
+  <mock-object-state class="instance"></mock-object-state>
+
+  <mock-props-multiple-container class="instance"></mock-props-multiple-container>
+</div>
+
+<script src="main.js" type="module"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // script for adding a lifecycle component
+    document.getElementById('add-lifecycle').addEventListener('click', function () {
+      const comp = document.createElement('mock-lifecycle')
+      comp.classList.add('d-block')
+      document.getElementById('lifecycle-container').appendChild(comp)
+    })
+
+    // script for removing a component
+    document.getElementById('remove-lifecycle').addEventListener('click', function () {
+      document.querySelector('mock-lifecycle').remove()
+    })
+
+    // script for changing observed prop value
+    document.getElementById('change-observed-prop').addEventListener('click', function () {
+      document.querySelector('mock-props-observed').setAttribute('display-string', 'the last crusade')
+    })
+
+    // script for changing not observed prop value
+    document.getElementById('change-not-observed-prop').addEventListener('click', function () {
+      document.querySelector('mock-props-not-observed').setAttribute('display-string', 'the last crusade')
+    })
+
+    // script for adding a required props component
+    document.getElementById('add-required').addEventListener('click', function () {
+      const comp = document.createElement('mock-props-required')
+      comp.classList.add('d-block')
+      document.getElementById('required-container').appendChild(comp)
+    })
+
+    document.querySelector('mock-method-event').addEventListener('has-clicked', function () {
+      document.getElementById('event-emit-message').classList.remove('d-none')
+    })
+  })
+</script>
+</body>
+</html>

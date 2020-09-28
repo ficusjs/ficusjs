@@ -25,6 +25,7 @@ export interface ComponentPropertyTree {
 }
 
 export type ComponentOptions<I, T, D, S> = {
+  renderer: (what: T, where: any) => void
   render: () => T
   computed?: ComponentComputedTree
   props?: ComponentPropertyTree

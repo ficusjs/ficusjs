@@ -6,11 +6,13 @@ import { createPersist, createStore, getStore } from './store.js'
  * Function to use another FicusJS module
  * @param {Object} module
  */
-function use (module) {
+function use (module, renderer, html) {
   if (module.create && typeof module.create === 'function') {
-    module.create({
+    return module.create({
       // components
       createComponent,
+      renderer,
+      html,
 
       // event bus
       createEventBus,

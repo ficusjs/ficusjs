@@ -20,11 +20,14 @@ The following example shows how to consume a module from a shared library.
 // import the required FicusJS functions
 import { createComponent, use } from 'https://unpkg.com/ficusjs?module'
 
+// import the renderer and html tagged template literal from the lit-html library
+import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+
 // import component library from a local path
 import { module } from './path/to/component-module.esm.js'
 
 // import the components into your application
-use(module)
+use(module, renderer, html)
 
 // in your template, use the component
 createComponent('my-component', {
@@ -45,12 +48,23 @@ The `use` function will import a module of components into your application read
 // import the use function
 import { use } from 'https://unpkg.com/ficusjs?module'
 
+// import the renderer and html tagged template literal from the lit-html library
+import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+
 // import component module from a local path
 import { module } from './path/to/component-module.esm.js'
 
 // import the components into your application
-use(module)
+use(module, renderer, html)
 ```
+
+The following arguments must be provided to the `use` function:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `module` | `object` | The imported `module` |
+| `renderer` | `function` | The `renderer` function for passing to components |
+| `html` | `object` | The `html` tagged template literal for passing to components |
 
 ## Creating a module
 
@@ -64,6 +78,37 @@ The shared module `create` method will be invoked by the `use` function in the c
 
 It is the responsibility of the `create` method to use the `object` argument to create components, stores or events (anything required by the module).
 
+```js
+// Export a module object that is invoked by the `use` function
+export const module = {
+  create ({ /* arguments passed to the create function */ }) {
+    // create components or stores here
+  }
+}
+```
+
+### Async `create` method
+
+You can return a `Promise` from the `create` method that contains async operations.
+
+```js
+// use async/await
+export const module = {
+  async create ({ /* arguments passed to the create function */ }) {
+    await asyncFunction()
+  }
+}
+
+// return a Promise
+export const module = {
+  create ({ /* arguments passed to the create function */ }) {
+    return asyncFunction()
+  }
+}
+```
+
+If returning a `Promise`, the calling module must handle the response before continuing execution.
+
 ### When using the all features build
 
 When using the all features build `dist/index.js`, the `object` argument will contain the following properties.
@@ -71,6 +116,8 @@ When using the all features build `dist/index.js`, the `object` argument will co
 | Property | Type | Description |
 | --- | --- | --- |
 | `createComponent` | `function` | The `createComponent` function |
+| `renderer` | `function` | The `renderer` function for component rendering |
+| `html` | `object` | The `html` tagged template literal for component rendering |
 | `createEventBus` | `function` | The `createEventBus` function |
 | `createPersist` | `function` | The `createPersist` function |
 | `createStore` | `function` | The `createStore` function |
@@ -83,7 +130,7 @@ The module will be created using the provided `object` argument.
 ```js
 // Export a module object that is invoked by the `use` function
 export const module = {
-  create ({ createComponent, createEventBus, createPersist, createStore, getEventBus, getStore, use }) {
+  create ({ createComponent, renderer, html, createEventBus, createPersist, createStore, getEventBus, getStore, use }) {
     // create components, stores or events here
   }
 }
@@ -117,7 +164,7 @@ export const module = {
     createComponent('shared-component', createSharedComponent(renderer, html, getStore))
 
     // import and use another module
-    use(anotherModule)
+    use(anotherModule, renderer, html)
   }
 }
 ```
@@ -129,6 +176,8 @@ When using the component only `dist/component.js` without stores and events, the
 | Property | Type | Description |
 | --- | --- | --- |
 | `createComponent` | `function` | The `createComponent` function |
+| `renderer` | `function` | The `renderer` function for component rendering |
+| `html` | `object` | The `html` tagged template literal for component rendering |
 | `use` | `function` | The `use` function for loading modules internally |
 
 The module object will be created using the provided arguments.
@@ -136,7 +185,7 @@ The module object will be created using the provided arguments.
 ```js
 // Export a module object that is invoked by the `use` function
 export const module = {
-  create ({ createComponent, use }) {
+  create ({ createComponent, renderer, html, use }) {
     // create components here
   }
 }

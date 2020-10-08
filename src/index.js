@@ -1,4 +1,7 @@
 import { createComponent } from './component.js'
+import { withEventBus } from './with-event-bus.js'
+import { withStateTransactions } from './with-state-transactions.js'
+import { withStore } from './with-store.js'
 import { createEventBus, getEventBus } from './event.js'
 import { createPersist, createStore, getStore } from './store.js'
 
@@ -32,6 +35,9 @@ function use (module, renderer, html) {
 export {
   // components
   createComponent,
+  withStateTransactions,
+  withStore,
+  withEventBus,
 
   // event bus
   createEventBus,

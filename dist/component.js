@@ -1,1 +1,416 @@
-function toKebabCase(e){return e.replace(/([A-Z])/g,"-$1").toLowerCase()}function createComponent(e,t){const s=function(e){if(!e)return[];const t=[];return Object.keys(e).forEach(s=>{(null==e[s].observed||e[s].observed)&&t.push(toKebabCase(s))}),t}(t.props);window.customElements.get(e)||window.customElements.define(e,class extends HTMLElement{static get observedAttributes(){return s}connectedCallback(){this._checkInit(),this._subscribeToStores(!1),this._subscribeToEventBus(),this._preprocess(),"function"!=typeof this.mounted||this.isMountedCalled||(this.mounted(),this.isMountedCalled=!0),"function"==typeof this.updated&&this.isMountedCalled&&this.updated()}disconnectedCallback(){this._unsubscribeFromStores(),this._unsubscribeFromEventBus(),"function"==typeof this.removed&&(this.removed(),this.isRemovedCalled=!0)}attributeChangedCallback(){this._checkInit(),this._preprocess()}get initialised(){return this._props&&this._state&&this._computed&&this.templateRenderer}_checkInit(){this.initialised||this._init(t)}_init(e){if(this._props=e.props||{},this._computed=e.computed||{},e.state&&"function"!=typeof e.state)throw new Error("State must be a function!");this._state=e.state||{},this.computedCache={},this.subscribeCallback=()=>{this.computedCache={},this._processRender()},this.setStore(t.store||null),this.setEventBus(t.eventBus||null),this.props=this._processProps(),"function"==typeof this._state&&(this._state=this._state.bind(this)()),this.state=this._monitorState(this._state),this._processInitProps(e),this.root=this._processRoot(e.root),this.slots=this._processSlots(),this.render=e.render||null,this.templateRenderer=e.renderer,this.template=null,this.created=e.created||null,this.mounted=e.mounted||e.ready||null,this.updated=e.updated||null,this.removed=e.removed||null,this.isCreatedCalled=!1,this.isMountedCalled=!1,this.isRemovedCalled=!1,this.emit=(e,t)=>{!function(e,t,s={}){const i=Object.assign({},{bubbles:!0,cancelable:!0,composed:!1},s);let r;"composed"in CustomEvent.prototype?r=new CustomEvent(t,i):(r=document.createEvent("CustomEvent"),r.initCustomEvent(t,i.bubbles,i.cancelable,i.detail),Object.defineProperty(r,"composed",{value:i.composed})),e.dispatchEvent(r)}(this,e,{detail:t})},this._processInstanceProps(this._props),"function"!=typeof this.created||this.isCreatedCalled||(this.created(),this.isCreatedCalled=!0)}_processProps(){const e={};return Object.keys(this._props).forEach(t=>{const s={},i=this._props[t],r=this._getAttribute(t);let o=null;if(null!=i.default&&(o=i.default),i.required&&null==r)null!=o?(console.info(`No biggie, the required prop '${t}' has no value set, so the default has been set`),s[t]=o):(s[t]=null,console.error(`The required prop '${t}' has no value set`));else switch(i.type){case String:default:s[t]=r||o;break;case Number:s[t]=null!=r?parseFloat(r):null!=o?o:0;break;case Boolean:s[t]=null!=r?"true"===r.toString():null!=o&&o;break;case Object:try{s[t]=null!=r?JSON.parse(r):null!=o?o:void 0}catch(e){s[t]=null!=o?o:void 0,console.error("An object parse issue occurred",e)}}e[t]=s[t],this._instanceProps&&this._instanceProps[t]&&(e[t]=this._instanceProps[t])}),e}_processInitProps(e){const t=this,s=["state","created","mounted","updated","removed","render","renderer","setStore","setEventBus"],i=Object.keys(e);i.length&&i.forEach(i=>{t[i]||s.includes(i)||"function"!=typeof e[i]||(t[i]=e[i].bind(t)),"computed"===i&&this._processComputed(e[i])})}_processRoot(e){switch(e){case"standard":default:return this;case"shadow":return this.attachShadow({mode:"open"});case"shadow:closed":return this.attachShadow({mode:"closed"})}}_processComputed(e){const t=this,s=Object.keys(e);s.length&&s.forEach(s=>{t[s]?console.warn(`Computed property '${s}' already exists on the component instance`):Object.defineProperty(t,s,{get:()=>(t.computedCache[s]||(t.computedCache[s]=e[s].bind(t)()),t.computedCache[s])})})}_processRender(){const e=this.render?this.render():void 0;e&&(this.template=e,this._updateRender())}_monitorState(e){const t=this;return new Proxy(e,{set:(e,s,i)=>(e[s]===i||(e[s]=i,t.computedCache={},t._processRender()),!0)})}_processSlots(){const e=this.childNodes,t={default:[]};return e.length>0&&[...e].forEach(e=>{const s=e.getAttribute?e.getAttribute("slot"):null;s?t[s]=e:t.default.push(e)}),t}_getAttribute(e){try{return this.getAttribute(toKebabCase(e))}catch(e){return console.error("A get prop error occurred",e),""}}_processInstanceProps(e){const t=this,s=Object.keys(e);e&&s.forEach(e=>{let s;t[e]&&(s=t[e],delete t[e]),Object.defineProperty(t,e,{get(){return this._instanceProps&&this._instanceProps[e]?this._instanceProps[e]:this.getAttribute(toKebabCase(e))},set(t){return this._instanceProps||(this._instanceProps={}),this._instanceProps[e]=t,this.setAttribute(toKebabCase(e),"object"==typeof t?JSON.stringify(t):t.toString()),this.attributeChangedCallback(),!0},enumerable:!0}),s&&(t[e]=s)})}_preprocess(){this.computedCache={},this.props=this._processProps(),this._processRender()}_updateRender(){var e;this.template&&("object"!=typeof(e=this.template)&&"function"!=typeof e||"function"!=typeof e.then?this.templateRenderer(this.template,this.root):this.template.then(e=>this.templateRenderer(e,this.root)).catch(e=>console.error("A component render error occurred",e)))}_subscribeToStores(e=!0){if(this.store&&this.store.subscribe&&"function"==typeof this.store.subscribe&&!this.unsubscribe)this.unsubscribe=this.store.subscribe(this.subscribeCallback),e&&this.subscribeCallback();else if(this.store&&"object"==typeof this.store&&!this.store.subscribe){this.unsubscribe={};Object.keys(this.store).forEach(e=>{this.store[e]&&this.store[e].subscribe&&"function"==typeof this.store[e].subscribe&&!this.unsubscribe[e]&&(this.unsubscribe[e]=this.store[e].subscribe(this.subscribeCallback))}),e&&this.subscribeCallback()}}_unsubscribeFromStores(){if(this.store&&this.unsubscribe&&"object"==typeof this.unsubscribe){Object.keys(this.unsubscribe).forEach(e=>{this.unsubscribe[e]()}),this.unsubscribe=null}else this.store&&this.unsubscribe&&"function"==typeof this.unsubscribe&&(this.unsubscribe(),this.unsubscribe=null)}_subscribeToEventBus(){for(const e in this._eventSubscriptions){const{unsubscribe:t,callback:s}=this._eventSubscriptions[e];t||(this._eventSubscriptions[e].unsubscribe=this._eventBus.subscribe(e,s))}}_unsubscribeFromEventBus(){for(const e in this._eventSubscriptions){const{unsubscribe:t}=this._eventSubscriptions[e];t&&t(),this._eventSubscriptions[e].unsubscribe=null}}setStore(e){this.store=e,this._subscribeToStores()}setEventBus(e){const t=this;this._eventBus=e,this._eventSubscriptions={},this.eventBus={subscribe:(e,s)=>(t._eventSubscriptions[e]={unsubscribe:t._eventBus.subscribe(e,s),callback:s},function(){const{unsubscribe:s}=t._eventSubscriptions[e];s&&s(),t._eventSubscriptions[e].unsubscribe=null}),publish(e,s={}){t._eventBus.publish(e,s)}}}})}function use(e,t,s){if(e.create&&"function"==typeof e.create)return e.create({createComponent:createComponent,renderer:t,html:s,use:use})}export{createComponent,use};
+function toKebabCase (str) {
+  return str.replace(/([A-Z])/g, '-$1').toLowerCase()
+}
+
+function collateObservedAttrs (props) {
+  if (!props) return []
+  const oa = [];
+  const opk = Object.keys(props);
+  opk.forEach(k => {
+    if (props[k].observed != null && !props[k].observed) return
+    oa.push(toKebabCase(k));
+  });
+  return oa
+}
+
+function isPromise (obj) {
+  return (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function'
+}
+
+function emit (elem, name, opts = {}) {
+  const defs = {
+    bubbles: true,
+    cancelable: true,
+    composed: false
+  };
+  const eventOptions = Object.assign({}, defs, opts);
+  let e;
+  if ('composed' in CustomEvent.prototype) {
+    e = new CustomEvent(name, eventOptions);
+  } else {
+    e = document.createEvent('CustomEvent');
+    e.initCustomEvent(
+      name,
+      eventOptions.bubbles,
+      eventOptions.cancelable,
+      eventOptions.detail
+    );
+    Object.defineProperty(e, 'composed', { value: eventOptions.composed });
+  }
+  return elem.dispatchEvent(e)
+}
+
+/* global HTMLElement */
+
+function createComponent (tagName, props) {
+  const observedAttrs = collateObservedAttrs(props.props);
+
+  window.customElements.get(tagName) ||
+  window.customElements.define(
+    tagName,
+    class FicusComponent extends HTMLElement {
+      // standard HTMLElement props and lifecycle hooks
+
+      static get observedAttributes () {
+        return observedAttrs
+      }
+
+      connectedCallback () {
+        this._checkInit();
+        this._preprocess();
+      }
+
+      disconnectedCallback () {
+        if (typeof this.removed === 'function') {
+          this.removed();
+          this.isRemovedCalled = true;
+        }
+      }
+
+      attributeChangedCallback () {
+        this._checkInit();
+        this._preprocess();
+      }
+
+      // custom props and private methods
+
+      get initialised () {
+        return this._props && this._state && this._computed && this.templateRenderer
+      }
+
+      _checkInit () {
+        if (!this.initialised) {
+          this._init(props);
+        }
+      }
+
+      _init (options) {
+        // It's handy to access what was passed through originally, so we'll store in private props
+        this._props = options.props || {};
+        this._computed = options.computed || {};
+
+        // check the state
+        if (options.state && typeof options.state !== 'function') throw new Error('State must be a function!')
+        this._state = options.state || {};
+
+        // create a cache for the computed functions
+        this.computedCache = {};
+
+        // A status enum to set during operations
+        this.status = 'render';
+
+        // Run passed props through the props processor
+        this.props = this._processProps();
+
+        // Take whatever is passed and set it as a proxy in local state
+        if (typeof this._state === 'function') {
+          this._state = this._state.bind(this)();
+        }
+        this.state = this._monitorState(this._state);
+
+        // Allow methods and computed properties to be added to this instance
+        this._processMethodsAndComputedProps(options);
+
+        // Determine what our root is. It can be a pointer for `this` or a shadow root
+        this.root = this._processRoot(options.root);
+
+        // do we have child nodes, if so create them as slots
+        this.slots = this._processSlots();
+
+        // Pull out a render method if there is one defined
+        this.render = options.render || null;
+
+        // set the default template renderer
+        this.templateRenderer = options.renderer;
+
+        // Create a template instance we can call with each render
+        this.template = null;
+
+        // Find lifecycle handlers
+        this.created = options.created || null;
+        this.mounted = options.mounted || null;
+        this.updated = options.updated || null;
+        this.removed = options.removed || null;
+        this.isCreatedCalled = false; // ensure callback is only called once
+        this.isMountedCalled = false; // ensure callback is only called once
+        this.isRemovedCalled = false; // ensure callback is only called once
+
+        // event handlers - the ability to emit an event from the component
+        this.emit = (eventName, data) => {
+          emit(this, eventName, { detail: data });
+        };
+
+        // create instance properties
+        this._processInstanceProps(this._props);
+
+        // fire the created method
+        if (typeof this.created === 'function' && !this.isCreatedCalled) {
+          this.created();
+          this.isCreatedCalled = true;
+        }
+      }
+
+      _processProps () {
+        const response = {};
+
+        Object.keys(this._props).forEach(key => {
+          const instanceResponse = {};
+          const instance = this._props[key];
+          const attributeValue = this._getAttribute(key);
+          let defaultValue = null;
+
+          if (instance.default != null) {
+            defaultValue = instance.default;
+          }
+
+          // If there's a required attribute with no value we need to do generate the most useful feedback
+          if (instance.required && attributeValue == null) {
+            // If there's a default value, this is less severe, so set a warning and return out
+            if (defaultValue != null) {
+              console.info(`No biggie, the required prop '${key}' has no value set, so the default has been set`);
+              instanceResponse[key] = defaultValue;
+            } else {
+              // If there's no default, this is an error. We'll set the data to be null too
+              instanceResponse[key] = null;
+              console.error(`The required prop '${key}' has no value set`);
+            }
+          } else {
+            // We're all good here, so let's process the data
+            // Make sure the data matches the declared type
+            switch (instance.type) {
+              case String:
+              default:
+                instanceResponse[key] = attributeValue || defaultValue;
+                break
+              case Number:
+                instanceResponse[key] = attributeValue != null ? parseFloat(attributeValue) : defaultValue != null ? defaultValue : 0;
+                break
+              case Boolean:
+                instanceResponse[key] = attributeValue != null ? attributeValue.toString() === 'true' : defaultValue != null ? defaultValue : false;
+                break
+              case Object:
+                try {
+                  instanceResponse[key] = attributeValue != null ? JSON.parse(attributeValue) : defaultValue != null ? defaultValue : undefined;
+                } catch (ex) {
+                  instanceResponse[key] = defaultValue != null ? defaultValue : undefined;
+                  console.error('An object parse issue occurred', ex);
+                }
+                break
+            }
+          }
+
+          // Set this data in the main response object
+          response[key] = instanceResponse[key];
+
+          // Override the props data if we have an instanceProp
+          if (this._instanceProps && this._instanceProps[key]) {
+            response[key] = this._instanceProps[key];
+          }
+        });
+
+        return response
+      }
+
+      _processMethodsAndComputedProps (props) {
+        const self = this;
+        const protectedMethods = ['state', 'created', 'mounted', 'updated', 'removed', 'render', 'renderer'];
+        const keys = Object.keys(props);
+        if (!keys.length) return
+        // Run through and bind to the component instance
+        keys.forEach(key => {
+          if (!self[key] && !protectedMethods.includes(key) && typeof props[key] === 'function') {
+            self[key] = props[key].bind(self);
+          }
+          if (key === 'computed') {
+            this._processComputed(props[key]);
+          }
+        });
+      }
+
+      _processRoot (key) {
+        switch (key) {
+          case 'standard':
+          default:
+            return this
+          case 'shadow':
+            return this.attachShadow({ mode: 'open' })
+          case 'shadow:closed':
+            return this.attachShadow({ mode: 'closed' })
+        }
+      }
+
+      _processComputed (obj) {
+        const self = this;
+        const keys = Object.keys(obj);
+
+        // Bail out if there's not any getters
+        if (!keys.length) return
+
+        // Run through and create a real getter
+        keys.forEach(key => {
+          if (self[key]) {
+            console.warn(`Computed property '${key}' already exists on the component instance`);
+            return
+          }
+          Object.defineProperty(self, key, {
+            get () {
+              // check the computed cache first
+              if (!self.computedCache[key]) {
+                self.computedCache[key] = obj[key].bind(self)();
+              }
+              return self.computedCache[key]
+            }
+          });
+        });
+      }
+
+      _processRender () {
+        // Check if there's a render method and get the result if it does exist
+        const template = this.render ? this.render() : undefined;
+
+        // Nothing to render so bail out
+        if (!template) return
+
+        // Set the template for rendering
+        this.template = template;
+
+        // Render the template
+        this._updateRender();
+      }
+
+      _monitorState (objectInstance) {
+        const self = this;
+
+        return new Proxy(objectInstance, {
+          set (obj, property, value) {
+            // We don't want to do anything if there's no actual changes to make
+            if (obj[property] === value) return true
+
+            // Allow the value to be set with no dramas
+            obj[property] = value;
+
+            // clear the computed cache
+            self.computedCache = {};
+
+            // Run the render processor now that there's changes
+            if (self.status === 'render') self._processRender();
+
+            return true
+          }
+        })
+      }
+
+      _processSlots () {
+        const children = this.childNodes;
+        const slots = {
+          default: []
+        };
+        if (children.length > 0) {
+          [...children].forEach(child => {
+            const to = child.getAttribute ? child.getAttribute('slot') : null;
+            if (!to) {
+              slots.default.push(child);
+            } else {
+              slots[to] = child;
+            }
+          });
+        }
+        return slots
+      }
+
+      _getAttribute (key) {
+        try {
+          return this.getAttribute(toKebabCase(key))
+        } catch (ex) {
+          console.error('A get prop error occurred', ex);
+          return ''
+        }
+      }
+
+      _processInstanceProps (props) {
+        const self = this;
+        const keys = Object.keys(props);
+        // set instance properties for any defined props
+        if (props) {
+          keys.forEach(key => {
+            let existingPropValue;
+            if (self[key]) {
+              existingPropValue = self[key];
+              delete self[key];
+            }
+            Object.defineProperty(self, key, {
+              get () {
+                if (this._instanceProps && this._instanceProps[key]) {
+                  return this._instanceProps[key]
+                }
+                return this.getAttribute(toKebabCase(key))
+              },
+              set (newValue) {
+                if (!this._instanceProps) {
+                  this._instanceProps = {};
+                }
+                this._instanceProps[key] = newValue;
+
+                // set the HTML attribute value
+                this.setAttribute(toKebabCase(key), typeof newValue === 'object' ? JSON.stringify(newValue) : newValue.toString());
+                this.attributeChangedCallback();
+                return true
+              },
+              enumerable: true
+            });
+            if (existingPropValue) self[key] = existingPropValue;
+          });
+        }
+      }
+
+      _preprocess () {
+        this.computedCache = {};
+        this.props = this._processProps();
+        this._processRender();
+      }
+
+      _updateRender () {
+        if (this.template) {
+          // is this an async render?
+          if (isPromise(this.template)) {
+            this.template
+              .then(template => {
+                this.templateRenderer(template, this.root);
+                this._callLifecycleMethods();
+              })
+              .catch(e => console.error('A component render error occurred', e));
+          } else {
+            this.templateRenderer(this.template, this.root);
+            this._callLifecycleMethods();
+          }
+        }
+      }
+
+      _callLifecycleMethods () {
+        if (typeof this.mounted === 'function' && !this.isMountedCalled) {
+          this.mounted();
+          this.isMountedCalled = true;
+        }
+        if (typeof this.updated === 'function' && this.isMountedCalled) {
+          this.updated();
+        }
+      }
+    });
+}
+
+/**
+ * Function to use a FicusJS module of components
+ * @param {Object} module
+ */
+function use (module, renderer, html) {
+  if (module.create && typeof module.create === 'function') {
+    return module.create({
+      createComponent,
+      renderer,
+      html,
+      use
+    })
+  }
+}
+
+export { createComponent, use };

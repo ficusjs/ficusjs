@@ -19,21 +19,10 @@ function createComponent (tagName, props) {
 
       connectedCallback () {
         this._checkInit()
-        this._subscribeToStores(false)
-        this._subscribeToEventBus()
         this._preprocess()
-        if (typeof this.mounted === 'function' && !this.isMountedCalled) {
-          this.mounted()
-          this.isMountedCalled = true
-        }
-        if (typeof this.updated === 'function' && this.isMountedCalled) {
-          this.updated()
-        }
       }
 
       disconnectedCallback () {
-        this._unsubscribeFromStores()
-        this._unsubscribeFromEventBus()
         if (typeof this.removed === 'function') {
           this.removed()
           this.isRemovedCalled = true
@@ -69,20 +58,8 @@ function createComponent (tagName, props) {
         // create a cache for the computed functions
         this.computedCache = {}
 
-        // create a subscription callback
-        this.subscribeCallback = () => {
-          // clear the getter cache
-          this.computedCache = {}
-
-          // Run the render processor now that there's changes
-          this._processRender()
-        }
-
-        // If we have a store, use it
-        this.setStore(props.store || null)
-
-        // if we have pub/sub event bus use it
-        this.setEventBus(props.eventBus || null)
+        // A status enum to set during operations
+        this.status = 'render'
 
         // Run passed props through the props processor
         this.props = this._processProps()
@@ -94,7 +71,7 @@ function createComponent (tagName, props) {
         this.state = this._monitorState(this._state)
 
         // Allow methods and computed properties to be added to this instance
-        this._processInitProps(options)
+        this._processMethodsAndComputedProps(options)
 
         // Determine what our root is. It can be a pointer for `this` or a shadow root
         this.root = this._processRoot(options.root)
@@ -113,7 +90,7 @@ function createComponent (tagName, props) {
 
         // Find lifecycle handlers
         this.created = options.created || null
-        this.mounted = options.mounted || options.ready || null
+        this.mounted = options.mounted || null
         this.updated = options.updated || null
         this.removed = options.removed || null
         this.isCreatedCalled = false // ensure callback is only called once
@@ -196,9 +173,9 @@ function createComponent (tagName, props) {
         return response
       }
 
-      _processInitProps (props) {
+      _processMethodsAndComputedProps (props) {
         const self = this
-        const protectedMethods = ['state', 'created', 'mounted', 'updated', 'removed', 'render', 'renderer', 'setStore', 'setEventBus']
+        const protectedMethods = ['state', 'created', 'mounted', 'updated', 'removed', 'render', 'renderer']
         const keys = Object.keys(props)
         if (!keys.length) return
         // Run through and bind to the component instance
@@ -278,7 +255,7 @@ function createComponent (tagName, props) {
             self.computedCache = {}
 
             // Run the render processor now that there's changes
-            self._processRender()
+            if (self.status === 'render') self._processRender()
 
             return true
           }
@@ -359,92 +336,25 @@ function createComponent (tagName, props) {
           // is this an async render?
           if (isPromise(this.template)) {
             this.template
-              .then(template => this.templateRenderer(template, this.root))
+              .then(template => {
+                this.templateRenderer(template, this.root)
+                this._callLifecycleMethods()
+              })
               .catch(e => console.error('A component render error occurred', e))
           } else {
             this.templateRenderer(this.template, this.root)
+            this._callLifecycleMethods()
           }
         }
       }
 
-      _subscribeToStores (invokeSubscribeCallback = true) {
-        if (this.store && this.store.subscribe && typeof this.store.subscribe === 'function' && !this.unsubscribe) {
-          this.unsubscribe = this.store.subscribe(this.subscribeCallback)
-          if (invokeSubscribeCallback) this.subscribeCallback()
-        } else if (this.store && typeof this.store === 'object' && !this.store.subscribe) {
-          this.unsubscribe = {}
-          const keys = Object.keys(this.store)
-          keys.forEach(k => {
-            if (this.store[k] && this.store[k].subscribe && typeof this.store[k].subscribe === 'function' && !this.unsubscribe[k]) {
-              this.unsubscribe[k] = this.store[k].subscribe(this.subscribeCallback)
-            }
-          })
-          if (invokeSubscribeCallback) this.subscribeCallback()
+      _callLifecycleMethods () {
+        if (typeof this.mounted === 'function' && !this.isMountedCalled) {
+          this.mounted()
+          this.isMountedCalled = true
         }
-      }
-
-      _unsubscribeFromStores () {
-        if (this.store && this.unsubscribe && typeof this.unsubscribe === 'object') {
-          const keys = Object.keys(this.unsubscribe)
-          keys.forEach(k => {
-            this.unsubscribe[k]()
-          })
-          this.unsubscribe = null
-        } else if (this.store && this.unsubscribe && typeof this.unsubscribe === 'function') {
-          this.unsubscribe()
-          this.unsubscribe = null
-        }
-      }
-
-      _subscribeToEventBus () {
-        for (const k in this._eventSubscriptions) {
-          const { unsubscribe, callback } = this._eventSubscriptions[k]
-          if (!unsubscribe) {
-            this._eventSubscriptions[k].unsubscribe = this._eventBus.subscribe(k, callback)
-          }
-        }
-      }
-
-      _unsubscribeFromEventBus () {
-        for (const k in this._eventSubscriptions) {
-          const { unsubscribe } = this._eventSubscriptions[k]
-          unsubscribe && unsubscribe()
-          this._eventSubscriptions[k].unsubscribe = null
-        }
-      }
-
-      /* instance methods for components */
-
-      /**
-       * Set a store for this component so changes to the store
-       * are monitored and reactive DOM changes are made
-       * @param {Object|Store} store
-       */
-      setStore (store) {
-        this.store = store
-        this._subscribeToStores()
-      }
-
-      /**
-       * Set an event bus instance for this component to use
-       * @param {Events} eventBus
-       */
-      setEventBus (eventBus) {
-        const self = this
-        this._eventBus = eventBus
-        this._eventSubscriptions = {}
-        this.eventBus = {
-          subscribe (event, callback) {
-            self._eventSubscriptions[event] = { unsubscribe: self._eventBus.subscribe(event, callback), callback }
-            return function () {
-              const { unsubscribe } = self._eventSubscriptions[event]
-              unsubscribe && unsubscribe()
-              self._eventSubscriptions[event].unsubscribe = null
-            }
-          },
-          publish (event, data = {}) {
-            self._eventBus.publish(event, data)
-          }
+        if (typeof this.updated === 'function' && this.isMountedCalled) {
+          this.updated()
         }
       }
     })

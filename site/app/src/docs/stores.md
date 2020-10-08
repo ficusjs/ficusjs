@@ -276,6 +276,19 @@ try {
 }
 ```
 
+### `begin` method
+
+The `begin` method starts a transaction.
+
+### `end` method
+
+The `end` method ends the transaction and notifies subscribers that the store state has changed.
+
+### `rollback` method
+
+The `rollback` method rolls back the store state changes carried out within the transaction.
+This is used if an error occurs, and the state needs to be reset.
+
 ## Creating components with application state
 
 Once you have created your store instance, simply pass it to each component so that it can react to state changes.

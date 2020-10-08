@@ -79,8 +79,6 @@ The following properties can be used when creating components:
 | `mounted` |  | `function` | Invoked when the component is first connected to the DOM. This may trigger before the components contents have been fully rendered |
 | `updated` |  | `function` | Invoked when the component is moved or reconnected to the DOM. This may trigger before the components contents have been fully rendered |
 | `removed` |  | `function` | Invoked each time the component is disconnected from the DOM |
-| `store` |  | `object` | A store instance or object of store instances. Subscription to store changes are handled automatically within the component |
-| `eventBus` |  | `object` | An event bus instance. Subscriptions based on lifecycle hooks are automatically handled within the component |
 
 ## Root definition
 
@@ -138,9 +136,10 @@ exampleComponentInstance.className = 'another-value'
 
 ## Computed getters
 
-Getters are functions that are used like properties in your component. They are defined with the `computed` property.
+Computed getters are functions that are used like properties in your component. They are defined with the `computed` property.
 
 They are memoized functions which means the result of the getter is cached for subsequent executions. This is useful when creating projections from large sets of data.
+
 Setting local state will automatically reset the computed cache.
 
 You can access getters with `this` in your component `render` function.
@@ -251,7 +250,10 @@ The `created` hook will be invoked when the component has been created and befor
 
 ### `mounted` function
 
-The `mounted` hook will be invoked when the component has been connected to the DOM. This may trigger before the components contents have been fully rendered.
+The `mounted` hook will be invoked when the component has mounted in the DOM.
+
+This may trigger before the components contents have been fully rendered.
+
 This is triggered by the custom element [`connectedCallback`](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) lifecycle callback.
 
 ```js
@@ -264,8 +266,12 @@ This is triggered by the custom element [`connectedCallback`](https://developer.
 
 ### `updated` function
 
-The `updated` hook will be invoked each time the component has been moved or reconnected to the DOM.
+The `updated` hook will be invoked each time the component state changes.
+
+It is also invoked when the component has been moved or is reconnected to the DOM.
 This is triggered by the custom element [`connectedCallback`](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) lifecycle callback.
+
+The component's DOM will have updated when this hook runs and may trigger before the components contents have been fully rendered.
 
 ```js
 {
@@ -284,38 +290,6 @@ This is triggered by the custom element [`disconnectedCallback`](https://develop
 {
   removed () {
     // do something when the component is removed!
-  }
-}
-```
-
-## Instance methods
-
-Instance methods allow internal properties to be changed within the component itself.
-
-### `setStore` method
-
-The `setStore` method can be called when a store instance needs to be set after the component has initialised.
-The method accepts a `store` argument which can be a single store instance or object of store instances.
-
-```js
-{
-  mounted () {
-    const store = getStoreSomehow()
-    this.setStore(store)
-  }
-}
-```
-
-### `setEventBus` method
-
-The `setEventBus` method can be called when an instance needs to be set after the component has initialised.
-The method accepts an `eventBus` argument which is a single event instance.
-
-```js
-{
-  mounted () {
-    const eventBus = getEventBus()
-    this.setEventBus(eventBus)
   }
 }
 ```

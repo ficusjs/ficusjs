@@ -46,6 +46,20 @@ The `withStore` function provides a `this.store` property within the component.
 It also makes the component reactive to store changes as well as handling automatic store subscriptions based on the component lifecycle hooks.
 It will also refresh computed getters when store state changes.
 
+### `setStore` method
+
+The `setStore` method can be called when a store instance needs to be set after the component has initialised.
+The method accepts a `store` argument which can be a single store instance or object of store instances.
+
+```js
+{
+  someMethod () {
+    const store = getStoreSomehow()
+    this.setStore(store)
+  }
+}
+```
+
 ## `withEventBus` function
 
 The `withEventBus` function extends a component and makes working with an event bus easier in component methods.
@@ -75,6 +89,20 @@ createComponent(
 
 The `withEventBus` function provides a `this.eventBus` property within the component.
 It handles automatic event bus subscription based on the component lifecycle hooks.
+
+### `setEventBus` method
+
+The `setEventBus` method can be called when an instance needs to be set after the component has initialised.
+The method accepts an `eventBus` argument which is a single event instance.
+
+```js
+{
+  someMethod () {
+    const eventBus = getEventBus()
+    this.setEventBus(eventBus)
+  }
+}
+```
 
 ## `withStateTransactions` function
 

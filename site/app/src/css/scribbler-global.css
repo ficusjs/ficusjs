@@ -43,6 +43,23 @@ hr {
   border-bottom: 1px solid var(--bg-color);
 }
 
+blockquote {
+  margin-left: 0;
+}
+
+blockquote::before {
+  border-left: 2px solid var(--primary-color-light);
+  content: "";
+  display: block;
+  width: 20px;
+  height: 24px;
+  position: absolute;
+}
+
+blockquote p {
+  margin-left: 20px;
+}
+
 * {
   box-sizing: border-box;
 }

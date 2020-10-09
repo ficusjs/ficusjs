@@ -296,14 +296,17 @@ This is triggered by the custom element [`disconnectedCallback`](https://develop
 
 ## Rendering
 
-When the `render` function has been called, the result will be passed to the `renderer` function for updating the DOM.
-This is handled within the component lifecycle.
+A `renderer` function **must** be provided when creating a new component. This allows any renderer to be plugged into a component.
 
-There are a number of renderers available and can be added to suit your requirements. The following renderers have been tested with FicusJS:
+There are a number of renderers available and can be added to suit your needs. The following renderers have been tested with FicusJS:
 
 - [lit-html](https://www.npmjs.com/package/lit-html)
 - [uhtml](https://www.npmjs.com/package/uhtml)
 - [htm and Preact](https://www.npmjs.com/package/htm)
+- `document.createElement`
+
+When the `render` function has been called, the result will be passed to the `renderer` function for updating the DOM.
+This is handled within the component lifecycle.
 
 ### Renderer function
 
@@ -327,6 +330,36 @@ createComponent('test-comp', {
   renderer (what, where) {
     // the uhtml renderer requires a different argument order
     renderer(where, what)
+  }
+}
+```
+
+#### `document.createElement` renderer
+
+If you want to use the standard `document.createElement` renderer, you can supply a `renderer` function like the following.
+
+```js
+function renderer (what, where) {
+    // remove any existing elements
+    while (where.firstChild) where.removeChild(where.firstChild)
+
+    // create a new in-memory element
+    const element = document.createElement('div')
+    element.innerHTML = what
+
+    // add the element to the DOM
+    where.appendChild(element)
+}
+```
+
+In your component, return a template literal string containing HTML.
+
+```js
+{
+  render () {
+    return `
+      <div>Some HTML content with ${someVariable}</div>
+    `
   }
 }
 ```

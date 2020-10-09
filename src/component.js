@@ -364,12 +364,12 @@ function createComponent (tagName, props) {
  * Function to use a FicusJS module of components
  * @param {Object} module
  */
-function use (module, renderer, html) {
+function use (module, renderer, ...args) {
   if (module.create && typeof module.create === 'function') {
     return module.create({
       createComponent,
       renderer,
-      html,
+      ...args,
       use
     })
   }

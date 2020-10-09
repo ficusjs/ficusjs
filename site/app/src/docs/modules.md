@@ -58,20 +58,26 @@ import { module } from './path/to/component-module.esm.js'
 use(module, renderer, html)
 ```
 
-The following arguments must be provided to the `use` function:
+The following arguments **must** be provided to the `use` function:
 
 | Property | Type | Description |
 | --- | --- | --- |
 | `module` | `object` | The imported `module` |
 | `renderer` | `function` | The `renderer` function for passing to components |
-| `html` | `object` | The `html` tagged template literal for passing to components |
+
+Additional arguments can be provided to the `use` function and will be passed to the module. For example; the `html` tagged template literal can be passed for module components to return HTML content.
+
+```js
+// pass the html tagged template literal to the module for rendering
+use(module, renderer, html)
+```
 
 ## Creating a module
 
 A module is a set of functions for creating components, stores and/or events.
 This ensures just the definitions will be shared without the overhead of bundling the FicusJS runtime.
 
-Modules can be minified to optimise load.
+> Modules should be minified to optimise load.
 
 A single Javascript file exports a named object `module` exposing a `create` method.
 The shared module `create` method will be invoked by the `use` function in the context of the running application and is passed a single `object` argument.
@@ -82,7 +88,7 @@ It is the responsibility of the `create` method to use the `object` argument to 
 // Export a module object that is invoked by the `use` function
 export const module = {
   create ({ /* arguments passed to the create function */ }) {
-    // create components or stores here
+    // create stuff here
   }
 }
 ```
@@ -117,7 +123,6 @@ When using the all features build `dist/index.js`, the `object` argument will co
 | --- | --- | --- |
 | `createComponent` | `function` | The `createComponent` function |
 | `renderer` | `function` | The `renderer` function for component rendering |
-| `html` | `object` | The `html` tagged template literal for component rendering |
 | `createEventBus` | `function` | The `createEventBus` function |
 | `createPersist` | `function` | The `createPersist` function |
 | `createStore` | `function` | The `createStore` function |
@@ -125,13 +130,13 @@ When using the all features build `dist/index.js`, the `object` argument will co
 | `getStore` | `function` | The `getStore` function |
 | `use` | `function` | The `use` for loading modules internally |
 
-The module will be created using the provided `object` argument.
+Additional arguments provided to the `use` function will be passed to the module. For example; the `html` tagged template literal can be passed for module components to return HTML content.
 
 ```js
 // Export a module object that is invoked by the `use` function
 export const module = {
-  create ({ createComponent, renderer, html, createEventBus, createPersist, createStore, getEventBus, getStore, use }) {
-    // create components, stores or events here
+  create (helpers) {
+    // create stuff here
   }
 }
 ```
@@ -177,15 +182,14 @@ When using the component only `dist/component.js` without stores and events, the
 | --- | --- | --- |
 | `createComponent` | `function` | The `createComponent` function |
 | `renderer` | `function` | The `renderer` function for component rendering |
-| `html` | `object` | The `html` tagged template literal for component rendering |
 | `use` | `function` | The `use` function for loading modules internally |
 
-The module object will be created using the provided arguments.
+Additional arguments provided to the `use` function will be passed to the module. For example; the `html` tagged template literal can be passed for module components to return HTML content.
 
 ```js
 // Export a module object that is invoked by the `use` function
 export const module = {
-  create ({ createComponent, renderer, html, use }) {
+  create (helpers) {
     // create components here
   }
 }

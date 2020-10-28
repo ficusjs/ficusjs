@@ -21,7 +21,7 @@ The following example shows how to consume a module from a shared library.
 import { createComponent, use } from 'https://unpkg.com/ficusjs?module'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
 
 // import component library from a local path
 import { module } from './path/to/component-module.esm.js'
@@ -49,7 +49,7 @@ The `use` function will import a module of components into your application read
 import { use } from 'https://unpkg.com/ficusjs?module'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
 
 // import component module from a local path
 import { module } from './path/to/component-module.esm.js'

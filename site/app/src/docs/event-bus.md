@@ -33,11 +33,15 @@ const eventBus = createEventBus()
 Once you have created your events instance using `createEventBus`, simply pass it to each component:
 
 ```js
+import { createComponent, withEventBus } from 'https://unpkg.com/ficusjs?module'
+
 // A new component
-createComponent('my-component', {
-  eventBus,
-  ...
-})
+createComponent(
+  'my-component',
+  withEventBus(eventBus, {
+    /* pass component creation options here */
+  })
+)
 ```
 
 ## `getEventBus` function
@@ -47,13 +51,15 @@ If the event bus has not yet been created, `getEventBus` will create a new insta
 
 ```js
 // import the function
-import { getEventBus } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, getEventBus, withEventBus } from 'https://unpkg.com/ficusjs?module'
 
 // use it within a component
-createComponent('my-component', {
-  eventBus: getEventBus(),
-  ...
-})
+createComponent(
+  'my-component',
+  withEventBus(getEventBus(), {
+    /* pass component creation options here */
+  })
+)
 ```
 
 ## Subscribe

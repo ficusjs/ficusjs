@@ -1,6 +1,6 @@
 {
   "name": "ficusjs",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "FicusJS is a set of lightweight functions for developing applications using web components",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -22,8 +22,21 @@
     "serve": "http-server",
     "serve:silent": "http-server -s"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ficusjs/ficusjs.git"
+  },
+  "keywords": [
+    "ficusjs",
+    "frontend",
+    "web-components"
+  ],
   "author": "Matt Levy",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ficusjs/ficusjs/issues"
+  },
+  "homepage": "https://docs.ficusjs.org",
   "devDependencies": {
     "cypress": "5.3.0",
     "http-server": "0.12.3",

@@ -16,7 +16,7 @@ The `withStore` function extends a component and makes working with stores easie
 import { createComponent, withStore } from 'https://unpkg.com/ficusjs?module'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
 
 // import a single store or object of stores from a local file
 import { store } from './store.js'
@@ -68,7 +68,7 @@ The `withEventBus` function extends a component and makes working with an event 
 import { createComponent, withEventBus } from 'https://unpkg.com/ficusjs?module'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
 
 // import an event bus from a local file
 import { eventBus } from './event-bus.js'
@@ -112,7 +112,7 @@ The `withStateTransactions` function extends a component with transactions so mu
 import { createComponent, withStateTransactions } from 'https://unpkg.com/ficusjs?module'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
 
 createComponent(
   'my-like-component',

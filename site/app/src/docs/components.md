@@ -19,10 +19,11 @@ Import the `createComponent` function together with a renderer function and `htm
 **my-component.js**
 
 ```js
-import { createComponent } from 'https://unpkg.com/ficusjs?module'
+// import the createComponent function
+import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
 
 createComponent('my-component', {
   renderer,
@@ -334,35 +335,18 @@ createComponent('test-comp', {
 }
 ```
 
-#### `document.createElement` renderer
+### Minified ES module renderers
 
-If you want to use the standard `document.createElement` renderer, you can supply a `renderer` function like the following.
+The [`ficusjs-renderers`](https://www.npmjs.com/package/ficusjs-renderers) package provides a tested set of renderers as ES modules to make working with them much easier.
 
-```js
-function renderer (what, where) {
-    // remove any existing elements
-    while (where.firstChild) where.removeChild(where.firstChild)
+These renderers are available as minified ES module bundles:
 
-    // create a new in-memory element
-    const element = document.createElement('div')
-    element.innerHTML = what
+- [lit-html](https://www.npmjs.com/package/lit-html)
+- [uhtml](https://www.npmjs.com/package/uhtml)
+- [htm and Preact](https://www.npmjs.com/package/htm)
+- `document.createElement`
 
-    // add the element to the DOM
-    where.appendChild(element)
-}
-```
-
-In your component, return a template literal string containing HTML.
-
-```js
-{
-  render () {
-    return `
-      <div>Some HTML content with ${someVariable}</div>
-    `
-  }
-}
-```
+For more details, visit [https://github.com/ficusjs/ficusjs-renderers](https://github.com/ficusjs/ficusjs-renderers)
 
 ### Rendering props
 

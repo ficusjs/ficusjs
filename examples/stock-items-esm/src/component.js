@@ -1,10 +1,8 @@
-import { createComponent } from 'https://unpkg.com/ficusjs?module'
-import { render as renderer, html } from 'https://unpkg.com/uhtml?module'
+import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/uhtml.js'
 
 createComponent('stock-items', {
-  renderer (what, where) {
-    renderer(where, what)
-  },
+  renderer,
   state () {
     return {
       products: []

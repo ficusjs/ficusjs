@@ -1,10 +1,8 @@
 import { createComponent } from 'ficusjs/dist/component'
-import { render as renderer, html } from 'uhtml'
+import { html, renderer } from 'ficusjs-renderers/dist/uhtml'
 
 createComponent('stock-items', {
-  renderer (what, where) {
-    renderer(where, what)
-  },
+  renderer,
   state () {
     return {
       products: []

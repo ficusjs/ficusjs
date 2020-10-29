@@ -1,23 +1,25 @@
-import { createComponent } from 'https://unpkg.com/ficusjs?module'
-import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+import { createComponent, withStore } from 'https://unpkg.com/ficusjs?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
 import { store } from './store.js'
 
 import './list.js'
 
-createComponent('todo-body', {
-  store,
-	renderer,
-	toggleAll (e) {
-		this.store.dispatch('markAllComplete', e.target.checked)
-	},
-  render () {
-    if (!this.store.state.todos || this.store.state.todos.length === 0) {
-      return ''
-    }
-    return html`<section class="main">
+createComponent(
+  'todo-body',
+  withStore(store, {
+    renderer,
+    toggleAll (e) {
+      this.store.dispatch('markAllComplete', e.target.checked)
+    },
+    render () {
+      if (!this.store.state.todos || this.store.state.todos.length === 0) {
+        return ''
+      }
+      return html`<section class="main">
  <input id="toggle-all" class="toggle-all" type="checkbox" @change=${this.toggleAll}>
  <label for="toggle-all">Mark all as complete</label>
  <todo-list></todo-list>
 </section>`
-  }
-})
+    }
+  })
+)

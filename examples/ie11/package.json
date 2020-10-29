@@ -20,6 +20,7 @@
     "@rollup/plugin-node-resolve": "9.0.0",
     "core-js": "3.6.5",
     "ficusjs": "latest",
+    "ficusjs-renderers": "latest",
     "rollup": "2.26.3",
     "serve": "11.3.2",
     "standard": "14.3.4",

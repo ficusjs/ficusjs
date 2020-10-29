@@ -289,24 +289,6 @@ The `end` method ends the transaction and notifies subscribers that the store st
 The `rollback` method rolls back the store state changes carried out within the transaction.
 This is used if an error occurs, and the state needs to be reset.
 
-## Creating components with application state
-
-Once you have created your store instance, simply pass it to each component so that it can react to state changes.
-Subscription to store changes will be handled automatically within the component.
-
-```js
-// An initialised store. Params omitted for brevity
-const store = createStore('an.example.store', {
-  ...
-})
-
-// A new component
-createComponent('my-component', {
-  store,
-  ...
-})
-```
-
 ## Multiple stores
 
 You can create as many stores as you want to separate your application state.
@@ -326,25 +308,31 @@ const allStores = {
 }
 
 // Pass a relevant store to a component
-createComponent('my-component', {
-  store: allStores.drinks,
-  ...
-})
+createComponent(
+  'my-component',
+  withStore(allStores.drinks, {
+    ...
+  })
+)
 
 // Or pass all the stores to a component
-createComponent('my-component', {
-  store: allStores,
-  ...
-})
+createComponent(
+  'my-component',
+  withStore(allStores, {
+    ...
+  })
+)
 
 // Or just pass the required stores to a component
-createComponent('my-component', {
-  store: {
+createComponent(
+  'my-component',
+  withStore({
     food: allStores.food,
     snacks: allStores.snacks
-  },
-  ...
-})
+  }, {
+    ...
+  })
+)
 ```
 
 ### Transactions using an `Object` of stores
@@ -482,4 +470,29 @@ class MyCustomPersist {
 const store = createStore('an.example.store', {
   persist: new MyCustomPersist()
 })
+```
+
+## Usage in components
+
+Once you have created your store instance, the `withStore` function extends a component and makes working with stores easier in component rendering, computed getters and methods.
+Subscription to store changes will be handled automatically within the component.
+
+See [extending components](/docs/composition) for more on the `withStore` function.
+
+```js
+import { createComponent, withStore } from 'https://unpkg.com/ficusjs?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+
+// An initialised store. Params omitted for brevity
+const store = createStore('an.example.store', {
+  ...
+})
+
+// A new component
+createComponent(
+  'my-component',
+  withStore(store, {
+    ...
+  })
+)
 ```

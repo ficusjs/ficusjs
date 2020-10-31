@@ -12,7 +12,7 @@ title: FicusJS documentation - Features
 - Application state management with stores
 - Application event bus
 - Small footprint
-    - All features - 3.54 KB gzipped
+    - All features - 3.55 KB gzipped
     - Components - 1.88 KB gzipped
     - Stores - 1.21 KB gzipped
     - Event bus - 271 B gzipped

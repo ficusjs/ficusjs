@@ -27,7 +27,7 @@ import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/
 import { module } from './path/to/component-module.esm.js'
 
 // import the components into your application
-use(module, renderer, html)
+use(module, { renderer, html })
 
 // in your template, use the component
 createComponent('my-component', {
@@ -55,7 +55,7 @@ import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/
 import { module } from './path/to/component-module.esm.js'
 
 // import the components into your application
-use(module, renderer, html)
+use(module, { renderer, html })
 ```
 
 The following arguments **must** be provided to the `use` function:
@@ -63,13 +63,13 @@ The following arguments **must** be provided to the `use` function:
 | Property | Type | Description |
 | --- | --- | --- |
 | `module` | `object` | The imported `module` |
-| `renderer` | `function` | The `renderer` function for passing to components |
+| `helpers` | `object` | A helpers object for passing to components. This **must** contain the `renderer` function as a named property |
 
-Additional arguments can be provided to the `use` function and will be passed to the module. For example; the `html` tagged template literal can be passed for module components to return HTML content.
+The `helpers` object **must** contain the `renderer` function as named property. Additional helpers can be provided in the `helpers` object and will be passed to the module. For example; the `html` tagged template literal can be passed for module components to return HTML content.
 
 ```js
-// pass the html tagged template literal to the module for rendering
-use(module, renderer, html)
+// pass the renderer and the html tagged template literal to the module for rendering
+use(module, { renderer, html })
 ```
 
 ## Creating a module
@@ -87,7 +87,7 @@ It is the responsibility of the `create` method to use the `object` argument to 
 ```js
 // Export a module object that is invoked by the `use` function
 export const module = {
-  create ({ /* arguments passed to the create function */ }) {
+  create (helpers) {
     // create stuff here
   }
 }
@@ -100,14 +100,14 @@ You can return a `Promise` from the `create` method that contains async operatio
 ```js
 // use async/await
 export const module = {
-  async create ({ /* arguments passed to the create function */ }) {
+  async create (helpers) {
     await asyncFunction()
   }
 }
 
 // return a Promise
 export const module = {
-  create ({ /* arguments passed to the create function */ }) {
+  create (helpers) {
     return asyncFunction()
   }
 }
@@ -117,7 +117,7 @@ If returning a `Promise`, the calling module must handle the response before con
 
 ### When using the all features build
 
-When using the all features build `dist/index.js`, the `object` argument will contain the following properties.
+When using the all features build `dist/index.js`, the helpers `object` will contain the following properties.
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -130,7 +130,7 @@ When using the all features build `dist/index.js`, the `object` argument will co
 | `getStore` | `function` | The `getStore` function |
 | `use` | `function` | The `use` for loading modules internally |
 
-Additional arguments provided to the `use` function will be passed to the module. For example; the `html` tagged template literal can be passed for module components to return HTML content.
+Additional arguments provided in the `helpers` object will be passed to the module. For example; the `html` tagged template literal can be passed for module components to return HTML content.
 
 ```js
 // Export a module object that is invoked by the `use` function
@@ -169,14 +169,14 @@ export const module = {
     createComponent('shared-component', createSharedComponent(renderer, html, getStore))
 
     // import and use another module
-    use(anotherModule, renderer, html)
+    use(anotherModule, { renderer, html })
   }
 }
 ```
 
 ### When using the component build only
 
-When using the component only `dist/component.js` without stores and events, the `object` argument will contain the following properties:
+When using the component only `dist/component.js` without stores and events, the helpers `object` argument will contain the following properties:
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -184,7 +184,7 @@ When using the component only `dist/component.js` without stores and events, the
 | `renderer` | `function` | The `renderer` function for component rendering |
 | `use` | `function` | The `use` function for loading modules internally |
 
-Additional arguments provided to the `use` function will be passed to the module. For example; the `html` tagged template literal can be passed for module components to return HTML content.
+Additional arguments provided in the `helpers` object will be passed to the module. For example; the `html` tagged template literal can be passed for module components to return HTML content.
 
 ```js
 // Export a module object that is invoked by the `use` function

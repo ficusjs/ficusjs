@@ -9,7 +9,7 @@ import { createPersist, createStore, getStore } from './store.js'
  * Function to use another FicusJS module
  * @param {Object} module
  */
-function use (module, renderer, ...args) {
+function use (module, { renderer, ...args }) {
   if (module.create && typeof module.create === 'function') {
     return module.create({
       // components

@@ -170,3 +170,33 @@ The `endTransaction` method ends the transaction and triggers a component render
 
 The `rollbackTransaction` method rolls back the state changes carried out within the transaction.
 This is used if an error occurs, and the state needs to be reset.
+
+## `withStyles` function
+
+The `withStyles` function extends a component and makes working with component styles more efficient
+by injecting CSS into the `<head>` once for all component instances.
+
+```js
+import { createComponent, withStyles } from 'https://unpkg.com/ficusjs?module'
+
+// import the renderer and html tagged template literal from the lit-html library
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+
+createComponent(
+  'my-component',
+  withStyles({
+    renderer,
+    styles () {
+      return `
+        my-component button {
+          background-color: yellow;
+          color: black;
+        }
+      `
+    },
+    render () {
+      return html`<button type="button">A styled button</button>`
+    }
+  })
+)
+```

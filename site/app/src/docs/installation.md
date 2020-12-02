@@ -36,5 +36,9 @@ The following builds are available.
 
 - All (component, event bus and store) `dist/index.js`
 - [Components](docs/components) `dist/component.js`
+  - [With store](docs/composition) `dist/with-store.js`
+  - [With event bus](docs/composition) `dist/with-event-bus.js`
+  - [With state transactions](docs/composition) `dist/with-state-transactions.js`
+  - [With styles](docs/composition) `dist/with-styles.js`
 - [Event bus](docs/event-bus) `dist/event.js`
 - [Stores](docs/stores) `dist/store.js`

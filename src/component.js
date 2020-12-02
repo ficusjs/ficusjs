@@ -17,6 +17,10 @@ function createComponent (tagName, props) {
         return observedAttrs
       }
 
+      get componentTagName () {
+        return tagName
+      }
+
       connectedCallback () {
         this._checkInit()
         this._preprocess()

@@ -25,6 +25,7 @@ export type ComponentOptions<I, T> = {
   mounted?: () => void
   updated?: () => void
   removed?: () => void
+  styles?: () => string
   state?: () => I
 } & {
   [key: string]: ComponentMethod

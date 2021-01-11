@@ -11,11 +11,6 @@ function createComponent (tagName, props) {
   window.customElements.define(
     tagName,
     class FicusComponent extends HTMLElement {
-      constructor () {
-        super()
-        this._init(props)
-      }
-
       // standard HTMLElement props and lifecycle hooks
 
       static get observedAttributes () {

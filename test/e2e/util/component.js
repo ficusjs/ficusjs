@@ -1,4 +1,4 @@
-import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+import { renderer, html } from 'https://cdn.skypack.dev/@ficusjs/renderer/lit-html'
 import { createComponent as componentCreator } from '../../../src/component.js'
 import { withStore } from '../../../src/with-store.js'
 import { withStateTransactions } from '../../../src/with-state-transactions.js'

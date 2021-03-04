@@ -12,7 +12,7 @@ var getAll = function (selector, scope) {
 // setup typewriter effect in the terminal demo
 // if (document.getElementsByClassName('demo').length > 0) {
 //   var i = 0;
-//   var txt = `import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+//   var txt = `import { renderer, html } from 'https://cdn.skypack.dev/@ficusjs/renderer/lit-html'
 // import { createComponent } from 'https://cdn.skypack.dev/ficusjs'
 //
 // createComponent('hello-world', {

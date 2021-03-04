@@ -1,4 +1,4 @@
-import { createStore, createPersist } from 'https://unpkg.com/ficusjs?module'
+import { createStore, createPersist } from 'https://cdn.skypack.dev/ficusjs'
 
 export const store = createStore('todomvc', {
   initialState: {

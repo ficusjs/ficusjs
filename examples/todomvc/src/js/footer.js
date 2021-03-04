@@ -1,4 +1,4 @@
-import { createComponent, withStore } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, withStore } from 'https://cdn.skypack.dev/ficusjs'
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 import { store } from './store.js'
 import { router } from './router.js'

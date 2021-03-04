@@ -1,4 +1,4 @@
-import { createRouter } from 'https://unpkg.com/ficusjs-router?module'
+import { createRouter } from 'https://cdn.skypack.dev/@ficusjs/router'
 import { store } from './store.js'
 
 export const router = createRouter([

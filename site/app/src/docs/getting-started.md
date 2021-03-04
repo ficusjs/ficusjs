@@ -12,8 +12,8 @@ Create an `index.html` file and copy the following between the `<body>` tags.
 <hello-world></hello-world>
 
 <script type="module">
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
-import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
+import { createComponent } from 'https://cdn.skypack.dev/ficusjs/component'
 
 createComponent('hello-world', {
   renderer,

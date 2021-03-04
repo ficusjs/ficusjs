@@ -15,7 +15,7 @@ Import the `createStore` function into your Javascript main file:
 **main.js**
 
 ```js
-import { createStore } from 'https://unpkg.com/ficusjs?module'
+import { createStore } from 'https://cdn.skypack.dev/ficusjs'
 ```
 
 Create a new store instance with `actions`, `mutations` and `initialState`:
@@ -72,7 +72,7 @@ The `getStore` function is a quick way to retrieve a store.
 
 ```js
 // import the function
-import { getStore } from 'https://unpkg.com/ficusjs?module'
+import { getStore } from 'https://cdn.skypack.dev/ficusjs'
 
 // retrieve a store instance
 const storeInstance = getStore('my.another.store')
@@ -417,7 +417,7 @@ const store = createStore('an.example.store', {
 You can optionally save state to `window.localStorage` (for persistence across browser sessions) using the `createPersist` function:
 
 ```js
-import { createStore, createPersist } from 'https://unpkg.com/ficusjs?module'
+import { createStore, createPersist } from 'https://cdn.skypack.dev/ficusjs'
 
 // An initialised store. Params omitted for brevity
 const store = createStore('an.example.store', {
@@ -446,7 +446,7 @@ Four methods must be implemented:
 | `removeState()` | Remove the state from the persistence store |
 
 ```js
-import { createStore } from 'https://unpkg.com/ficusjs?module'
+import { createStore } from 'https://cdn.skypack.dev/ficusjs'
 
 class MyCustomPersist {
   setState (state) {
@@ -480,8 +480,8 @@ Subscription to store changes will be handled automatically within the component
 See [extending components](/docs/composition) for more on the `withStore` function.
 
 ```js
-import { createComponent, withStore } from 'https://unpkg.com/ficusjs?module'
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { createComponent, withStore } from 'https://cdn.skypack.dev/ficusjs'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 // An initialised store. Params omitted for brevity
 const store = createStore('an.example.store', {

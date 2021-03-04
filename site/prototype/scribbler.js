@@ -13,7 +13,7 @@ var getAll = function (selector, scope) {
 // if (document.getElementsByClassName('demo').length > 0) {
 //   var i = 0;
 //   var txt = `import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
-// import { createComponent } from 'https://unpkg.com/ficusjs?module'
+// import { createComponent } from 'https://cdn.skypack.dev/ficusjs'
 //
 // createComponent('hello-world', {
 //   renderer,

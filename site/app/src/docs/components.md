@@ -20,10 +20,10 @@ Import the `createComponent` function together with a renderer function and `htm
 
 ```js
 // import the createComponent function
-import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
+import { createComponent } from 'https://cdn.skypack.dev/ficusjs/component'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 createComponent('my-component', {
   renderer,
@@ -230,10 +230,10 @@ Example component using `setState` method
 
 ```js
 // import the createComponent function
-import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
+import { createComponent } from 'https://cdn.skypack.dev/ficusjs/component'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 createComponent('set-state-example', {
   renderer,

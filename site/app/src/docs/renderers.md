@@ -15,18 +15,18 @@ This allows any tagged template literal renderer to be plugged into a component.
 
 The following renderers are available as minified bundles.
 
+- [uhtml](https://www.npmjs.com/package/uhtml) (default)
 - [lit-html](https://www.npmjs.com/package/lit-html)
-- [uhtml](https://www.npmjs.com/package/uhtml)
 - [htm and Preact](https://www.npmjs.com/package/htm)
 - `document.createElement`
 
-## `lit-html`
+## `uhtml`
 
-The [lit-html](https://www.npmjs.com/package/lit-html) renderer is available in this package.
+The [uhtml](https://www.npmjs.com/package/uhtml) renderer is available in this package and is the default renderer.
 
 ```js
 // import the renderer function and the html tagged template literal
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/uhtml'
 
 createComponent('test-comp', {
   renderer,
@@ -38,13 +38,13 @@ createComponent('test-comp', {
 })
 ```
 
-## `uhtml`
+## `lit-html`
 
-The [uhtml](https://www.npmjs.com/package/uhtml) renderer is available in this package.
+The [lit-html](https://www.npmjs.com/package/lit-html) renderer is available in this package.
 
 ```js
 // import the renderer function and the html tagged template literal
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/uhtml.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 createComponent('test-comp', {
   renderer,
@@ -62,7 +62,7 @@ The [htm and Preact](https://www.npmjs.com/package/htm) renderer is available in
 
 ```js
 // import the renderer function and the html tagged template literal
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/htm.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/htm'
 
 createComponent('test-comp', {
   renderer,
@@ -82,7 +82,7 @@ In your component, return a template literal string containing HTML.
 This is only the `renderer` function and **does not use** a tagged template literal for rendering.
 
 ```js
-import { renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/create-element.js'
+import { renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/create-element'
 
 createComponent('test-comp', {
   renderer,

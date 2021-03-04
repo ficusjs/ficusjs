@@ -13,10 +13,10 @@ You can also write your own functions.
 The `withStore` function extends a component and makes working with stores easier in component rendering, computed getters and methods.
 
 ```js
-import { createComponent, withStore } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, withStore } from 'https://cdn.skypack.dev/ficusjs'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 // import a single store or object of stores from a local file
 import { store } from './store.js'
@@ -65,10 +65,10 @@ The method accepts a `store` argument which can be a single store instance or ob
 The `withEventBus` function extends a component and makes working with an event bus easier in component methods.
 
 ```js
-import { createComponent, withEventBus } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, withEventBus } from 'https://cdn.skypack.dev/ficusjs'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 // import an event bus from a local file
 import { eventBus } from './event-bus.js'
@@ -109,10 +109,10 @@ The method accepts an `eventBus` argument which is a single event instance.
 The `withStateTransactions` function extends a component with transactions so multiple state changes can occur without triggering a re-render.
 
 ```js
-import { createComponent, withStateTransactions } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, withStateTransactions } from 'https://cdn.skypack.dev/ficusjs'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 createComponent(
   'my-like-component',
@@ -177,10 +177,10 @@ The `withStyles` function extends a component and makes working with component s
 by providing a `styles` function which is invoked injecting CSS into the `<head>` once for all component instances.
 
 ```js
-import { createComponent, withStyles } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, withStyles } from 'https://cdn.skypack.dev/ficusjs'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 createComponent(
   'my-component',

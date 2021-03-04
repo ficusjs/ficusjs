@@ -1,5 +1,5 @@
 import { createComponent, withStore } from 'https://unpkg.com/ficusjs?module'
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 import { store } from './store.js'
 import { keyCodes } from './constants.js'
 

@@ -17,7 +17,7 @@ Import the `createEventBus` function into your Javascript main file:
 **main.js**
 
 ```js
-import { createEventBus } from 'https://unpkg.com/ficusjs?module'
+import { createEventBus } from 'https://cdn.skypack.dev/ficusjs'
 ```
 
 Create a new event bus instance:
@@ -33,7 +33,7 @@ const eventBus = createEventBus()
 Once you have created your events instance using `createEventBus`, simply pass it to each component:
 
 ```js
-import { createComponent, withEventBus } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, withEventBus } from 'https://cdn.skypack.dev/ficusjs'
 
 // A new component
 createComponent(
@@ -51,7 +51,7 @@ If the event bus has not yet been created, `getEventBus` will create a new insta
 
 ```js
 // import the function
-import { createComponent, getEventBus, withEventBus } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, getEventBus, withEventBus } from 'https://cdn.skypack.dev/ficusjs'
 
 // use it within a component
 createComponent(
@@ -95,8 +95,8 @@ will be handled automatically when the component fires the `removed` or `updated
 See [extending components](/docs/composition) for more on the `withEventBus` function.
 
 ```js
-import { createComponent, createEventBus, withEventBus } from 'https://unpkg.com/ficusjs?module'
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { createComponent, createEventBus, withEventBus } from 'https://cdn.skypack.dev/ficusjs'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 const eventBus = createEventBus()
 

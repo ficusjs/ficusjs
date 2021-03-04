@@ -1,5 +1,5 @@
 import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/uhtml.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/uhtml'
 
 createComponent('stock-items', {
   renderer,

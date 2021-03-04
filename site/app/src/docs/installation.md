@@ -12,13 +12,11 @@ We recommend using native ES modules in the browser.
 
 ```html
 <script type="module">
-  import { createComponent } from 'https://unpkg.com/ficusjs?module'
+  import { createComponent } from 'https://cdn.skypack.dev/ficusjs'
 </script>
 ```
 
-You can browse the source of the NPM package at [cdn.jsdelivr.net/npm/ficusjs](https://cdn.jsdelivr.net/npm/ficusjs/).
-
-FicusJS is also available on [unpkg](https://unpkg.com/browse/ficusjs/).
+FicusJS is available on [Skypack](https://www.skypack.dev/view/ficusjs).
 
 ## NPM
 

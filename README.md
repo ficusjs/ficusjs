@@ -4,9 +4,9 @@
 
 FicusJS is a set of lightweight functions for developing applications using web components.
 
-- A function for creating fast, lightweight web components (1.89 KB gzipped)
-- A function for creating fast, lightweight stores for application state (1.21 KB gzipped)
-- A function for creating a fast, lightweight publish/subscribe event bus (271 B gzipped)
+- A function for creating fast, lightweight web components (2.01 KB gzipped)
+- A function for creating fast, lightweight stores for application state (1.22 KB gzipped)
+- A function for creating a fast, lightweight publish/subscribe event bus (274 B gzipped)
 
 ## Documentation
 

@@ -1,9 +1,9 @@
-import { ComponentOptions } from './component'
+import { ComponentOptions, FicusComponent } from './component'
 
-export type ComponentOptionsWithStateTransactions<I, T> = ComponentOptions<I, T> & {
+export interface FicusComponentWithStateTransactions<S> extends FicusComponent<S> {
   beginTransaction(): void
   endTransaction(): void
   rollbackTransaction(): void
 }
 
-export declare function withStateTransactions<I, T> (options: ComponentOptionsWithStateTransactions<I, T>)
+export declare function withStateTransactions<I, T> (options: ComponentOptions<I, T>)

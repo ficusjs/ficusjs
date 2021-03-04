@@ -25,3 +25,18 @@ li.title {
   border: 1px dashed rgba(0, 0, 0, .2);
   margin-bottom: 10px;
 }
+
+button.success {
+  background-color: darkgreen;
+  color: #ffffff;
+}
+
+button.info {
+  background-color: darkcyan;
+  color: #ffffff;
+}
+
+button.secondary {
+  background-color: darkgray;
+  color: #ffffff;
+}

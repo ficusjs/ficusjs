@@ -192,6 +192,78 @@ If `state` is not a function, changing state in one instance would affect the st
 }
 ```
 
+### Updating state
+
+Updating state can be done using assignment or the `setState` method.
+
+#### State assignment
+
+Updating state values can be done using direct assignment.
+
+```js
+this.state.name = 'new name value'
+```
+
+#### `setState` method
+
+The `setState` method can be used to set one or more state values in a single transaction. This will only trigger a single render update. An optional callback can be provided which is invoked after rendering has occurred.
+
+The `setState` function takes two arguments:
+
+1. State setter function (receives the current state as an argument)
+2. An optional callback which is invoked after rendering
+
+```js
+this.setState(
+  (state) => {
+    return {
+      // return new state property values
+    }
+  },
+  () => {
+    // do something after rendering
+  }
+)
+```
+
+Example component using `setState` method
+
+```js
+// import the createComponent function
+import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
+
+// import the renderer and html tagged template literal from the lit-html library
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+
+createComponent('set-state-example', {
+  renderer,
+  state () {
+    return {
+      count: 0,
+      isEven: false,
+      color: 'secondary'
+    }
+  },
+  increment () {
+    this.setState(
+      (state) => {
+        const count = state.count + 1
+        const isEven = count % 2 === 0
+        return {
+          count,
+          isEven,
+          color: isEven ? 'success' : 'info'
+        }
+      },
+      () => console.log('Component did render!')
+    )
+  },
+  render () {
+    return html`<button type="button" @click=${this.increment} class="${this.state.color}">Count is&nbsp;<strong>${this.state.count}</strong></button>`
+  }
+})
+```
+
 ## Methods
 
 It is common to be able to call a method and perform an action. To achieve this, you can define methods when creating your component.

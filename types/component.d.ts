@@ -1,3 +1,7 @@
+export interface FicusComponent<S> extends HTMLElement {
+  setState: (stateFn: (state: S) => object, callback: () => void) => void
+}
+
 export type ComponentGetter = () => any
 export type ComponentMethod = (...args: any[]) => void
 

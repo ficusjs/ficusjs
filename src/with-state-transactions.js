@@ -1,8 +1,34 @@
+import { isPromise } from './util/is-promise.js'
+
 export function withStateTransactions (options) {
   return {
     ...options,
     created () {
       this.state = this._monitorTransactionState(this._state)
+      this.setState = (stateFn, callback) => {
+        const setter = data => {
+          if (!data || typeof data !== 'object') return
+          const isExistingTransaction = this.transaction
+          const existingUpdated = this.updated
+          if (callback) {
+            this.updated = () => {
+              setTimeout(callback)
+              this.updated = existingUpdated || undefined
+            }
+          }
+          if (!isExistingTransaction) {
+            this.beginTransaction()
+          }
+          for (const key in data) {
+            if (!this.state[key] || (this.state[key] !== data[key])) this.state[key] = data[key]
+          }
+          if (!isExistingTransaction) {
+            this.endTransaction()
+          }
+        }
+        const res = stateFn(this.state)
+        isPromise(res) ? res.then(setter) : setter(res)
+      }
       if (options.created) options.created.call(this)
     },
     beginTransaction () {

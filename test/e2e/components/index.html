@@ -11,23 +11,28 @@
   <h1>Components</h1>
   <mock-basic class="instance"></mock-basic>
 
+  <h2>Async render</h2>
   <mock-async-render class="instance"></mock-async-render>
 
+  <h2>Computed</h2>
   <mock-computed class="instance"></mock-computed>
   <mock-cached-computed class="instance"></mock-cached-computed>
 
+  <h2>Lifecycle methods</h2>
   <div class="instance">
     <div id="lifecycle-container"></div>
     <button type="button" id="add-lifecycle">Add lifecycle component</button>
     <button type="button" id="remove-lifecycle">Remove lifecycle component</button>
   </div>
 
+  <h2>Methods</h2>
   <mock-methods class="instance"></mock-methods>
   <div class="instance">
     <mock-method-event></mock-method-event>
     <span class="d-none" id="event-emit-message"><code>has-clicked</code> event has fired</span>
   </div>
 
+  <h2>Props</h2>
   <mock-props class="instance" display-string="the holy grail"></mock-props>
   <mock-props-default class="instance"></mock-props-default>
   <mock-props-default class="instance" display-string=""></mock-props-default>
@@ -56,6 +61,7 @@
     <button type="button" id="change-not-observed-prop">Change not observed prop</button>
   </div>
 
+  <h2>Slots</h2>
   <mock-slots class="instance">Marty McFly</mock-slots>
 
   <mock-slot-named class="instance">
@@ -63,10 +69,19 @@
     <span slot="second" class="text-success">Doc Brown</span>
   </mock-slot-named>
 
+  <h2>State</h2>
   <mock-state class="instance"></mock-state>
   <mock-state class="instance"></mock-state>
   <mock-state class="instance"></mock-state>
 
+  <h3>Set state</h3>
+  <mock-set-state class="instance"></mock-set-state>
+  <mock-set-state-with-transactions class="instance"></mock-set-state-with-transactions>
+  <mock-set-state-multiple class="instance"></mock-set-state-multiple>
+  <mock-set-state-multiple-promise class="instance"></mock-set-state-multiple-promise>
+  <mock-set-state-no-callback class="instance"></mock-set-state-no-callback>
+
+  <h2>State transactions</h2>
   <mock-state-transactions class="instance"></mock-state-transactions>
 
   <mock-prop-state class="instance"></mock-prop-state>
@@ -113,6 +128,14 @@
 
     document.querySelector('mock-method-event').addEventListener('has-clicked', function () {
       document.getElementById('event-emit-message').classList.remove('d-none')
+    })
+
+    // script for set state
+    document.addEventListener('setStateCallback', function () {
+      console.log('setStateCallback')
+    })
+    document.addEventListener('setStateMultipleCallback', function () {
+      console.log('setStateMultipleCallback')
     })
   })
 </script>

@@ -106,6 +106,28 @@ function createComponent (tagName, props) {
           emit(this, eventName, { detail: data })
         }
 
+        // set state method
+        this.setState = (stateFn, callback) => {
+          const setter = data => {
+            if (!data || typeof data !== 'object') return
+            const existingUpdated = this.updated
+            if (callback) {
+              this.updated = () => {
+                setTimeout(callback)
+                this.updated = existingUpdated || undefined
+              }
+            }
+            this.status = 'transaction'
+            for (const key in data) {
+              if (!this.state[key] || (this.state[key] !== data[key])) this.state[key] = data[key]
+            }
+            this.status = 'render'
+            this._processRender()
+          }
+          const res = stateFn(this.state)
+          isPromise(res) ? res.then(setter) : setter(res)
+        }
+
         // create instance properties
         this._processInstanceProps(this._props)
 
@@ -145,6 +167,7 @@ function createComponent (tagName, props) {
             // Make sure the data matches the declared type
             switch (instance.type) {
               case String:
+              // eslint-disable-next-line default-case-last,no-fallthrough
               default:
                 instanceResponse[key] = attributeValue || defaultValue
                 break
@@ -196,6 +219,7 @@ function createComponent (tagName, props) {
       _processRoot (key) {
         switch (key) {
           case 'standard':
+          // eslint-disable-next-line default-case-last,no-fallthrough
           default:
             return this
           case 'shadow':
@@ -355,6 +379,8 @@ function createComponent (tagName, props) {
       _callLifecycleMethods () {
         if (typeof this.mounted === 'function' && !this.isMountedCalled) {
           this.mounted()
+          this.isMountedCalled = true
+        } else {
           this.isMountedCalled = true
         }
         if (typeof this.updated === 'function' && this.isMountedCalled) {

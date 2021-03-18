@@ -17,7 +17,7 @@ jobs:
       - run: npm install
       - run: npm test
       - run: npm install
-        working-directory: ./site/app
+        working-directory: ./site
       - run: npm run build
-        working-directory: ./site/app
-      - run: surge ./site/app/dist ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+        working-directory: ./site
+      - run: surge ./site/dist ficusjs.surge.sh --token ${{ secrets.SURGE_TOKEN }}

@@ -17,12 +17,12 @@ jobs:
         with:
           node-version: 12
       - run: npm install
-        working-directory: ./site/app
+        working-directory: ./site
       - run: npm run build
-        working-directory: ./site/app
+        working-directory: ./site
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: site/app/dist
+          FOLDER: site/dist

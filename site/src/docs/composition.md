@@ -13,7 +13,11 @@ You can also write your own functions.
 The `withStore` function extends a component and makes working with stores easier in component rendering, computed getters and methods.
 
 ```js
+// import it with all other features
 import { createComponent, withStore } from 'https://cdn.skypack.dev/ficusjs'
+
+// alternatively, import the function directly
+// import { withStore } from 'https://cdn.skypack.dev/ficusjs/with-store'
 
 // import the renderer and html tagged template literal from the lit-html library
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
@@ -65,7 +69,11 @@ The method accepts a `store` argument which can be a single store instance or ob
 The `withEventBus` function extends a component and makes working with an event bus easier in component methods.
 
 ```js
+// import it with all other features
 import { createComponent, withEventBus } from 'https://cdn.skypack.dev/ficusjs'
+
+// alternatively, import the function directly
+// import { withEventBus } from 'https://cdn.skypack.dev/ficusjs/with-event-bus'
 
 // import the renderer and html tagged template literal from the lit-html library
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
@@ -109,7 +117,11 @@ The method accepts an `eventBus` argument which is a single event instance.
 The `withStateTransactions` function extends a component with transactions so multiple state changes can occur without triggering a re-render.
 
 ```js
+// import it with all other features
 import { createComponent, withStateTransactions } from 'https://cdn.skypack.dev/ficusjs'
+
+// alternatively, import the function directly
+// import { withStateTransactions } from 'https://cdn.skypack.dev/ficusjs/with-state-transactions'
 
 // import the renderer and html tagged template literal from the lit-html library
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
@@ -177,7 +189,11 @@ The `withStyles` function extends a component and makes working with component s
 by providing a `styles` function which is invoked injecting CSS into the `<head>` once for all component instances.
 
 ```js
+// import it with all other features
 import { createComponent, withStyles } from 'https://cdn.skypack.dev/ficusjs'
+
+// alternatively, import the function directly
+// import { withStyles } from 'https://cdn.skypack.dev/ficusjs/with-styles'
 
 // import the renderer and html tagged template literal from the lit-html library
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'

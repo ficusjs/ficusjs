@@ -17,7 +17,8 @@ The following renderers are available as minified bundles.
 
 - [uhtml](https://www.npmjs.com/package/uhtml) (default)
 - [lit-html](https://www.npmjs.com/package/lit-html)
-- [htm and Preact](https://www.npmjs.com/package/htm)
+- [htm](https://www.npmjs.com/package/htm)
+- [htm](https://www.npmjs.com/package/htm) with [Preact](https://www.npmjs.com/package/preact)
 - `document.createElement`
 
 ## `uhtml`
@@ -56,13 +57,30 @@ createComponent('test-comp', {
 })
 ```
 
-## `htm` and `Preact`
 
-The [htm and Preact](https://www.npmjs.com/package/htm) renderer is available in this package.
+## `htm`
+
+The [htm](https://www.npmjs.com/package/htm) renderer is a JSX-like renderer available in this package.
 
 ```js
-// import the renderer function and the html tagged template literal
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/htm'
+
+createComponent('test-comp', {
+  renderer,
+  render () {
+    return html`
+      <div>Some HTML content with ${someVariable}</div>
+    `
+  }
+})
+```
+
+## `htm` with `Preact`
+
+The [htm](https://www.npmjs.com/package/htm) with [Preact](https://www.npmjs.com/package/preact) renderer is available in this package.
+
+```js
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/htm-preact'
 
 createComponent('test-comp', {
   renderer,

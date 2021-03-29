@@ -22,18 +22,18 @@
   },
   "author": "Matt Levy",
   "devDependencies": {
-    "@11ty/eleventy": "^0.11.1",
+    "@11ty/eleventy": "^0.12.1",
     "concat-cli": "4.0.0",
     "cssnano": "4.1.10",
     "cross-env": "7.0.3",
     "mkdirp": "1.0.4",
     "ncp": "2.0.0",
     "npm-run-all": "4.1.5",
-    "postcss": "8.2.7",
+    "postcss": "8.2.8",
     "postcss-cli": "8.3.1",
     "rimraf": "3.0.2",
     "standard": "16.0.3",
-    "terser": "5.6.0",
-    "workbox-cli": "6.1.1"
+    "terser": "5.6.1",
+    "workbox-cli": "6.1.2"
   }
 }

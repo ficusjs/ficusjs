@@ -4,9 +4,14 @@ title: FicusJS documentation
 ---
 # FicusJS documentation
 
-Welcome to the FicusJS documentation!
+FicusJS is a set of lightweight functions for developing applications using web components.
 
-## About
+## What are web components?
+
+Web components are a set of browser APIs that allow you to create new custom, reusable, encapsulated HTML tags for use in websites and web applications.
+Web Components work across modern browsers and can be used with any JavaScript library or framework that works with HTML.
+
+## Go build-less
 
 Browsers have improved a lot over the past years. It's now possible to do web development without requiring any build tools, using the native module loader of the browser. We think this is a great fit for FicusJS, and we recommend this as a general starting point.
 

@@ -1,10 +1,13 @@
 /* css variables*/
 :root {
-  --primary-color: #182B19;
-  --primary-color-light: #509353;
-  --accent-color: #366336;
-  --accent-color-light: #66BD6B;
-  --accent-color-dark: #274427;
+  --primary-color: #000;
+  --primary-color-light: #000;
+  --accent-color: #4ca0a3;
+  --accent-color-light: #70e0e4;
+  --accent-color-dark: #275b5d;
+  --compliment-color: #588f60;
+  --compliment-color-light: #84d68f;
+  --compliment-color-dark: #395c3e;
   --white-color: #FAFBFC;
   --light-gray-color: #C6CBD1;
   --medium-gray-color: #959DA5;
@@ -24,7 +27,7 @@ html, body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 p, li {
@@ -85,8 +88,8 @@ code {
 /* buttons */
 .button--primary {
   padding: 10px 22px;
-  background-color: var(--accent-color);
-  color: white;
+  background-color: var(--accent-color-light);
+  color: var(--primary-color);
   position: relative;
   text-decoration: none;
   border: 0;
@@ -98,15 +101,14 @@ code {
   content: "";
   width: 1rem;
   height: 1rem;
-  background-color: var(--accent-color-light);
+  background-color: var(--compliment-color-light);
   right: -0.4rem;
   top: -0.4rem;
   transition: all 0.3s ease-out;
 }
 
 .button--primary:hover {
-  text-shadow: 0px 1px 1px var(--accent-color-dark);
-  color: white;
+  background-color: var(--accent-color);
   transform: translate3D(0, -3px, 0);
 }
 

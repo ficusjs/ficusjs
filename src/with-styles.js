@@ -45,7 +45,7 @@ export function withStyles (options) {
         linkElem.type = 'text/css'
         linkElem.href = item
         document.head.appendChild(linkElem)
-        return
+        return Promise.resolve()
       }
 
       // if this is a local file, read it and return the contents
@@ -55,7 +55,7 @@ export function withStyles (options) {
       }
 
       // otherwise this is (hopefully) raw css so return it
-      return item
+      return Promise.resolve(item)
     },
     _createAndInjectStylesheet (cssText, attributes) {
       const style = this._createStyle(cssText)

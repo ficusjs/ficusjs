@@ -1,3 +1,5 @@
+import { isPromise } from './util/is-promise.mjs'
+
 class BasePersist {
   /**
    * Create an instance of persistence with the unique namespace identifier
@@ -27,7 +29,8 @@ class BasePersist {
    * @returns {string}
    */
   getState () {
-    return JSON.parse(this.storage.getItem(`${this.namespace}:state`))
+    const state = this.storage.getItem(`${this.namespace}:state`)
+    return state ? JSON.parse(state) : undefined
   }
 
   /**
@@ -35,7 +38,8 @@ class BasePersist {
    * @returns {number}
    */
   lastUpdated () {
-    return parseInt(this.storage.getItem(`${this.namespace}:lastUpdated`), 10)
+    const lastUpdated = this.storage.getItem(`${this.namespace}:lastUpdated`)
+    return lastUpdated ? parseInt(lastUpdated, 10) : undefined
   }
 
   /**
@@ -52,9 +56,9 @@ class Store {
     const self = this
 
     // Add some default objects to hold our getters, actions, mutations and state
-    self.getters = {}
+    // self.getters = {}
     self.actions = {}
-    self.mutations = {}
+    // self.mutations = {}
     self.state = {}
 
     // create a getter cache
@@ -70,27 +74,8 @@ class Store {
     // We store callbacks for when the state changes in here
     self.callbacks = []
 
-    // Look in the passed params object for getters, actions and mutations
-    // that might have been passed in
-    if (options.getters) {
-      self.getters = new Proxy((options.getters || {}), {
-        get (getters, key) {
-          // check the getter cache first
-          if (!self.getterCache[key]) {
-            const result = getters[key](self.state)
-            self.getterCache[key] = result
-          }
-          return self.getterCache[key]
-        }
-      })
-    }
-
     if (options.actions) {
       self.actions = options.actions
-    }
-
-    if (options.mutations) {
-      self.mutations = options.mutations
     }
 
     // initial state values
@@ -147,13 +132,18 @@ class Store {
         // clear the getter cache
         self.getterCache = {}
 
-        if (self.status !== 'clear') {
-          // Fire off our callback processor because if there's listeners,
-          // they're going to want to know that something has changed
-          self._processCallbacks(self.state)
+        if (!self.transaction) {
+          // if we have persistence pass the new state to it
+          if (self.persist) {
+            self.persist.setState(self.state)
+          }
 
           // Reset the status ready for the next operation
           self.status = 'resting'
+
+          // Fire off our callback processor because if there's listeners,
+          // they're going to want to know that something has changed
+          self._processCallbacks(self.state)
         }
 
         return true
@@ -187,14 +177,13 @@ class Store {
    * @param {string} actionKey
    * @param {mixed} payload
    * @returns {boolean}
-   * @memberof Store
+   * @memberOf Store
    */
   dispatch (actionKey, payload) {
     // Run a quick check to see if the action actually exists
     // before we try to run it
     if (typeof this.actions[actionKey] !== 'function') {
-      console.error(`Dude, the store action "${actionKey}" doesn't exist.`)
-      return false
+      throw new Error(`Dude, the store action "${actionKey}" doesn't exist.`)
     }
 
     // Let anything that's watching the status know that we're dispatching an action
@@ -205,37 +194,60 @@ class Store {
   }
 
   /**
-   * Look for a mutation and modify the state object
-   * if that mutation exists by calling it
-   *
-   * @param {string} mutationKey
-   * @param {mixed} payload
-   * @returns {boolean}
-   * @memberof Store
+   * A method to set state
+   * @param {Function|Promise} stateFn
+   * @memberOf Store
    */
-  commit (mutationKey, payload) {
-    // Run a quick check to see if this mutation actually exists
-    // before trying to run it
-    if (typeof this.mutations[mutationKey] !== 'function') {
-      console.error(`Dude, the store mutation "${mutationKey}" doesn't exist`)
-      return false
-    }
+  setState (stateFn) {
+    const setter = data => {
+      if (!data || typeof data !== 'object') return
 
-    // Let anything that's watching the status know that we're mutating state
-    this.status = 'mutation'
+      const isExistingTransaction = this.transaction
+
+      // begin a transaction
+      if (!isExistingTransaction) this.begin()
+
+      for (const key in data) {
+        if (!this.state[key] || (this.state[key] !== data[key])) this.state[key] = data[key]
+      }
+
+      // end the transaction
+      if (!isExistingTransaction) this.end()
+    }
 
     // Get a new version of the state by running the mutation and storing the result of it
-    const newState = this.mutations[mutationKey](this.state, payload)
+    const res = stateFn(this.state)
 
-    // Update the old state with the new state returned from our mutation
-    this.state = newState
+    // set the state
+    isPromise(res) ? res.then(setter) : setter(res)
+  }
 
-    // if we have persistence pass the new state to it
-    if (this.persist) {
-      this.persist.setState(newState)
+  /**
+   * A method to return state
+   * @param {string} key
+   * @returns {undefined|*}
+   */
+  getState (key) {
+    // If path is not defined or it has false value
+    if (!key) return undefined
+
+    // check the getter cache first
+    if (!this.getterCache[key]) {
+      // Check if path is string or array. Regex : ensure that we do not have '.' and brackets.
+      // Regex explained: https://regexr.com/58j0k
+      const keyArray = Array.isArray(key) ? key : key.match(/([^[.\]])+/g)
+
+      // get the result
+      const result = keyArray.reduce((prevObj, key) => prevObj && prevObj[key], this.state)
+
+      // if the result is not defined
+      if (result == null) return undefined
+
+      // cache the result
+      this.getterCache[key] = result
     }
 
-    return true
+    return this.getterCache[key]
   }
 
   /**
@@ -247,7 +259,7 @@ class Store {
    * @returns {boolean}
    */
   _processCallbacks (data) {
-    if (!this.callbacks.length || this.transaction) {
+    if (!this.callbacks.length) {
       return false
     }
 
@@ -266,8 +278,7 @@ class Store {
    */
   subscribe (callback) {
     if (typeof callback !== 'function') {
-      console.error('Dude, you can only subscribe to store changes with a valid function')
-      return false
+      throw new Error('Dude, you can only subscribe to store changes with a valid function')
     }
 
     // create an unsubscribe function
@@ -288,11 +299,13 @@ class Store {
    * @private
    */
   _copyValue (value) {
+    if (!value) return value
     return JSON.parse(JSON.stringify(value))
   }
 
   /**
    * Begin a sequence of store changes as a single unit of work
+   * @memberOf Store
    */
   begin () {
     this.transactionCache = {}
@@ -301,14 +314,22 @@ class Store {
 
   /**
    * End the sequence of changes made to the store and notify subscribers
+   * @memberOf Store
    */
   end () {
     this.transaction = false
+
+    // if we have persistence pass the new state to it
+    if (this.persist) {
+      this.persist.setState(this.state)
+    }
+
     this._processCallbacks(this.state)
   }
 
   /**
    * Rollback a sequence of store changes
+   * @memberOf Store
    */
   rollback () {
     Object.keys(this.transactionCache).forEach(k => (this.state[k] = this.transactionCache[k]))
@@ -318,6 +339,7 @@ class Store {
   /**
    * Clear the store and reset back to the initial state
    * @param {boolean} notifySubscribers A boolean to indicate if subscribers should be notified
+   * @memberOf Store
    */
   clear (notifySubscribers = true) {
     this.getterCache = {}
@@ -329,7 +351,8 @@ class Store {
       this.persist.removeState()
     }
 
-    // set the special clear status
+    // start a transaction
+    this.transaction = true
     this.status = 'clear'
 
     // merge the copy of initial state with the current state
@@ -338,6 +361,7 @@ class Store {
       this.state[key] = initialState[key]
     }
 
+    this.transaction = false
     this.status = 'resting'
 
     if (notifySubscribers) this._processCallbacks(this.state)
@@ -352,11 +376,9 @@ class Store {
  */
 export function createStore (key, options) {
   const store = new Store(options)
-  if (typeof window !== 'undefined') {
-    window.__ficusjs__ = window.__ficusjs__ || {}
-    window.__ficusjs__.store = window.__ficusjs__.store || {}
-    window.__ficusjs__.store[key] = store
-  }
+  globalThis.__ficusjs__ = globalThis.__ficusjs__ || {}
+  globalThis.__ficusjs__.store = globalThis.__ficusjs__.store || {}
+  globalThis.__ficusjs__.store[key] = store
   return store
 }
 
@@ -368,9 +390,9 @@ export function createStore (key, options) {
  */
 export function createPersist (namespace, storageName = 'session') {
   if (storageName === 'local') {
-    return new BasePersist(namespace, window.localStorage)
+    return new BasePersist(namespace, globalThis.localStorage)
   }
-  return new BasePersist(namespace, window.sessionStorage)
+  return new BasePersist(namespace, globalThis.sessionStorage)
 }
 
 /**
@@ -379,7 +401,7 @@ export function createPersist (namespace, storageName = 'session') {
  * @returns {T}
  */
 export function getStore (key) {
-  if (typeof window !== 'undefined' && window.__ficusjs__ && window.__ficusjs__.store && window.__ficusjs__.store[key]) {
-    return window.__ficusjs__.store[key]
+  if (globalThis.__ficusjs__ && globalThis.__ficusjs__.store && globalThis.__ficusjs__.store[key]) {
+    return globalThis.__ficusjs__.store[key]
   }
 }

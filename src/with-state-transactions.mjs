@@ -1,4 +1,4 @@
-import { isPromise } from './util/is-promise.js'
+import { isPromise } from './util/is-promise.mjs'
 
 export function withStateTransactions (options) {
   return {

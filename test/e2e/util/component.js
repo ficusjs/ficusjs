@@ -1,11 +1,11 @@
 import { renderer, html } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
-import { createComponent as componentCreator } from '../../../src/component.js'
-import { withStore } from '../../../src/with-store.js'
-import { withStateTransactions } from '../../../src/with-state-transactions.js'
-import { withStyles } from '../../../src/with-styles.js'
-import { withEventBus } from '../../../src/with-event-bus.js'
+import { createComponent as componentCreator } from '../../../src/component.mjs'
+import { withStore } from '../../../src/with-store.mjs'
+import { withStateTransactions } from '../../../src/with-state-transactions.mjs'
+import { withStyles } from '../../../src/with-styles.mjs'
+import { withEventBus } from '../../../src/with-event-bus.mjs'
 import { createStore, getStore } from '../../../src/store.js'
-import { createEventBus, getEventBus } from '../../../src/event.js'
+import { createEventBus, getEventBus } from '../../../src/event-bus.mjs'
 
 function createComponent (tagName, options) {
   componentCreator(tagName, { ...options, renderer })

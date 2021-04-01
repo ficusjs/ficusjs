@@ -1,16 +1,15 @@
-/* global HTMLElement */
-import { collateObservedAttrs } from './util/collate-observed-attrs.js'
-import { toKebabCase } from './util/to-kebab-case.js'
-import { isPromise } from './util/is-promise.js'
-import { emit } from './util/emit.js'
+import { collateObservedAttrs } from './util/collate-observed-attrs.mjs'
+import { toKebabCase } from './util/to-kebab-case.mjs'
+import { isPromise } from './util/is-promise.mjs'
+import { emit } from './util/emit.mjs'
 
 function createComponent (tagName, props) {
   const observedAttrs = collateObservedAttrs(props.props)
 
-  window.customElements.get(tagName) ||
-  window.customElements.define(
+  globalThis.customElements.get(tagName) ||
+  globalThis.customElements.define(
     tagName,
-    class FicusComponent extends HTMLElement {
+    class FicusComponent extends globalThis.HTMLElement {
       // standard HTMLElement props and lifecycle hooks
 
       static get observedAttributes () {

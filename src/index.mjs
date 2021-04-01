@@ -1,10 +1,10 @@
-import { createComponent } from './component.js'
-import { withEventBus } from './with-event-bus.js'
-import { withStateTransactions } from './with-state-transactions.js'
-import { withStore } from './with-store.js'
-import { withStyles } from './with-styles.js'
-import { createEventBus, getEventBus } from './event.js'
-import { createPersist, createStore, getStore } from './store.js'
+import { createComponent } from './component.mjs'
+import { withEventBus } from './with-event-bus.mjs'
+import { withStateTransactions } from './with-state-transactions.mjs'
+import { withStore } from './with-store.mjs'
+import { withStyles } from './with-styles.mjs'
+import { createEventBus, getEventBus } from './event-bus.mjs'
+import { createPersist, createStore, getStore } from './store.mjs'
 
 /**
  * Function to use another FicusJS module

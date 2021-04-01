@@ -4,3 +4,6 @@ test/snapshots
 .idea
 .vscode
 *.log
+tmp-test
+.nyc_output
+coverage

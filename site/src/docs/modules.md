@@ -117,7 +117,7 @@ If returning a `Promise`, the calling module must handle the response before con
 
 ### When using the all features build
 
-When using the all features build `dist/index.js`, the helpers `object` will contain the following properties.
+When using the all features build `dist/index.mjs`, the helpers `object` will contain the following properties.
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -176,7 +176,7 @@ export const module = {
 
 ### When using the component build only
 
-When using the component only `dist/component.js` without stores and events, the helpers `object` argument will contain the following properties:
+When using the component only `dist/component.mjs` without stores and events, the helpers `object` argument will contain the following properties:
 
 | Property | Type | Description |
 | --- | --- | --- |

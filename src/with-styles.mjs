@@ -4,36 +4,32 @@ export function withStyles (options) {
     created () {
       if (options.created) options.created.call(this)
       if (options.styles && typeof options.styles === 'function') {
-        if (typeof window !== 'undefined') {
-          window.__ficusjs__ = window.__ficusjs__ || {}
-          window.__ficusjs__.styles = window.__ficusjs__.styles || {}
-        }
+        globalThis.__ficusjs__ = globalThis.__ficusjs__ || {}
+        globalThis.__ficusjs__.styles = globalThis.__ficusjs__.styles || {}
         this._injectStyles(options.styles())
       }
     },
     _injectStyles (styleItems) {
-      if (typeof window !== 'undefined') {
-        if (window.__ficusjs__ && window.__ficusjs__.styles && window.__ficusjs__.styles[this.componentTagName]) return
+      if (globalThis.__ficusjs__ && globalThis.__ficusjs__.styles && globalThis.__ficusjs__.styles[this.componentTagName]) return
 
-        if ((Array.isArray(styleItems) && styleItems.filter(x => typeof x !== 'string').length) || (!Array.isArray(styleItems) && typeof styleItems !== 'string')) {
-          // if this IS an array and any of the elements are NOT a string -> Error
-          // if this is NOT an array and also NOT a string -> Error
-          console.error('Dude, styles must return a string or an array of strings!')
-          return
-        }
+      if ((Array.isArray(styleItems) && styleItems.filter(x => typeof x !== 'string').length) || (!Array.isArray(styleItems) && typeof styleItems !== 'string')) {
+        // if this IS an array and any of the elements are NOT a string -> Error
+        // if this is NOT an array and also NOT a string -> Error
+        console.error('Dude, styles must return a string or an array of strings!')
+        return
+      }
 
-        let cssToImport = ''
-        // styles may be an array
-        if (Array.isArray(styleItems)) {
-          Promise.all(styleItems.map(item => this._processStyle(item)))
-            .then(allCss => {
-              cssToImport = allCss.filter(css => css).join('\n')
-              this._createAndInjectStylesheet(cssToImport, { 'data-tag': this.componentTagName })
-            })
-        } else {
-          this._processStyle(styleItems)
-            .then(cssToImport => this._createAndInjectStylesheet(cssToImport, { 'data-tag': this.componentTagName }))
-        }
+      let cssToImport = ''
+      // styles may be an array
+      if (Array.isArray(styleItems)) {
+        Promise.all(styleItems.map(item => this._processStyle(item)))
+          .then(allCss => {
+            cssToImport = allCss.filter(css => css).join('\n')
+            this._createAndInjectStylesheet(cssToImport, { 'data-tag': this.componentTagName })
+          })
+      } else {
+        this._processStyle(styleItems)
+          .then(cssToImport => this._createAndInjectStylesheet(cssToImport, { 'data-tag': this.componentTagName }))
       }
     },
     _processStyle (item) {
@@ -51,7 +47,7 @@ export function withStyles (options) {
       // if this is a local file, read it and return the contents
       const fileRegex = /.+\.css$/
       if (fileRegex.test(item)) {
-        return window.fetch(item).then(css => css.text())
+        return globalThis.fetch(item).then(css => css.text())
       }
 
       // otherwise this is (hopefully) raw css so return it
@@ -61,7 +57,7 @@ export function withStyles (options) {
       const style = this._createStyle(cssText)
       this._setElementAttributes(style, attributes)
       document.head.appendChild(style)
-      window.__ficusjs__.styles[this.componentTagName] = { loaded: true, style }
+      globalThis.__ficusjs__.styles[this.componentTagName] = { loaded: true, style }
     },
     _createStyle (cssText) {
       const style = document.createElement('style')

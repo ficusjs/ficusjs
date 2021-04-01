@@ -8,19 +8,22 @@
   "types": "types/index.d.ts",
   "scripts": {
     "build": "run-p build:*",
-    "build:all": "rollup -i src/index.js -o dist/index.js -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
-    "build:component": "rollup -i src/component.js -o dist/component.js -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
-    "build:event": "rollup -i src/event.js -o dist/event.js -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
-    "build:store": "rollup -i src/store.js -o dist/store.js -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
-    "build:with-event-bus": "rollup -i src/with-event-bus.js -o dist/with-event-bus.js -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
-    "build:with-state-transactions": "rollup -i src/with-state-transactions.js -o dist/with-state-transactions.js -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
-    "build:with-styles": "rollup -i src/with-styles.js -o dist/with-styles.js -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
-    "build:with-store": "rollup -i src/with-store.js -o dist/with-store.js -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:all": "rollup -i src/index.mjs -o dist/index.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:component": "rollup -i src/component.mjs -o dist/component.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:event-bus": "rollup -i src/event-bus.mjs -o dist/event-bus.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:store": "rollup -i src/store.mjs -o dist/store.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:with-event-bus": "rollup -i src/with-event-bus.mjs -o dist/with-event-bus.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:with-state-transactions": "rollup -i src/with-state-transactions.mjs -o dist/with-state-transactions.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:with-styles": "rollup -i src/with-styles.mjs -o dist/with-styles.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:with-store": "rollup -i src/with-store.mjs -o dist/with-store.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "dev": "run-p serve open",
     "open": "open-cli http://localhost:8080/test/e2e",
     "test": "start-server-and-test serve:silent http://localhost:8080 cy:run",
+    "test:unit": "ava test/unit/**/*.spec.mjs",
+    "test:unit:watch": "ava test/unit/**/*.spec.mjs --watch",
+    "test:unit:coverage": "c8 --all --include=src/**/*.mjs --reporter=lcov --reporter=text-summary ava test/unit/**/*.spec.mjs --verbose",
     "serve": "http-server",
     "serve:silent": "http-server -s"
   },
@@ -40,40 +43,46 @@
   },
   "homepage": "https://docs.ficusjs.org",
   "devDependencies": {
+    "ava": "3.15.0",
+    "c8": "7.7.0",
     "cypress": "6.8.0",
     "http-server": "0.12.3",
+    "jsdom": "16.5.2",
+    "node-sessionstorage": "1.0.0",
     "npm-run-all": "4.1.5",
     "open-cli": "6.0.1",
+    "nyc": "15.1.0",
     "rollup": "2.44.0",
     "rollup-plugin-filesize": "9.1.1",
     "rollup-plugin-terser": "7.0.2",
+    "sinon": "10.0.0",
     "standard": "16.0.3",
     "start-server-and-test": "1.12.1"
   },
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.mjs"
     },
     "./component": {
-      "import": "./dist/component.js"
+      "import": "./dist/component.mjs"
     },
-    "./event": {
-      "import": "./dist/event.js"
+    "./event-bus": {
+      "import": "./dist/event-bus.mjs"
     },
     "./store": {
-      "import": "./dist/store.js"
+      "import": "./dist/store.mjs"
     },
     "./with-event-bus": {
-      "import": "./dist/with-event-bus.js"
+      "import": "./dist/with-event-bus.mjs"
     },
     "./with-state-transactions": {
-      "import": "./dist/with-state-transactions.js"
+      "import": "./dist/with-state-transactions.mjs"
     },
     "./with-store": {
-      "import": "./dist/with-store.js"
+      "import": "./dist/with-store.mjs"
     },
     "./with-styles": {
-      "import": "./dist/with-styles.js"
+      "import": "./dist/with-styles.mjs"
     }
   }
 }

@@ -1,4 +1,4 @@
-import { toKebabCase } from './to-kebab-case.js'
+import { toKebabCase } from './to-kebab-case.mjs'
 
 export function collateObservedAttrs (props) {
   if (!props) return []

@@ -16,7 +16,7 @@ Component names require a dash to be used in them; they **cannot** be single wor
 
 Import the `createComponent` function together with a renderer function and `html` [template literal tag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates) into your Javascript file:
 
-**my-component.js**
+**my-component.mjs**
 
 ```js
 // import the createComponent function

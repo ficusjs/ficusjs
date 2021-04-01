@@ -1,13 +1,11 @@
-class Events {
+class EventBus {
   constructor () {
-    if (typeof window !== 'undefined' && window.__ficusjs__ && window.__ficusjs__.eventBus) {
-      return window.__ficusjs__.eventBus
+    if (globalThis.__ficusjs__ && globalThis.__ficusjs__.eventBus) {
+      return globalThis.__ficusjs__.eventBus
     }
     this.events = {}
-    if (typeof window !== 'undefined') {
-      window.__ficusjs__ = window.__ficusjs__ || {}
-      window.__ficusjs__.eventBus = window.__ficusjs__.eventBus || this
-    }
+    globalThis.__ficusjs__ = globalThis.__ficusjs__ || {}
+    globalThis.__ficusjs__.eventBus = globalThis.__ficusjs__.eventBus || this
   }
 
   /**
@@ -17,7 +15,7 @@ class Events {
    * @param {string} event
    * @param {function} callback
    * @returns {number} A count of callbacks for this event
-   * @memberof Events
+   * @memberof EventBus
    */
   subscribe (event, callback) {
     const self = this
@@ -47,7 +45,7 @@ class Events {
    * @param {string} event
    * @param {object} [data={}]
    * @returns {array} The callbacks for this event, or an empty array if no event exits
-   * @memberof Events
+   * @memberof EventBus
    */
   publish (event, data = {}) {
     const self = this
@@ -63,16 +61,16 @@ class Events {
 }
 
 /**
- * Function to create an Events instance
- * @returns {Events}
+ * Function to create an EventBus instance
+ * @returns {EventBus}
  */
 export function createEventBus () {
-  return new Events()
+  return new EventBus()
 }
 
 /**
- * Function to get the running Events instance
- * @returns {Events}
+ * Function to get the running EventBus instance
+ * @returns {EventBus}
  */
 export function getEventBus () {
   return createEventBus()

@@ -9,3 +9,4 @@ img
 .vscode
 cypress.json
 favicon.ico
+coverage

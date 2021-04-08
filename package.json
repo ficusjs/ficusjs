@@ -1,6 +1,6 @@
 {
   "name": "ficusjs",
-  "version": "3.2.3",
+  "version": "4.0.0",
   "description": "FicusJS is a set of lightweight functions for developing applications using web components",
   "type": "module",
   "main": "dist/index.js",
@@ -13,14 +13,13 @@
     "build:event-bus": "rollup -i src/event-bus.mjs -o dist/event-bus.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:store": "rollup -i src/store.mjs -o dist/store.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-event-bus": "rollup -i src/with-event-bus.mjs -o dist/with-event-bus.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
-    "build:with-state-transactions": "rollup -i src/with-state-transactions.mjs -o dist/with-state-transactions.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-styles": "rollup -i src/with-styles.mjs -o dist/with-styles.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-store": "rollup -i src/with-store.mjs -o dist/with-store.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "dev": "run-p serve open",
     "open": "open-cli http://localhost:8080/test/e2e",
-    "test": "start-server-and-test serve:silent http://localhost:8080 cy:run",
+    "test": "npm run test:unit && start-server-and-test serve:silent http://localhost:8080 cy:run",
     "test:unit": "ava test/unit/**/*.spec.mjs",
     "test:unit:watch": "ava test/unit/**/*.spec.mjs --watch",
     "test:unit:coverage": "c8 --all --include=src/**/*.mjs --reporter=lcov --reporter=text-summary ava test/unit/**/*.spec.mjs --verbose",
@@ -44,8 +43,8 @@
   "homepage": "https://docs.ficusjs.org",
   "devDependencies": {
     "ava": "3.15.0",
-    "c8": "7.7.0",
-    "cypress": "6.8.0",
+    "c8": "7.7.1",
+    "cypress": "7.0.1",
     "http-server": "0.12.3",
     "jsdom": "16.5.2",
     "node-sessionstorage": "1.0.0",
@@ -74,9 +73,6 @@
     },
     "./with-event-bus": {
       "import": "./dist/with-event-bus.mjs"
-    },
-    "./with-state-transactions": {
-      "import": "./dist/with-state-transactions.mjs"
     },
     "./with-store": {
       "import": "./dist/with-store.mjs"

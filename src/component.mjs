@@ -73,9 +73,6 @@ function createComponent (tagName, props) {
         }
         this.state = this._monitorState(this._state)
 
-        // Allow methods and computed properties to be added to this instance
-        this._processMethodsAndComputedProps(options)
-
         // Determine what our root is. It can be a pointer for `this` or a shadow root
         this.root = this._processRoot(options.root)
 
@@ -126,6 +123,9 @@ function createComponent (tagName, props) {
           const res = stateFn(this.state)
           isPromise(res) ? res.then(setter) : setter(res)
         }
+
+        // Allow methods and computed properties to be added to this instance
+        this._processMethodsAndComputedProps(options)
 
         // create instance properties
         this._processInstanceProps(this._props)
@@ -201,12 +201,11 @@ function createComponent (tagName, props) {
 
       _processMethodsAndComputedProps (props) {
         const self = this
-        const protectedMethods = ['state', 'created', 'mounted', 'updated', 'removed', 'render', 'renderer']
         const keys = Object.keys(props)
         if (!keys.length) return
         // Run through and bind to the component instance
         keys.forEach(key => {
-          if (!self[key] && !protectedMethods.includes(key) && typeof props[key] === 'function') {
+          if (!self[key] && typeof props[key] === 'function') {
             self[key] = props[key].bind(self)
           }
           if (key === 'computed') {
@@ -391,7 +390,8 @@ function createComponent (tagName, props) {
 
 /**
  * Function to use a FicusJS module of components
- * @param {Object} module
+ * @param {object} module
+ * @param {object} options
  */
 function use (module, { renderer, ...args }) {
   if (module.create && typeof module.create === 'function') {

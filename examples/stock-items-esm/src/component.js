@@ -1,4 +1,4 @@
-import { createComponent } from 'https://cdn.skypack.dev/ficusjs/component'
+import { createComponent } from 'https://cdn.skypack.dev/ficusjs@3/component'
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/uhtml'
 
 createComponent('stock-items', {

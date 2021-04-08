@@ -9,10 +9,8 @@ test.beforeEach(t => {
       test: null,
       test2: null
     },
-    actions: {
-      setTest (context, payload) {
-        context.setState((state) => ({ ...state, test: payload }))
-      }
+    setTest (payload) {
+      this.setState((state) => ({ ...state, test: payload }))
     }
   })
 })
@@ -22,13 +20,13 @@ test('create a store', t => {
 })
 
 test('dispatch action to set state', t => {
-  store.dispatch('setTest', 'test')
+  store.setTest('test')
   t.is(store.state.test, 'test')
 })
 
 test('dispatch an invalid action', t => {
   const error = t.throws(() => {
-    store.dispatch('setFake', 'test')
+    store.setFake('test')
   })
-  t.is(error.message, 'Dude, the store action "setFake" doesn\'t exist.')
+  t.is(error.message, 'store.setFake is not a function')
 })

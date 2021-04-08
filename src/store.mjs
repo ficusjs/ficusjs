@@ -3,7 +3,8 @@ import { isPromise } from './util/is-promise.mjs'
 class BasePersist {
   /**
    * Create an instance of persistence with the unique namespace identifier
-   * @param namespace
+   * @param {string} namespace
+   * @param {object} storage
    */
   constructor (namespace, storage) {
     this.namespace = namespace
@@ -12,8 +13,7 @@ class BasePersist {
 
   /**
    * Set state in the persistence store
-   * @param key
-   * @param state
+   * @param {*} state
    */
   setState (state) {
     if (state) {
@@ -55,10 +55,7 @@ class Store {
   constructor (options) {
     const self = this
 
-    // Add some default objects to hold our getters, actions, mutations and state
-    // self.getters = {}
-    self.actions = {}
-    // self.mutations = {}
+    // An object to hold our state
     self.state = {}
 
     // create a getter cache
@@ -74,9 +71,8 @@ class Store {
     // We store callbacks for when the state changes in here
     self.callbacks = []
 
-    if (options.actions) {
-      self.actions = options.actions
-    }
+    // Allow actions to be added to this instance
+    this._processActions(options)
 
     // initial state values
     let initialState = options.initialState || {}
@@ -106,6 +102,19 @@ class Store {
 
     // set-up state
     this._processState(initialState)
+  }
+
+  _processActions (options) {
+    const self = this
+    const keys = Object.keys(options)
+    if (!keys.length) return
+
+    // Run through and bind to the component instance
+    keys.forEach(key => {
+      if (!self[key] && typeof options[key] === 'function') {
+        self[key] = options[key].bind(self)
+      }
+    })
   }
 
   /**
@@ -162,35 +171,12 @@ class Store {
 
   /**
    * Last updated state time difference in seconds
-   * @param key
+   * @param {number} value
    * @returns {number}
    * @private
    */
   _lastUpdatedTimeDiff (value) {
     return Math.round((new Date().getTime() - value) / 1000)
-  }
-
-  /**
-   * A dispatcher for actions that looks in the actions
-   * collection and runs the action if it can find it
-   *
-   * @param {string} actionKey
-   * @param {mixed} payload
-   * @returns {boolean}
-   * @memberOf Store
-   */
-  dispatch (actionKey, payload) {
-    // Run a quick check to see if the action actually exists
-    // before we try to run it
-    if (typeof this.actions[actionKey] !== 'function') {
-      throw new Error(`Dude, the store action "${actionKey}" doesn't exist.`)
-    }
-
-    // Let anything that's watching the status know that we're dispatching an action
-    this.status = 'action'
-
-    // Actually call the action and pass it the Store context and whatever payload was passed
-    return this.actions[actionKey](this, payload)
   }
 
   /**
@@ -205,14 +191,26 @@ class Store {
       const isExistingTransaction = this.transaction
 
       // begin a transaction
-      if (!isExistingTransaction) this.begin()
+      if (!isExistingTransaction) {
+        this.transactionCache = {}
+        this.transaction = true
+      }
 
       for (const key in data) {
         if (!this.state[key] || (this.state[key] !== data[key])) this.state[key] = data[key]
       }
 
       // end the transaction
-      if (!isExistingTransaction) this.end()
+      if (!isExistingTransaction) {
+        this.transaction = false
+
+        // if we have persistence pass the new state to it
+        if (this.persist) {
+          this.persist.setState(this.state)
+        }
+
+        this._processCallbacks(this.state)
+      }
     }
 
     // Get a new version of the state by running the mutation and storing the result of it
@@ -301,39 +299,6 @@ class Store {
   _copyValue (value) {
     if (!value) return value
     return JSON.parse(JSON.stringify(value))
-  }
-
-  /**
-   * Begin a sequence of store changes as a single unit of work
-   * @memberOf Store
-   */
-  begin () {
-    this.transactionCache = {}
-    this.transaction = true
-  }
-
-  /**
-   * End the sequence of changes made to the store and notify subscribers
-   * @memberOf Store
-   */
-  end () {
-    this.transaction = false
-
-    // if we have persistence pass the new state to it
-    if (this.persist) {
-      this.persist.setState(this.state)
-    }
-
-    this._processCallbacks(this.state)
-  }
-
-  /**
-   * Rollback a sequence of store changes
-   * @memberOf Store
-   */
-  rollback () {
-    Object.keys(this.transactionCache).forEach(k => (this.state[k] = this.transactionCache[k]))
-    this.end()
   }
 
   /**

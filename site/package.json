@@ -4,7 +4,10 @@
   "description": "Website for FicusJS",
   "scripts": {
     "build": "cross-env NODE_ENV=production eleventy --input=src --output=dist",
-    "build:js": "terser -c -m -o dist/assets/js/main.js src/assets/js/main.js",
+    "build:js": "run-p build:js:*",
+    "build:js:main": "terser -c -m -o dist/assets/js/main.js src/assets/js/main.js",
+    "build:js:sidebar": "terser -c -m -o dist/assets/js/sidebar-details.js src/assets/js/sidebar-details.js",
+    "build:js:theme": "terser -c -m -o dist/assets/js/theme.js src/assets/js/theme.js",
     "postbuild": "mkdirp dist/assets/js && run-s build:* copy:* workbox:gen",
     "clean": "rimraf dist",
     "copy:assets": "mkdirp dist/assets/img && ncp src/assets/img dist/assets/img",

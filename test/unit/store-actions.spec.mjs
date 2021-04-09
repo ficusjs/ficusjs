@@ -1,10 +1,10 @@
 import test from 'ava'
-import { createStore } from '../../src/store.mjs'
+import { createAppState } from '../../src/app-state.mjs'
 
 let store
 
 test.beforeEach(t => {
-  store = createStore('actions.store', {
+  store = createAppState('actions.store', {
     initialState: {
       test: null,
       test2: null

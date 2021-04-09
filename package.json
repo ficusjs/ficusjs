@@ -1,18 +1,20 @@
 {
   "name": "ficusjs",
-  "version": "4.0.0",
+  "version": "3.3.0",
   "description": "FicusJS is a set of lightweight functions for developing applications using web components",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
   "types": "types/index.d.ts",
   "scripts": {
     "build": "run-p build:*",
     "build:all": "rollup -i src/index.mjs -o dist/index.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:component": "rollup -i src/component.mjs -o dist/component.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:event-bus": "rollup -i src/event-bus.mjs -o dist/event-bus.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:app-state": "rollup -i src/app-state.mjs -o dist/app-state.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:store": "rollup -i src/store.mjs -o dist/store.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-event-bus": "rollup -i src/with-event-bus.mjs -o dist/with-event-bus.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:with-state-transactions": "rollup -i src/with-state-transactions.mjs -o dist/with-state-transactions.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-styles": "rollup -i src/with-styles.mjs -o dist/with-styles.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-store": "rollup -i src/with-store.mjs -o dist/with-store.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "cy:open": "cypress open",
@@ -51,7 +53,7 @@
     "npm-run-all": "4.1.5",
     "open-cli": "6.0.1",
     "nyc": "15.1.0",
-    "rollup": "2.44.0",
+    "rollup": "2.45.0",
     "rollup-plugin-filesize": "9.1.1",
     "rollup-plugin-terser": "7.0.2",
     "sinon": "10.0.0",
@@ -68,11 +70,17 @@
     "./event-bus": {
       "import": "./dist/event-bus.mjs"
     },
+    "./app-state": {
+      "import": "./dist/app-state.mjs"
+    },
     "./store": {
       "import": "./dist/store.mjs"
     },
     "./with-event-bus": {
       "import": "./dist/with-event-bus.mjs"
+    },
+    "./with-state-transactions": {
+      "import": "./dist/with-state-transactions.mjs"
     },
     "./with-store": {
       "import": "./dist/with-store.mjs"

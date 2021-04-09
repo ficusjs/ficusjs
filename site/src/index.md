@@ -17,6 +17,7 @@ FicusJS is a set of lightweight functions for developing web applications. It is
 - creating web components
 - managing application state
 - publish/subscribe event bus
+- reuse with modules
 
 ## What are web components?
 

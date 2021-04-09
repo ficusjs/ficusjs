@@ -2,11 +2,15 @@
 layout: main.njk
 title: FicusJS documentation - Stores
 ---
-# Stores
+# Stores <span class="fd-deprecated" style="font-size: 1rem">Deprecated</span>
+
+Stores have been replaced with [application state](/app-state/) which is a simpler, less convoluted way of working with stores.
+
+---
 
 FicusJS provides a function for creating fast, lightweight stores for application state.
 
-To store application state outside of your components and have them react to changes, you can create a store which is shared across multiple components.
+To store application state outside of components and have them react to change, you can create a store which is shared across multiple components.
 
 ## Example
 
@@ -18,17 +22,31 @@ Import the `createStore` function into your Javascript main file:
 import { createStore } from 'https://cdn.skypack.dev/ficusjs@3'
 ```
 
-Create a new store instance with `initialState` and `actions`:
+Create a new store instance with `actions`, `mutations` and `initialState`:
 
 **main.js**
 
 ```js
 const store = createStore('an.example.store', {
+  ttl: 5,
   initialState: {
     count: 0
   },
-  increment (payload) {
-    this.state.count = this.state.count + payload
+  actions: {
+    increment (context, payload) {
+      context.commit('increment', payload)
+    }
+  },
+  mutations: {
+    increment (state, payload) {
+      state.count = payload
+      return state
+    }
+  },
+  getters: {
+    max (state) {
+      return Math.max(state.count) * 1000
+    }
   }
 })
 ```
@@ -45,9 +63,12 @@ The following properties can be used when creating stores:
 | Property | Type | Description                                                                                                                                                                              |
 | --- | --- | --- |
 | `initialState` | `object` | The initial state of the store |
+| `actions` | `object` | Contains one or more action functions that are dispatched to eventually mutate state |
+| `mutations` | `object` | Contains one or more mutation functions that set values and return new state |
+| `getters` | `object` | Contains one or more getter functions that return state projections |
+| `router` | `object` | A router instance for use in actions where changing URL is required |
 | `persist` | `string` or `object` | If persistence is required (between reloads), provide a unique namespace string for saving the store to `window.sessionStorage` |
 | `ttl` | `number` | Limit the lifetime of the data in the store by setting a time to live in seconds. Once the amount of seconds has elapsed, the store resets back to the `initialState` values |
-| `*` | `function` | one or more action functions that are invoked to eventually mutate state |
 
 ## getStore function
 
@@ -68,72 +89,134 @@ which keeps an eye on things for you and tells the store if something has been m
 
 ### Reading state
 
-Retrieving state is done using the `getState` method or by reading the property directly.
-
-The `getState` method is [memoized](https://en.wikipedia.org/wiki/Memoization).
+You can read a value from state once the instance has been created:
 
 ```js
-// by getState method
-const value = store.getState('some.nested.prop')
+// An initialised store. Params omitted for brevity
+const store = createStore('an.example.store', {
+  ...
+})
 
-// or read the property directly
-const value = store.state.some.nested.prop
-```
-
-### Mutating state
-
-Mutating state is done using the `setState` method or by direct assignment (similar to component local state).
-
-Please note, using direct assignment will notify subscribers for each value change. Mutating multiple values using direct assignment will trigger notifications for each value being set.
-
-Using `setState` will ensure only a single notification is triggered for multiple value changes. This is important in components as it's paramount to keep re-renders to a minimum.
-
-```js
-// by setState method
-this.setState(state => ({ ...state, someData: data }))
-
-// or by direct assignment
-this.state.someData = data
+// Log the title of the above state example
+console.log(store.state.title)
 ```
 
 ## Actions
 
-It is common to be able to call a method and perform an action. To achieve this, you can define methods when creating your store.
-Methods are functions that can be defined anywhere in the store definition object.
+To modify state, you need to dispatch an `action`.
+
+Actions are quite similar to mutations, but they can contain async operations such as fetching data. The end-goal of an action is to commit one or more `mutations`.
 
 ```js
-const store = createStore('example.store', {
-  initialState: {
-    someData: null
-  },
-  someAction () {
-    // perform some action
-  },
-  someOtherAction () {
-    // perform another action
+// Create a store with actions
+const store = createStore('an.example.store', {
+  actions: {
+    updateTitle (context, payload) {
+      context.commit('setTitle', payload.text)
+    }
   }
 })
 ```
 
-Each action is invoked in the context of the store which means `this` refers to the store instance.
+### Dispatch
+
+The `dispatch` method is part of the store object and runs actions for you. You can dispatch wherever there's a reference to your store:
 
 ```js
-const store = createStore('example.store', {
-  initialState: {
-    someData: null
-  },
-  someAction () {
-    doSomeDataLoading()
-      .then(data => {
-        // call the setState method to mutate the state
-        this.setState(state => ({ ...state, someData: data }))
-      })
+// Dispatch the `updateTitle` action to update the title
+store.dispatch('updateTitle', { text: 'The new text for the title' })
+```
+
+The `dispatch` method takes two parameters:
+
+- `actionKey` is the string name of your action
+- `payload` is the data that you want to pass along to your action
+
+## Mutations
+
+To actually modify the state, a `mutation` will take over.
+
+Mutations provide a synchronous method of mutating state. They have one job and one job only: mutate the state and return it.
+
+```js
+// Create a store with actions
+const store = createStore('an.example.store', {
+  mutations: {
+    setTitle (state, payload) {
+      state.title = payload
+      return state
+    }
   }
 })
 ```
 
-Actions can contain async operations such as fetching data.
-The end-goal of an action can either be committing one or more state changes or returning filtered state.
+The `setTitle` method has two parameters:
+
+- `state` is the current version of your store's state before this mutation
+- `payload` is the data that was passed in by your action
+
+Mutations like this should be as simple as possible and only mutate the state. Anything more complex should be done at an action level.
+
+### Commit
+
+The `commit` method is part of the store object and runs mutations for you.
+
+```js
+// Run the `setTitle` mutation to set the state
+context.commit('setTitle', payload)
+```
+
+The `commit` method takes two parameters:
+
+- `mutationKey` is the string name of your mutation
+- `payload` is the data that you want to pass along to your mutation
+
+## Getters
+
+Getters are useful if you want to return a projection of the state. A projection is a shape derived from the state.
+
+They are memoized functions which means the result of the getter is cached for subsequent executions. This is useful when creating projections from large sets of data.
+Setting state will automatically reset the getter cache.
+
+For example, given an array of objects, a getter can return a filtered set of objects:
+
+```js
+// Create a store with actions
+const store = createStore('an.example.store', {
+  initialState: {
+    people: [
+      { name: 'Bill', status: 'Active' },
+      { name: 'Ted', status: 'Active' },
+      { name: 'Grim Reaper', status: 'Disabled' }
+    ]
+  },
+  getters: {
+    activePeople (state) {
+      return state.people.filter(p => p.state === 'Active')
+    }
+  }
+})
+
+const activeOnes = store.getters.activePeople
+// [{ name: 'Bill', status: 'Active' }, { name: 'Ted', status: 'Active' }]
+```
+
+### Passing arguments to getters
+
+If you want to pass arguments to getters for specific filtering, you can return a function as a getter:
+
+```js
+{
+  getters: {
+    timesBy (state) {
+      return (amount) => state.count * amount
+    }
+  }
+}
+
+const total = store.getters.timesBy(20)
+// given a state.count value of 2, total will be 40
+```
 
 ## Subscribing to store changes
 
@@ -173,11 +256,48 @@ store.clear()
 store.clear(false)
 ```
 
+## Transactions
+
+A transaction is a sequence of operations performed (using one or more actions/mutations) on a store as a single logical unit of work.
+The transaction can be either all committed (applied to the store) or all rolled back (undone from the store).
+
+```js
+// Begin a transaction
+store.begin()
+
+try {
+  // Dispatch the `updateTitle` action to update the title
+  store.dispatch('updateTitle', { text: 'The new text for the title' })
+
+  // Commit a text change
+  store.commit('setText', 'example')
+
+  // Apply the transaction to the store and notify subscribers to re-render
+  store.end()
+} catch (e) {
+  // Rollback the transaction changes
+  store.rollback()
+}
+```
+
+### begin method
+
+The `begin` method starts a transaction.
+
+### end method
+
+The `end` method ends the transaction and notifies subscribers that the store state has changed.
+
+### rollback method
+
+The `rollback` method rolls back the store state changes carried out within the transaction.
+This is used if an error occurs, and the state needs to be reset.
+
 ## Multiple stores
 
 You can create as many stores as you want to separate your application state.
 
-### Manage multiple store instances with an object
+### Manage multiple store instances with an `Object`
 
 Simply create a Javascript `Object` containing multiple store instances and then pass specific instances to your components.
 
@@ -217,6 +337,33 @@ createComponent(
     ...
   })
 )
+```
+
+### Transactions using an object of stores
+
+To perform transactions across a set of stores, create methods to co-ordinate the transaction methods.
+
+```js
+// A helper function for testing a store instance
+function isStore (store) {
+  return store.subscribe && typeof store.subscribe === 'function'
+}
+
+// Create a number of stores
+const allStores = {
+  food: createStore('my.food.store', { ... }),
+  drinks: createStore('my.drinks.store', { ... }),
+  snacks: createStore('my.snacks.store', { ... }),
+  begin () {
+    Object.values(this).forEach(v => isStore(v) && v.begin())
+  },
+  end () {
+    Object.values(this).forEach(v => isStore(v) && v.end())
+  },
+  rollback () {
+    Object.values(this).forEach(v => isStore(v) && v.rollback())
+  }
+}
 ```
 
 ### Clearing multiple stores
@@ -274,7 +421,7 @@ const store = createStore('an.example.store', {
 You can optionally save state to `window.localStorage` (for persistence across browser sessions) using the `createPersist` function:
 
 ```js
-import { createStore, createPersist } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createStore, createPersist } from 'https://cdn.skypack.dev/ficusjs'
 
 // An initialised store. Params omitted for brevity
 const store = createStore('an.example.store', {
@@ -303,7 +450,7 @@ Four methods must be implemented:
 | `removeState()` | Remove the state from the persistence store |
 
 ```js
-import { createStore } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createStore } from 'https://cdn.skypack.dev/ficusjs'
 
 class MyCustomPersist {
   setState (state) {
@@ -334,11 +481,11 @@ const store = createStore('an.example.store', {
 Once you have created your store instance, the `withStore` function extends a component and makes working with stores easier in component rendering, computed getters and methods.
 Subscription to store changes will be handled automatically within the component.
 
-See [extending components](/composition) for more on the `withStore` function.
+See [extending components](/docs/composition) for more on the `withStore` function.
 
 ```js
 import { createComponent, withStore } from 'https://cdn.skypack.dev/ficusjs@3'
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/lit-html'
 
 // An initialised store. Params omitted for brevity
 const store = createStore('an.example.store', {

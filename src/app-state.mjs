@@ -1,13 +1,11 @@
+import { isPromise } from './util/is-promise.mjs'
 import { createPersist } from './base-persist.mjs'
 
 class Store {
   constructor (options) {
     const self = this
 
-    // Add some default objects to hold our getters, actions, mutations and state
-    self.getters = {}
-    self.actions = {}
-    self.mutations = {}
+    // An object to hold our state
     self.state = {}
 
     // create a getter cache
@@ -23,27 +21,8 @@ class Store {
     // We store callbacks for when the state changes in here
     self.callbacks = []
 
-    // Look in the passed params object for getters, actions and mutations
-    // that might have been passed in
-    if (options.getters) {
-      self.getters = new Proxy((options.getters || {}), {
-        get (getters, key) {
-          // check the getter cache first
-          if (!self.getterCache[key]) {
-            self.getterCache[key] = getters[key](self.state)
-          }
-          return self.getterCache[key]
-        }
-      })
-    }
-
-    if (options.actions) {
-      self.actions = options.actions
-    }
-
-    if (options.mutations) {
-      self.mutations = options.mutations
-    }
+    // Allow actions to be added to this instance
+    this._processActions(options)
 
     // initial state values
     let initialState = options.initialState || {}
@@ -73,6 +52,24 @@ class Store {
 
     // set-up state
     this._processState(initialState)
+  }
+
+  /**
+   * Attach actions to the store instance
+   * @param {object} options
+   * @private
+   */
+  _processActions (options) {
+    const self = this
+    const keys = Object.keys(options)
+    if (!keys.length) return
+
+    // Run through and bind to the component instance
+    keys.forEach(key => {
+      if (!self[key] && typeof options[key] === 'function') {
+        self[key] = options[key].bind(self)
+      }
+    })
   }
 
   /**
@@ -129,7 +126,7 @@ class Store {
 
   /**
    * Last updated state time difference in seconds
-   * @param value
+   * @param {number} value
    * @returns {number}
    * @private
    */
@@ -138,61 +135,72 @@ class Store {
   }
 
   /**
-   * A dispatcher for actions that looks in the actions
-   * collection and runs the action if it can find it
-   *
-   * @param {string} actionKey
-   * @param {*} payload
-   * @returns {boolean}
-   * @memberof Store
+   * A method to set state
+   * @param {Function|Promise} stateFn
+   * @memberOf Store
    */
-  dispatch (actionKey, payload) {
-    // Run a quick check to see if the action actually exists
-    // before we try to run it
-    if (typeof this.actions[actionKey] !== 'function') {
-      console.error(`Dude, the store action "${actionKey}" doesn't exist.`)
-      return false
+  setState (stateFn) {
+    const setter = data => {
+      if (!data || typeof data !== 'object') return
+
+      const isExistingTransaction = this.transaction
+
+      // begin a transaction
+      if (!isExistingTransaction) {
+        this.transactionCache = {}
+        this.transaction = true
+      }
+
+      for (const key in data) {
+        if (!this.state[key] || (this.state[key] !== data[key])) this.state[key] = data[key]
+      }
+
+      // end the transaction
+      if (!isExistingTransaction) {
+        this.transaction = false
+
+        // if we have persistence pass the new state to it
+        if (this.persist) {
+          this.persist.setState(this.state)
+        }
+
+        this._processCallbacks(this.state)
+      }
     }
 
-    // Let anything that's watching the status know that we're dispatching an action
-    this.status = 'action'
+    // Get a new version of the state by running the mutation and storing the result of it
+    const res = stateFn(this.state)
 
-    // Actually call the action and pass it the Store context and whatever payload was passed
-    return this.actions[actionKey](this, payload)
+    // set the state
+    isPromise(res) ? res.then(setter) : setter(res)
   }
 
   /**
-   * Look for a mutation and modify the state object
-   * if that mutation exists by calling it
-   *
-   * @param {string} mutationKey
-   * @param {*} payload
-   * @returns {boolean}
-   * @memberof Store
+   * A method to return state
+   * @param {string} key
+   * @returns {undefined|*}
    */
-  commit (mutationKey, payload) {
-    // Run a quick check to see if this mutation actually exists
-    // before trying to run it
-    if (typeof this.mutations[mutationKey] !== 'function') {
-      console.error(`Dude, the store mutation "${mutationKey}" doesn't exist`)
-      return false
+  getState (key) {
+    // If path is not defined or it has false value
+    if (!key) return undefined
+
+    // check the getter cache first
+    if (!this.getterCache[key]) {
+      // Check if path is string or array. Regex : ensure that we do not have '.' and brackets.
+      // Regex explained: https://regexr.com/58j0k
+      const keyArray = Array.isArray(key) ? key : key.match(/([^[.\]])+/g)
+
+      // get the result
+      const result = keyArray.reduce((prevObj, key) => prevObj && prevObj[key], this.state)
+
+      // if the result is not defined
+      if (result == null) return undefined
+
+      // cache the result
+      this.getterCache[key] = result
     }
 
-    // Let anything that's watching the status know that we're mutating state
-    this.status = 'mutation'
-
-    // Get a new version of the state by running the mutation and storing the result of it
-    const newState = this.mutations[mutationKey](this.state, payload)
-
-    // Update the old state with the new state returned from our mutation
-    this.state = newState
-
-    // if we have persistence pass the new state to it
-    if (this.persist) {
-      this.persist.setState(newState)
-    }
-
-    return true
+    return this.getterCache[key]
   }
 
   /**
@@ -204,7 +212,7 @@ class Store {
    * @returns {boolean}
    */
   _processCallbacks (data) {
-    if (!this.callbacks.length || this.transaction) {
+    if (!this.callbacks.length) {
       return false
     }
 
@@ -223,8 +231,7 @@ class Store {
    */
   subscribe (callback) {
     if (typeof callback !== 'function') {
-      console.error('Dude, you can only subscribe to store changes with a valid function')
-      return false
+      throw new Error('Dude, you can only subscribe to store changes with a valid function')
     }
 
     // create an unsubscribe function
@@ -245,36 +252,14 @@ class Store {
    * @private
    */
   _copyValue (value) {
+    if (!value) return value
     return JSON.parse(JSON.stringify(value))
-  }
-
-  /**
-   * Begin a sequence of store changes as a single unit of work
-   */
-  begin () {
-    this.transactionCache = {}
-    this.transaction = true
-  }
-
-  /**
-   * End the sequence of changes made to the store and notify subscribers
-   */
-  end () {
-    this.transaction = false
-    this._processCallbacks(this.state)
-  }
-
-  /**
-   * Rollback a sequence of store changes
-   */
-  rollback () {
-    Object.keys(this.transactionCache).forEach(k => (this.state[k] = this.transactionCache[k]))
-    this.end()
   }
 
   /**
    * Clear the store and reset back to the initial state
    * @param {boolean} notifySubscribers A boolean to indicate if subscribers should be notified
+   * @memberOf Store
    */
   clear (notifySubscribers = true) {
     this.getterCache = {}
@@ -309,11 +294,10 @@ class Store {
  * @param {object} options
  * @returns {Store}
  */
-function createStore (key, options) {
-  let store = getStore(key)
+function createAppState (key, options) {
+  let store = getAppState(key)
   if (store) return store
   store = new Store(options)
-  console.warn('createStore function is deprecated. Use createAppState and getAppState in v3.3.0 to create stores')
   globalThis.__ficusjs__ = globalThis.__ficusjs__ || {}
   globalThis.__ficusjs__.store = globalThis.__ficusjs__.store || {}
   globalThis.__ficusjs__.store[key] = store
@@ -325,11 +309,10 @@ function createStore (key, options) {
  * @param {string} key
  * @returns {Store|undefined}
  */
-function getStore (key) {
-  console.warn('getStore function is deprecated. Use createAppState and getAppState in v3.3.0 to create stores')
+function getAppState (key) {
   if (globalThis.__ficusjs__ && globalThis.__ficusjs__.store && globalThis.__ficusjs__.store[key]) {
     return globalThis.__ficusjs__.store[key]
   }
 }
 
-export { createStore, getStore, createPersist }
+export { createAppState, getAppState, createPersist }

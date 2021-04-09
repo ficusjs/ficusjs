@@ -1,3 +1,5 @@
+import { Persist } from './persist'
+
 export type StoreGetter<S> = (context: StoreClass<S>) => any
 export type StoreAction<S> = (context: StoreActionContext<S>, payload?: any) => void
 export type StoreDispatch<S> = (actionKey: keyof StoreActionTree<S>, payload: any) => void
@@ -27,6 +29,7 @@ export interface StoreOptions<S> {
   actions?: StoreActionTree<S>
   mutations?: StoreMutationTree<S>
   persist?: string | Persist<S>
+  ttl?: number
 }
 
 export type Store<S> = StoreOfStores<S> | StoreClass<S>
@@ -43,14 +46,5 @@ declare class StoreClass<S> {
 }
 
 export declare function createStore<S> (key: string, options: StoreOptions<S>): StoreClass<S>
-
-export declare function createPersist(namespace: string, storage: 'local' | 'session'): void
-
-declare class Persist<S> {
-  constructor(namespace: string)
-  setState (state: S): void
-  getState (): S
-  removeState (): void
-}
 
 export declare function getStore<S> (key: string): StoreClass<S>

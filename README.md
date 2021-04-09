@@ -4,24 +4,10 @@
 
 FicusJS is a set of lightweight functions for developing applications using web components.
 
-- A function for creating fast, lightweight web components (2.01 KB gzipped)
-- A function for creating fast, lightweight stores for application state (1.22 KB gzipped)
-- A function for creating a fast, lightweight publish/subscribe event bus (274 B gzipped)
+- A function for creating fast, lightweight web components (1.96 KB gzipped)
+- A function for creating fast, lightweight stores for application state (1.23 KB gzipped)
+- A function for creating a fast, lightweight publish/subscribe event bus (259 B gzipped)
 
 ## Documentation
 
 See the [full documentation](https://docs.ficusjs.org).
-
----
-
-## FicusJS router
-
-Looking for a lightweight standalone client-side router that supports history and hash routing plus web components?
-
-[Try FicusJS router!](https://router.ficusjs.org)
-
-## FicusJS script loader
-
-Looking for a lightweight script loader for lazy loading ES modules and ES5 scripts or both based on dynamic paths?
-
-[Try FicusJS script loader!](https://script.ficusjs.org)

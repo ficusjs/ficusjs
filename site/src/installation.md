@@ -38,7 +38,8 @@ The following builds are available.
 import {
   // components
   createComponent,
-  withStateTransactions,
+
+  // extending components
   withStore,
   withEventBus,
   withStyles,
@@ -47,14 +48,14 @@ import {
   createEventBus,
   getEventBus,
 
-  // stores
+  // app state
+  createAppState,
+  getAppState,
   createPersist,
-  createStore,
-  getStore,
 
   // modules
   use
-} from 'https://cdn.skypack.dev/ficusjs@3'
+} from 'https://cdn.skypack.dev/ficusjs@3.3.0'
 ```
 
 ### Components
@@ -63,14 +64,22 @@ import {
 import { createComponent, use } from 'https://cdn.skypack.dev/ficusjs@3/component'
 ```
 
+### Extending components
+
+```js
+import { withEventBus } from 'https://cdn.skypack.dev/ficusjs@3/with-event-bus'
+import { withStore } from 'https://cdn.skypack.dev/ficusjs@3/with-store'
+import { withStyles } from 'https://cdn.skypack.dev/ficusjs@3/with-styles'
+```
+
 ### Event bus
 
 ```js
-import { createEventBus, getEventBus } from 'https://cdn.skypack.dev/ficusjs@3/event'
+import { createEventBus, getEventBus } from 'https://cdn.skypack.dev/ficusjs@3/event-bus'
 ```
 
-### Stores
+### Application state
 
 ```js
-import { createPersist, createStore, getStore } from 'https://cdn.skypack.dev/ficusjs@3/store'
+import { createAppState, getAppState, createPersist } from 'https://cdn.skypack.dev/ficusjs@3.3.0/app-state'
 ```

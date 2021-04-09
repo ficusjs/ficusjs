@@ -1,6 +1,7 @@
 import test from 'ava'
 import sessionStorage from 'node-sessionstorage'
-import { createStore, createPersist } from '../../src/store.mjs'
+import { createStore } from '../../src/store.mjs'
+import { createPersist } from '../../src/base-persist.mjs'
 
 let store
 let store2

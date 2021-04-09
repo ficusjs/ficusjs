@@ -1,11 +1,11 @@
 import test from 'ava'
 import sinon from 'sinon'
-import { createStore, getStore } from '../../src/store.mjs'
+import { createAppState, getAppState } from '../../src/app-state.mjs'
 
 let store
 
 test.beforeEach(t => {
-  store = createStore('test.store', {
+  store = createAppState('test.store', {
     initialState: {
       test: null,
       nested: {
@@ -95,6 +95,6 @@ test('store change using setState', t => {
 })
 
 test('get a store', t => {
-  const thisStore = getStore('test.store')
+  const thisStore = getAppState('test.store')
   t.is(thisStore, store)
 })

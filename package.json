@@ -1,6 +1,6 @@
 {
   "name": "ficusjs",
-  "version": "4.0.0",
+  "version": "3.3.0",
   "description": "FicusJS is a set of lightweight functions for developing applications using web components",
   "type": "module",
   "main": "dist/index.mjs",

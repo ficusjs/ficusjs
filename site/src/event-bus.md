@@ -14,7 +14,6 @@ For communication between components without triggering a re-render, the event b
 
 Import the `createEventBus` function into your Javascript main file:
 
-**main.js**
 
 ```js
 import { createEventBus } from 'https://cdn.skypack.dev/ficusjs@3'

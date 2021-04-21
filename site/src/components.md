@@ -68,7 +68,7 @@ When using the `createComponent` function, you **must** pass two parameters:
 
 The following properties can be used when creating components:
 
-| Property | Required | Type | Description                                                                                                                                                                              |
+| Property | Required | Type | Description |
 | --- | --- | --- | --- |
 | `renderer` | yes | `function` | A function that renders what is returned from the `render` function |                                                                                    |
 | `render` | yes | `function` | A function that must return a response that can be passed to the `renderer` function |                                                                                    |

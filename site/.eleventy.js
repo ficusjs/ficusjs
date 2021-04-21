@@ -30,6 +30,7 @@ module.exports = function(eleventyConfig) {
     if (process.env.NODE_ENV === 'production') {
       return `<script>window.onload=function(){"serviceWorker"in navigator&&navigator.serviceWorker.register('/sw.js')};</script>`
     }
+    return ''
   })
 
   eleventyConfig.addPlugin(syntaxHighlight)

@@ -21,6 +21,8 @@ function createComponent (tagName, props) {
       }
 
       connectedCallback () {
+        if (this.connectedCallbackCount == null) this.connectedCallbackCount = 0
+        this.connectedCallbackCount = this.connectedCallbackCount + 1
         this._checkInit()
         this._preprocess()
       }
@@ -33,6 +35,7 @@ function createComponent (tagName, props) {
       }
 
       attributeChangedCallback () {
+        if (this.connectedCallbackCount == null) return
         this._checkInit()
         this._preprocess()
       }
@@ -63,6 +66,7 @@ function createComponent (tagName, props) {
 
         // A status enum to set during operations
         this.status = 'render'
+        this.connectedCallbackCount = 0
 
         // Run passed props through the props processor
         this.props = this._processProps()
@@ -341,7 +345,7 @@ function createComponent (tagName, props) {
 
                 // set the HTML attribute value
                 this.setAttribute(toKebabCase(key), typeof newValue === 'object' ? JSON.stringify(newValue) : newValue.toString())
-                this.attributeChangedCallback()
+
                 return true
               },
               enumerable: true

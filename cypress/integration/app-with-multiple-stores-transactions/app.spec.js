@@ -1,5 +1,5 @@
 /* global describe cy before it  */
-describe('Multiple stores transactions', () => {
+describe.skip('Multiple stores transactions', () => {
   const fiveClicks = (num) => {
     const genArr = Array.from({ length: 5 }, (v, k) => k + 1)
     cy.wrap(genArr).each((index) => {

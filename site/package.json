@@ -22,8 +22,8 @@
   "devDependencies": {
     "@11ty/eleventy": "0.12.1",
     "@11ty/eleventy-plugin-syntaxhighlight": "3.1.0",
-    "@ficusjs/components": "1.0.0-alpha.15",
-    "@ficusjs/styles": "1.0.0-alpha.23",
+    "@ficusjs/components": "1.0.0-alpha.17",
+    "@ficusjs/styles": "1.0.0-alpha.24",
     "clean-css": "5.1.2",
     "concat-cli": "4.0.0",
     "cross-env": "7.0.3",

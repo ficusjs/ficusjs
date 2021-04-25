@@ -88,6 +88,9 @@
     },
     "./with-styles": {
       "import": "./dist/with-styles.mjs"
+    },
+    "./with-lazy-render": {
+      "import": "./dist/with-lazy-render.mjs"
     }
   }
 }

@@ -40,9 +40,11 @@ import {
   createComponent,
 
   // extending components
+  withStateTransactions,
   withStore,
   withEventBus,
   withStyles,
+  withLazyRender,
 
   // event bus
   createEventBus,
@@ -53,9 +55,13 @@ import {
   getAppState,
   createPersist,
 
+  // stores - DEPRECATED
+  createStore,
+  getStore,
+
   // modules
   use
-} from 'https://cdn.skypack.dev/ficusjs@3.3.0'
+} from 'https://cdn.skypack.dev/ficusjs@3'
 ```
 
 ### Components
@@ -67,9 +73,11 @@ import { createComponent, use } from 'https://cdn.skypack.dev/ficusjs@3/componen
 ### Extending components
 
 ```js
+import { withStateTransactions } from 'https://cdn.skypack.dev/ficusjs@3/with-state-transactions'
 import { withEventBus } from 'https://cdn.skypack.dev/ficusjs@3/with-event-bus'
 import { withStore } from 'https://cdn.skypack.dev/ficusjs@3/with-store'
 import { withStyles } from 'https://cdn.skypack.dev/ficusjs@3/with-styles'
+import { withLazyRender } from 'https://cdn.skypack.dev/ficusjs@3/with-lazy-render'
 ```
 
 ### Event bus
@@ -81,5 +89,11 @@ import { createEventBus, getEventBus } from 'https://cdn.skypack.dev/ficusjs@3/e
 ### Application state
 
 ```js
-import { createAppState, getAppState, createPersist } from 'https://cdn.skypack.dev/ficusjs@3.3.0/app-state'
+import { createAppState, getAppState, createPersist } from 'https://cdn.skypack.dev/ficusjs@3/app-state'
+```
+
+### Stores - <span class="fd-deprecated" style="font-size: 1rem">DEPRECATED</span>
+
+```js
+import { createStore, getStore } from 'https://cdn.skypack.dev/ficusjs@3/store'
 ```

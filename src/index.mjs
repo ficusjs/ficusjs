@@ -43,6 +43,8 @@ function use (module, { renderer, ...args }) {
 export {
   // components
   createComponent,
+
+  // extending components
   withStateTransactions,
   withStore,
   withEventBus,
@@ -56,9 +58,9 @@ export {
   // app state
   createAppState,
   getAppState,
-
-  // stores
   createPersist,
+
+  // stores - DEPRECATED
   createStore,
   getStore,
 

@@ -5,7 +5,7 @@
 	<stop stop-color="#54E4E5" offset=".7203"/>
 </linearGradient>
 <path d="M104.146,0H28.114C12.651,0,0,12.651,0,28.114v76.031h76.031c15.463,0,28.114-12.651,28.114-28.114V0  z M14.21,55.973h34.378v33.963H14.21V55.973z M76.031,89.936H62.797V41.764H14.21v-13.65c0-7.667,6.238-13.905,13.905-13.905h61.822  v61.822C89.936,83.699,83.699,89.936,76.031,89.936z" fill="url(#SVGID_1_)"/>
-<g fill="#0D0D0D">
+<g fill="#fff">
 	<path d="m197.97 10.774-8.398 14.306h-26.501c-12.971 0-16.851 6.183-16.851 13.821v7.759h49.342l-7.034 13.578h-42.308v32.369h-14.306v-53.585c0-16.366 8.486-28.248 30.187-28.248h35.869z"/>
 	
 		<path d="m201.05 36.502h15.793v56.106h-15.793v-56.106z"/>
@@ -15,4 +15,4 @@
 	
 	<polygon points="216.83 25.084 201.05 25.084 209.34 10.778 224.8 10.774"/>
 </g>
-<text x="438.44534" y="30.114613" fill="#000000" font-family="sans-serif" font-size="26.667px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="438.44534" y="30.114613" font-family="Saira" font-size="26.667px" font-weight="bold">JS</tspan></text></svg>
+<text x="465.51196" y="30.115023" fill="#ffffff" font-family="sans-serif" font-size="26.667px" letter-spacing="0px" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="465.51196" y="30.115023" fill="#ffffff" font-family="Saira" font-size="26.667px" font-weight="bold" text-align="end" text-anchor="end">SCRIPT</tspan></text></svg>

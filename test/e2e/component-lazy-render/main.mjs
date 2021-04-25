@@ -29,7 +29,7 @@ createComponent(
     render () {
       return this.elementVisible
         ? html`<span>Lazy rendered component with placeholder</span>`
-        : '<span></span>'
+        : html`<span>Placeholder</span>`
     }
   })
 )

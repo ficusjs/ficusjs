@@ -39,7 +39,7 @@
     "web-components"
   ],
   "author": "Matt Levy",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ficusjs/ficusjs/issues"
   },

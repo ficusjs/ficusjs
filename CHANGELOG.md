@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### New
 - Add `withLazyRender` composition function for conditional/lazy rendering of components
+- Add `createAppState` and `getAppState` functions for creating fast, lightweight stores for managing application state
 
 ### Updates
 - Update documentation theme
@@ -15,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixes
 - Fix issue with props triggering multiple initial renders
+
+### Deprecated
+- Deprecate `createStore` and `getStore` functions - use new `createAppState` and `getAppState` functions instead
 
 ## [3.2.3] - 2021-04-10
 

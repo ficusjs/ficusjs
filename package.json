@@ -17,6 +17,7 @@
     "build:with-state-transactions": "rollup -i src/with-state-transactions.mjs -o dist/with-state-transactions.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-styles": "rollup -i src/with-styles.mjs -o dist/with-styles.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-store": "rollup -i src/with-store.mjs -o dist/with-store.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:with-lazy-render": "rollup -i src/with-lazy-render.mjs -o dist/with-lazy-render.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "dev": "run-p serve open",

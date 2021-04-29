@@ -39,7 +39,7 @@ module.exports = function(eleventyConfig) {
     let newStr = String(s).replace(/New\ in\ v\d+\.\d+\.\d+/, "")
     newStr = newStr.replace(/Coming\ soon\ in\ v\d+\.\d+\.\d+/, "")
     newStr = newStr.replace(/⚠️/g, "")
-    newStr = newStr.replace(/[?!]/g, "")
+    newStr = newStr.replace(/[?!#]/g, "")
     newStr = newStr.replace(/<[^>]*>/g, "")
     return newStr;
   }
@@ -56,8 +56,8 @@ module.exports = function(eleventyConfig) {
       permalink: true,
       slugify: markdownItSlugify,
       permalinkBefore: false,
-      permalinkClass: "direct-link",
-      permalinkSymbol: "",
+      permalinkClass: "fd-direct-link",
+      permalinkSymbol: "#",
       level: [1,2,3,4,5]
     })
     .use(markdownItToc, {
@@ -78,6 +78,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginTOC, {
     tags: ['h2', 'h3', 'h4', 'h5'],
     wrapperClass: 'toc__nav',
-    ul: true
+    ul: true,
+    ignoredElements: ['.fd-direct-link']
   })
 }

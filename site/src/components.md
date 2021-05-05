@@ -205,6 +205,14 @@ Mutating state values can be done using direct assignment.
 this.state.name = 'new name value'
 ```
 
+When using direct assignment, only the top level properties are reactive. Mutating nested values will not trigger a render. To change nested values, copy the top level property.
+
+```js
+const newTopLevelProp = { ...this.state.topLevelProp }
+newTopLevelProp.some.nested = 'newValue'
+this.state.topLevelProp = newTopLevelProp
+```
+
 #### setState method
 
 The `setState` method can be used to set one or more state values in a single transaction. This will only trigger a single render update. An optional callback can be provided which is invoked after rendering has occurred.

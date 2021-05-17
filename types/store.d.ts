@@ -1,4 +1,4 @@
-import { Persist } from './persist'
+import { Persist } from '@ficusjs/state'
 
 export type StoreGetter<S> = (context: StoreClass<S>) => any
 export type StoreAction<S> = (context: StoreActionContext<S>, payload?: any) => void

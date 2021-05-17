@@ -1,6 +1,7 @@
+import { createPersist } from '@ficusjs/state'
 import { createComponent } from './component'
-import { createEventBus, getEventBus } from './event'
-import { createStore, createPersist, getStore } from './store'
+import { createEventBus, getEventBus } from './event-bus.js'
+import { createStore, getStore } from './store'
 
 type CreateComponentFn = typeof createComponent
 type UseFn = typeof use

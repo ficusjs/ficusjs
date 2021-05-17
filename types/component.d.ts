@@ -1,38 +1,11 @@
-export interface FicusComponent<S> extends HTMLElement {
-  setState: (stateFn: (state: S) => object, callback: () => void) => void
+import { CustomElementOptions } from '@ficusjs/core'
+
+export interface FicusComponent<TS> extends HTMLElement {
+  setState: (stateFn: (state: TS) => Partial<TS>, callback: () => void) => void
 }
 
-export type ComponentGetter = () => any
-export type ComponentMethod = (...args: any[]) => void
-
-export interface ComponentProperty {
-  type: String | Number | Boolean | Object
-  required?: boolean
-  observed?: boolean
-  default?: string | number | boolean | object
+export type ComponentOptions<TS, TE> = CustomElementOptions<TE> & {
+  state?: () => TS
 }
 
-export interface ComponentComputedTree {
-  [key: string]: ComponentGetter
-}
-
-export interface ComponentPropertyTree {
-  [key: string]: ComponentProperty
-}
-
-export type ComponentOptions<I, T> = {
-  renderer: (what: T, where: any) => void
-  render: () => T
-  computed?: ComponentComputedTree
-  props?: ComponentPropertyTree
-  created?: () => void
-  mounted?: () => void
-  updated?: () => void
-  removed?: () => void
-  styles?: () => string
-  state?: () => I
-} & {
-  [key: string]: ComponentMethod
-}
-
-export declare function createComponent<I, T>(tagName: string, options: ComponentOptions<I, T>): void
+export declare function createComponent<TS, TE>(tagName: string, options: ComponentOptions<TS, TE>): void

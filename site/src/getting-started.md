@@ -13,9 +13,9 @@ Create an `index.html` file and copy the following between the `<body>` tags.
 
 <script type="module">
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/htm'
-import { createComponent } from 'https://cdn.skypack.dev/ficusjs@3/component'
+import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
 
-createComponent('hello-world', {
+createCustomElement('hello-world', {
   renderer,
   handleClick () {
     window.alert('Hello to you!')
@@ -34,7 +34,7 @@ createComponent('hello-world', {
 
 Alternatively, fork this Codepen to see it in action - [https://codepen.io/ducksoupdev/pen/GRZPqJO](https://codepen.io/ducksoupdev/pen/GRZPqJO)
 
-The hello world example creates a new [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) using the `createComponent` function and registers it to the `hello-world` tag. It uses the [htm](https://www.npmjs.com/package/htm) JSX-like renderer ([other renderers are available](/renderers/)) for creating HTML from [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+The hello world example creates a new [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) using the `createCustomElement` function and registers it to the `hello-world` tag. It uses the [htm](https://www.npmjs.com/package/htm) JSX-like renderer ([other renderers are available](/renderers/)) for creating HTML from [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
 Once registered, the tag can be used multiple times in HTML and instances can be programmatically obtained using [`document.querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
 or [`element.querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector)

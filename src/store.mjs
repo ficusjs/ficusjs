@@ -1,4 +1,4 @@
-import { createPersist } from './base-persist.mjs'
+import { createPersist } from '../node_modules/@ficusjs/state/src/base-persist.mjs'
 
 class Store {
   constructor (options) {

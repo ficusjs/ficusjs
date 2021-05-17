@@ -1,6 +1,6 @@
 {
   "name": "ficusjs",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "FicusJS is a set of lightweight functions for developing applications using web components",
   "type": "module",
   "main": "dist/index.mjs",
@@ -9,6 +9,7 @@
   "scripts": {
     "build": "run-p build:*",
     "build:all": "rollup -i src/index.mjs -o dist/index.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:custom-element": "rollup -i src/custom-element.mjs -o dist/custom-element.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:component": "rollup -i src/component.mjs -o dist/component.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:event-bus": "rollup -i src/event-bus.mjs -o dist/event-bus.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:app-state": "rollup -i src/app-state.mjs -o dist/app-state.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
@@ -18,6 +19,9 @@
     "build:with-styles": "rollup -i src/with-styles.mjs -o dist/with-styles.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-store": "rollup -i src/with-store.mjs -o dist/with-store.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:with-lazy-render": "rollup -i src/with-lazy-render.mjs -o dist/with-lazy-render.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:with-local-state": "rollup -i src/with-local-state.mjs -o dist/with-local-state.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:with-state-machine": "rollup -i src/with-state-machine.mjs -o dist/with-state-machine.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:with-xstate-service": "rollup -i src/with-xstate-service.mjs -o dist/with-xstate-service.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "dev": "run-p serve open",
@@ -44,29 +48,44 @@
     "url": "https://github.com/ficusjs/ficusjs/issues"
   },
   "homepage": "https://docs.ficusjs.org",
+  "dependencies": {
+    "@ficusjs/core": "1.0.2",
+    "@ficusjs/event-bus": "1.0.0",
+    "@ficusjs/renderers": "3.1.0",
+    "@ficusjs/state": "1.0.1"
+  },
   "devDependencies": {
+    "@ficusjs/core": "1.0.2",
+    "@ficusjs/event-bus": "1.0.0",
+    "@ficusjs/renderers": "3.1.0",
+    "@ficusjs/state": "1.0.1",
     "ava": "3.15.0",
-    "c8": "7.7.1",
-    "cypress": "7.2.0",
+    "c8": "7.7.2",
+    "cypress": "7.3.0",
     "http-server": "0.12.3",
     "jsdom": "16.5.3",
     "node-sessionstorage": "1.0.0",
     "npm-run-all": "4.1.5",
     "open-cli": "6.0.1",
-    "nyc": "15.1.0",
-    "rollup": "2.46.0",
+    "rollup": "2.48.0",
     "rollup-plugin-filesize": "9.1.1",
     "rollup-plugin-terser": "7.0.2",
     "sinon": "10.0.1",
     "standard": "16.0.3",
-    "start-server-and-test": "1.12.1"
+    "start-server-and-test": "1.12.2"
   },
   "exports": {
     ".": {
       "import": "./dist/index.mjs"
     },
+    "./custom-element": {
+      "import": "./dist/custom-element.mjs"
+    },
     "./component": {
       "import": "./dist/component.mjs"
+    },
+    "./with-local-state": {
+      "import": "./dist/with-local-state.mjs"
     },
     "./event-bus": {
       "import": "./dist/event-bus.mjs"
@@ -80,9 +99,6 @@
     "./with-event-bus": {
       "import": "./dist/with-event-bus.mjs"
     },
-    "./with-state-transactions": {
-      "import": "./dist/with-state-transactions.mjs"
-    },
     "./with-store": {
       "import": "./dist/with-store.mjs"
     },
@@ -91,6 +107,20 @@
     },
     "./with-lazy-render": {
       "import": "./dist/with-lazy-render.mjs"
+    },
+    "./with-state-transactions": {
+      "import": "./dist/with-state-transactions.mjs"
+    },
+    "./with-state-machine": {
+      "import": "./dist/with-state-machine.mjs"
+    },
+    "./with-xstate-service": {
+      "import": "./dist/with-xstate-service.mjs"
     }
+  },
+  "standard": {
+    "ignore": [
+      "*.ts"
+    ]
   }
 }

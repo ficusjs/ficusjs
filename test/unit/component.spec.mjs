@@ -23,19 +23,6 @@ test('has p tag', t => {
   t.is(document.querySelector('p').textContent, 'Hello world')
 })
 
-test('render basic component', t => {
-  const body = document.body
-  createComponent('basic-comp', {
-    renderer,
-    render () {
-      return '<p>Basic component</p>'
-    }
-  })
-  const basicComp = document.createElement('basic-comp')
-  body.appendChild(basicComp)
-  t.is(document.querySelector('basic-comp p').textContent, 'Basic component')
-})
-
 test('component with state', t => {
   const body = document.body
   createComponent('comp-with-state', {

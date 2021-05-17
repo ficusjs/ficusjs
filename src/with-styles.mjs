@@ -2,12 +2,12 @@ export function withStyles (options) {
   return {
     ...options,
     created () {
-      if (options.created) options.created.call(this)
       if (options.styles && typeof options.styles === 'function') {
         globalThis.__ficusjs__ = globalThis.__ficusjs__ || {}
         globalThis.__ficusjs__.styles = globalThis.__ficusjs__.styles || {}
         this._injectStyles(options.styles())
       }
+      if (options.created) options.created.call(this)
     },
     _injectStyles (styleItems) {
       if (globalThis.__ficusjs__ && globalThis.__ficusjs__.styles && globalThis.__ficusjs__.styles[this.componentTagName]) return

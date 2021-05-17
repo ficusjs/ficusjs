@@ -12,7 +12,7 @@ We recommend using native ES modules in the browser.
 
 ```html
 <script type="module">
-  import { createComponent } from 'https://cdn.skypack.dev/ficusjs@3'
+  import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
 </script>
 ```
 
@@ -37,14 +37,20 @@ The following builds are available.
 ```js
 import {
   // components
+  createCustomElement,
   createComponent,
 
   // extending components
-  withStateTransactions,
-  withStore,
-  withEventBus,
+  withLocalState,
   withStyles,
   withLazyRender,
+  withStateMachine,
+  withXStateService,
+  withStore,
+  withEventBus,
+
+  // extending components - DEPRECATED
+  withStateTransactions,
 
   // event bus
   createEventBus,
@@ -64,20 +70,34 @@ import {
 } from 'https://cdn.skypack.dev/ficusjs@3'
 ```
 
+### Custom elements
+
+```js
+import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
+```
+
 ### Components
 
 ```js
-import { createComponent, use } from 'https://cdn.skypack.dev/ficusjs@3/component'
+import { createComponent } from 'https://cdn.skypack.dev/ficusjs@3/component'
 ```
 
 ### Extending components
 
 ```js
-import { withStateTransactions } from 'https://cdn.skypack.dev/ficusjs@3/with-state-transactions'
-import { withEventBus } from 'https://cdn.skypack.dev/ficusjs@3/with-event-bus'
-import { withStore } from 'https://cdn.skypack.dev/ficusjs@3/with-store'
+import { withLocalState } from 'https://cdn.skypack.dev/ficusjs@3/with-local-state'
 import { withStyles } from 'https://cdn.skypack.dev/ficusjs@3/with-styles'
 import { withLazyRender } from 'https://cdn.skypack.dev/ficusjs@3/with-lazy-render'
+import { withStateMachine } from 'https://cdn.skypack.dev/ficusjs@3/with-state-machine'
+import { withXStateService } from 'https://cdn.skypack.dev/ficusjs@3/with-xstate-service'
+import { withStore } from 'https://cdn.skypack.dev/ficusjs@3/with-store'
+import { withEventBus } from 'https://cdn.skypack.dev/ficusjs@3/with-event-bus'
+```
+
+### Extending components <span class="fd-deprecated" style="font-size: 1rem">DEPRECATED</span>
+
+```js
+import { withStateTransactions } from 'https://cdn.skypack.dev/ficusjs@3/with-state-transactions'
 ```
 
 ### Event bus
@@ -92,7 +112,7 @@ import { createEventBus, getEventBus } from 'https://cdn.skypack.dev/ficusjs@3/e
 import { createAppState, getAppState, createPersist } from 'https://cdn.skypack.dev/ficusjs@3/app-state'
 ```
 
-### Stores - <span class="fd-deprecated" style="font-size: 1rem">DEPRECATED</span>
+### Stores <span class="fd-deprecated" style="font-size: 1rem">DEPRECATED</span>
 
 ```js
 import { createStore, getStore } from 'https://cdn.skypack.dev/ficusjs@3/store'

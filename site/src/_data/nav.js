@@ -21,7 +21,6 @@ module.exports = {
   'Extending components': [
     { url: '/extending-components/', title: 'Introduction' },
     { url: '/extending-components/with-local-state/', title: 'withLocalState function' },
-    { url: '/extending-components/with-state-transactions/', title: 'withStateTransactions function' },
     { url: '/extending-components/with-styles/', title: 'withStyles function' },
     { url: '/extending-components/with-lazy-render/', title: 'withLazyRender function' },
     { url: '/extending-components/with-store/', title: 'withStore function' },
@@ -79,5 +78,9 @@ module.exports = {
   Helpers: [
     { url: '/router/', title: 'FicusJS router' },
     { url: '/script/', title: 'FicusJS script loader' }
+  ],
+  Deprecated: [
+    { url: '/stores/', title: 'Stores' },
+    { url: '/extending-components/with-state-transactions/', title: 'withStateTransactions function' }
   ]
 }

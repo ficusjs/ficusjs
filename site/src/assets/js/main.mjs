@@ -6,5 +6,6 @@ import './fonts.mjs'
 import './sidebar-details.mjs'
 import './theme.mjs'
 import './adaptive-tables.mjs'
+import './nav-filter.mjs'
 use(navbarModule, { renderer, html })
 use(dropdownModule, { renderer, html })

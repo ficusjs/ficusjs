@@ -56,14 +56,62 @@ As an application is interacted with, events cause it to change state.
 
 A finite state machine can be in only one of a finite number of states at any given time.
 
-You define states in the machine definition.
+You define states in the machine definition. Each state is an `object` containing the `on` property that defines one or more events that specify the next state as a `string`.
 
 ```js
 withStateMachine({
   initial: 'inactive', // optional - first state is used if omitted
   states: {
-    inactive: { on: { TOGGLE: 'active' } },
-    active: { on: { TOGGLE: 'inactive' } }
+    inactive: {
+      on: {
+        TOGGLE: 'active'
+      }
+    },
+    active: {
+      on: {
+        TOGGLE: 'inactive'
+      }
+    }
+  }
+}, {
+  /* component options */
+})
+```
+
+Given the current state of `inactive` and the event `TOGGLE`, the next state value is `active`.
+
+### Next state values as objects
+
+Next state values can also be set as objects containing a `target` (the next state) and an optional `action` to invoke actions with a specific name.
+
+```js
+withStateMachine({
+  initial: 'inactive', // optional - first state is used if omitted
+  states: {
+    inactive: {
+      on: {
+        TOGGLE: {
+          target: 'active',
+          action: 'whenSetToActiveAction'
+        }
+      }
+    },
+    active: {
+      on: {
+        TOGGLE: {
+          target: 'inactive',
+          action: 'whenSetToInactiveAction'
+        }
+      }
+    }
+  },
+  actions: {
+    whenSetToActiveAction () {
+      // do stuff
+    },
+    whenSetToInactiveAction () {
+      // do stuff
+    }
   }
 }, {
   /* component options */
@@ -121,6 +169,40 @@ withStateMachine({
   },
   actions: {
     active (data) {
+      if (data.someArg) {
+        // 'this' is the context of the custom element
+        this.invokeCustomElementMethod(data)
+      }
+    }
+  }
+}, {
+  /* component options */
+})
+```
+
+### Targetting actions with specific names
+
+You can also target specific actions by name when defining states.
+
+```js
+withStateMachine({
+  states: {
+    inactive: {
+      on: {
+        TOGGLE: {
+          target: 'active',
+          action: 'checkActionOnServer'
+        }
+      }
+    },
+    active: {
+      on: {
+        TOGGLE: 'inactive'
+      }
+    }
+  },
+  actions: {
+    checkActionOnServer (data) {
       if (data.someArg) {
         // 'this' is the context of the custom element
         this.invokeCustomElementMethod(data)

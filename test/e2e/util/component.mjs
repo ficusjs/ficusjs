@@ -22,12 +22,14 @@ const nothing = ''
 
 export {
   createComponent,
+  customElementCreator,
   createComponentWithStateMachine,
   createComponentWithXStateService,
   createStore,
   createEventBus,
   getEventBus,
   getStore,
+  renderer,
   html,
   nothing,
   withStore,

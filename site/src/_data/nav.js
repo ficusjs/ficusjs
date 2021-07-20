@@ -24,6 +24,7 @@ module.exports = {
     { url: '/extending-components/with-styles/', title: 'withStyles function' },
     { url: '/extending-components/with-lazy-render/', title: 'withLazyRender function' },
     { url: '/extending-components/with-store/', title: 'withStore function' },
+    { url: '/extending-components/with-worker-store/', title: 'withWorkerStore function' },
     { url: '/extending-components/with-event-bus/', title: 'withEventBus function' }
   ],
   Renderers: [
@@ -51,6 +52,7 @@ module.exports = {
     { url: '/app-state/persistence/', title: 'Persistence' },
     { url: '/app-state/multiple/', title: 'Multiple stores' },
     { url: '/app-state/singleton/', title: 'Singleton' },
+    { url: '/app-state/web-workers/', title: 'Web workers' },
     { url: '/app-state/usage/', title: 'Usage in components' }
   ],
   'Event bus': [

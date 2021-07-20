@@ -4,6 +4,7 @@ import { withEventBus } from './with-event-bus.mjs'
 import { withStateTransactions } from './with-state-transactions.mjs'
 import { withLazyRender } from './with-lazy-render.mjs'
 import { withStore } from './with-store.mjs'
+import { withWorkerStore } from './with-worker-store.mjs'
 import { withStyles } from './with-styles.mjs'
 import { withLocalState } from './with-local-state.mjs'
 import { withStateMachine } from './with-state-machine.mjs'
@@ -63,6 +64,7 @@ export {
   withStateMachine,
   withXStateService,
   withStore,
+  withWorkerStore,
   withEventBus,
 
   // extending components - DEPRECATED

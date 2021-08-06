@@ -7,9 +7,12 @@ title: FicusJS documentation - Event bus - createEventBus function
 Once you have created your events instance using `createEventBus`, simply pass it to each component:
 
 ```js
-import { createComponent, withEventBus } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createComponent, createEventBus, withEventBus } from 'https://cdn.skypack.dev/ficusjs@3'
 
-// A new component
+// create the event bus
+const eventBus = createEventBus()
+
+// create a new component
 createComponent(
   'my-component',
   withEventBus(eventBus, {

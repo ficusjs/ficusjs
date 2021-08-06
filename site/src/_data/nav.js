@@ -62,6 +62,7 @@ module.exports = {
     { url: '/event-bus/get-event-bus/', title: 'getEventBus function' },
     { url: '/event-bus/subscribe/', title: 'Subscribe' },
     { url: '/event-bus/publish/', title: 'Publish' },
+    { url: '/event-bus/subscribers/', title: 'Retrieve subscribers' },
     { url: '/event-bus/usage/', title: 'Usage in components' }
   ],
   Modules: [

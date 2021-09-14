@@ -4,7 +4,47 @@ title: FicusJS documentation - Components - Rendering
 ---
 # Rendering
 
-A `renderer` function **must** be provided when creating a new component. This allows any [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates) renderer to be plugged into a component.
+By default your `render` function must return a DOM element or HTML string for rendering. A built-in `renderer` function will convert strings to DOM elements automatically or render a given DOM element.
+
+**Example using an HTML string**
+
+```js
+import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
+
+createCustomElement('test-comp', {
+  props: {
+    personName: {
+      type: String
+    }
+  },
+  render () {
+    return `<p>Hello ${this.props.personName}!</p>`
+  }
+})
+```
+
+**Example using a DOM element**
+
+```js
+import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
+
+createCustomElement('test-comp', {
+  props: {
+    personName: {
+      type: String
+    }
+  },
+  render () {
+    const element = document.createElement('p')
+    element.textContent = `Hello ${this.props.personName}!`
+    return element
+  }
+})
+```
+
+## Custom renderer
+
+A custom `renderer` function can be provided when creating a new component and is recommended. This allows any [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates) renderer to be plugged into a component.
 
 There are a [number of renderers available](/renderers/) and can be added to suit your needs.
 
@@ -33,7 +73,7 @@ createComponent('test-comp', {
     // the uhtml renderer requires a different argument order
     renderer(where, what)
   }
-}
+})
 ```
 
 ## Rendering props

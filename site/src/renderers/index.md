@@ -8,11 +8,10 @@ Renderers allow any [tagged template literal](https://developer.mozilla.org/en-U
 
 The following renderers are available as minified bundles.
 
-- [uhtml](https://www.npmjs.com/package/uhtml) (default) - 3.02 KB gzipped
-- [lit-html](https://www.npmjs.com/package/lit-html) - 3.61 KB gzipped
 - [htm](https://www.npmjs.com/package/htm) (JSX-like syntax - no transpiler necessary) - 923 B gzipped
 - [htm](https://www.npmjs.com/package/htm) with [Preact](https://www.npmjs.com/package/preact) (JSX-like syntax - no transpiler necessary) - 4.3 KB gzipped
-- `document.createElement` - 141 B gzipped
+- [lit-html](https://www.npmjs.com/package/lit-html) - 3.61 KB gzipped
+- [uhtml](https://www.npmjs.com/package/uhtml) (default) - 3.02 KB gzipped
 
 ## Minified ES module renderers
 

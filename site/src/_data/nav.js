@@ -32,8 +32,7 @@ module.exports = {
     { url: '/renderers/uhtml/', title: 'uhtml' },
     { url: '/renderers/lit-html/', title: 'lit-html' },
     { url: '/renderers/htm/', title: 'htm' },
-    { url: '/renderers/htm-preact/', title: 'htm with preact' },
-    { url: '/renderers/create-element/', title: 'document.createElement' }
+    { url: '/renderers/htm-preact/', title: 'htm with preact' }
   ],
   'State machines': [
     { url: '/state-machines/', title: 'Introduction' },
@@ -75,8 +74,8 @@ module.exports = {
     { url: '/browser-support/', title: 'Browser support' },
     { url: '/going-build-less/', title: 'Going build-less' },
     { url: '/legacy-browsers/', title: 'Legacy browsers' },
-    { url: 'https://github.com/ficusjs/ficusjs/tree/master/examples', title: 'Examples' },
-    { url: 'https://github.com/ficusjs/ficusjs/blob/master/CHANGELOG.md', title: 'Changelog' }
+    { url: 'https://github.com/ficusjs/ficusjs/tree/main/examples', title: 'Examples' },
+    { url: 'https://github.com/ficusjs/ficusjs/blob/main/CHANGELOG.md', title: 'Changelog' }
   ],
   Helpers: [
     { url: '/router/', title: 'FicusJS router' },

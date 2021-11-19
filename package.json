@@ -1,6 +1,6 @@
 {
   "name": "ficusjs",
-  "version": "3.9.0",
+  "version": "3.10.0",
   "description": "FicusJS is a set of lightweight functions for developing applications using web components",
   "type": "module",
   "main": "dist/index.mjs",
@@ -52,12 +52,14 @@
   "homepage": "https://docs.ficusjs.org",
   "dependencies": {
     "@ficusjs/core": "1.2.0",
+    "@ficusjs/component-extensions": "1.0.1",
     "@ficusjs/event-bus": "1.2.0",
     "@ficusjs/renderers": "4.2.0",
     "@ficusjs/state": "1.3.0"
   },
   "devDependencies": {
     "@ficusjs/core": "1.2.0",
+    "@ficusjs/component-extensions": "1.0.1",
     "@ficusjs/event-bus": "1.2.0",
     "@ficusjs/renderers": "4.2.0",
     "@ficusjs/state": "1.3.0",

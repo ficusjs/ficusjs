@@ -18,6 +18,7 @@ FicusJS provides the following features for building modern web applications.
   - with an XState service
   - with an application state store
   - with an event bus
+  - with internationalization (i18n)
 - Fast lightweight publish/subscribe event bus
 - Fast lightweight stores for managing application state
 

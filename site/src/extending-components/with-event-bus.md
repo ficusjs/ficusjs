@@ -8,7 +8,7 @@ The `withEventBus` function extends a component and makes working with an event 
 
 ```js
 // import it with all other features
-import { createComponent, withEventBus } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, withEventBus } from 'https://cdn.skypack.dev/ficusjs@3'
 
 // alternatively, import the function directly
 // import { withEventBus } from 'https://cdn.skypack.dev/ficusjs@3/with-event-bus'
@@ -19,7 +19,7 @@ import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uht
 // import an event bus from a local file
 import { eventBus } from './event-bus.js'
 
-createComponent(
+createCustomElement(
   'my-component',
   withEventBus(eventBus, {
     renderer,
@@ -27,7 +27,7 @@ createComponent(
       this.eventBus.publish('increment', undefined)
     },
     render () {
-      return html`<button type="button" @click=${this.buttonClicked}>Increment</button>`
+      return html`<button type="button" onclick=${this.buttonClicked}>Increment</button>`
     }
   })
 )

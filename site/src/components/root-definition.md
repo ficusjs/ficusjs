@@ -13,7 +13,7 @@ You can use a standard root, a closed Shadow DOM root or an open Shadow DOM root
 | `shadow:closed` | A closed Shadow DOM root |
 
 ```js
-// import the createComponent function
+// import the createCustomElement function
 import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
 
 // import the renderer and html tagged template literal from the htm renderer

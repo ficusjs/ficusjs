@@ -9,7 +9,7 @@ by providing a `styles` function which is invoked injecting CSS into the `<head>
 
 ```js
 // import it with all other features
-import { createComponent, withStyles } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, withStyles } from 'https://cdn.skypack.dev/ficusjs@3'
 
 // alternatively, import the function directly
 // import { withStyles } from 'https://cdn.skypack.dev/ficusjs@3/with-styles'
@@ -17,7 +17,7 @@ import { createComponent, withStyles } from 'https://cdn.skypack.dev/ficusjs@3'
 // import the renderer and html tagged template literal from the uhtml renderer
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
 
-createComponent(
+createCustomElement(
   'my-component',
   withStyles({
     renderer,

@@ -312,7 +312,7 @@ const allStores = {
 }
 
 // Pass a relevant store to a component
-createComponent(
+createCustomElement(
   'my-component',
   withStore(allStores.drinks, {
     ...
@@ -320,7 +320,7 @@ createComponent(
 )
 
 // Or pass all the stores to a component
-createComponent(
+createCustomElement(
   'my-component',
   withStore(allStores, {
     ...
@@ -328,7 +328,7 @@ createComponent(
 )
 
 // Or just pass the required stores to a component
-createComponent(
+createCustomElement(
   'my-component',
   withStore({
     food: allStores.food,
@@ -484,7 +484,7 @@ Subscription to store changes will be handled automatically within the component
 See [extending components](/docs/composition) for more on the `withStore` function.
 
 ```js
-import { createComponent, withStore } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, withStore } from 'https://cdn.skypack.dev/ficusjs@3'
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/lit-html'
 
 // An initialised store. Params omitted for brevity
@@ -493,7 +493,7 @@ const store = createStore('an.example.store', {
 })
 
 // A new component
-createComponent(
+createCustomElement(
   'my-component',
   withStore(store, {
     ...

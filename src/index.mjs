@@ -12,6 +12,7 @@ import { withXStateService } from './with-xstate-service.mjs'
 import { createEventBus, getEventBus } from './event-bus.mjs'
 import { createStore, getStore } from './store.mjs'
 import { createAppState, getAppState, createPersist } from './app-state.mjs'
+import { createI18n, getI18n, withI18n } from './i18n.mjs'
 
 /**
  * Function to use another FicusJS module
@@ -28,7 +29,6 @@ function use (module, { renderer, ...args }) {
       renderer,
       ...args,
 
-      // components - DEPRECATED
       createComponent,
 
       // event bus
@@ -40,9 +40,12 @@ function use (module, { renderer, ...args }) {
       getAppState,
       createPersist,
 
-      // stores - DEPRECATED
       createStore,
       getStore,
+
+      // i18n
+      createI18n,
+      getI18n,
 
       // modules
       use
@@ -66,6 +69,7 @@ export {
   withStore,
   withWorkerStore,
   withEventBus,
+  withI18n,
 
   // extending components - DEPRECATED
   withStateTransactions,
@@ -82,6 +86,10 @@ export {
   // stores - DEPRECATED
   createStore,
   getStore,
+
+  // i18n
+  createI18n,
+  getI18n,
 
   // modules
   use

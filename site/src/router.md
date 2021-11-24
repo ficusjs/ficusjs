@@ -32,24 +32,24 @@ Create an `index.html` file and copy the following between the `<body>` tags.
 
 <script type="module">
 import { createRouter } from 'https://cdn.skypack.dev/@ficusjs/router@2'
-import { createComponent } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3'
 import { renderer, html } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/lit-html'
 
-createComponent('home-page', {
+createCustomElement('home-page', {
   renderer,
   render () {
     return html`<div>Welcome to the home page!</div>`
   }
 })
 
-createComponent('page-one', {
+createCustomElement('page-one', {
   renderer,
   render () {
     return html`<div>Welcome to the page one!</div>`
   }
 })
 
-createComponent('page-two', {
+createCustomElement('page-two', {
   renderer,
   render () {
     return html`<div>Welcome to the page two!</div>`
@@ -62,7 +62,7 @@ const router = createRouter([
   { path: '/two', component: 'page-two' }
 ], '#router-outlet', { mode: 'hash' })
 
-createComponent('top-nav', {
+createCustomElement('top-nav', {
   renderer,
   navigateTo (path) {
     router.push(path)

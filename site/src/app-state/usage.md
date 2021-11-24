@@ -10,7 +10,7 @@ Subscription to store changes will be handled automatically within the component
 See [extending components](/composition) for more on the `withStore` function.
 
 ```js
-import { createComponent, withStore } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, withStore } from 'https://cdn.skypack.dev/ficusjs@3'
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
 
 // An initialised store. Params omitted for brevity
@@ -19,7 +19,7 @@ const store = createAppState('an.example.store', {
 })
 
 // A new component
-createComponent(
+createCustomElement(
   'my-component',
   withStore(store, {
     ...

@@ -20,12 +20,13 @@ module.exports = {
   ],
   'Extending components': [
     { url: '/extending-components/', title: 'Introduction' },
-    { url: '/extending-components/with-local-state/', title: 'withLocalState function' },
-    { url: '/extending-components/with-styles/', title: 'withStyles function' },
+    { url: '/extending-components/with-event-bus/', title: 'withEventBus function' },
+    { url: '/extending-components/with-i18n/', title: 'withI18n function' },
     { url: '/extending-components/with-lazy-render/', title: 'withLazyRender function' },
+    { url: '/extending-components/with-local-state/', title: 'withLocalState function' },
     { url: '/extending-components/with-store/', title: 'withStore function' },
-    { url: '/extending-components/with-worker-store/', title: 'withWorkerStore function' },
-    { url: '/extending-components/with-event-bus/', title: 'withEventBus function' }
+    { url: '/extending-components/with-styles/', title: 'withStyles function' },
+    { url: '/extending-components/with-worker-store/', title: 'withWorkerStore function' }
   ],
   Renderers: [
     { url: '/renderers/', title: 'Introduction' },
@@ -63,6 +64,13 @@ module.exports = {
     { url: '/event-bus/publish/', title: 'Publish' },
     { url: '/event-bus/subscribers/', title: 'Retrieve subscribers' },
     { url: '/event-bus/usage/', title: 'Usage in components' }
+  ],
+  Internationalization: [
+    { url: '/i18n/', title: 'Introduction' },
+    { url: '/i18n/example/', title: 'Example' },
+    { url: '/i18n/create-i18n/', title: 'createI18n function' },
+    { url: '/i18n/get-i18n/', title: 'getI18n function' },
+    { url: '/i18n/usage/', title: 'Usage in components' }
   ],
   Modules: [
     { url: '/modules/', title: 'Introduction' },

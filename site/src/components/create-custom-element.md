@@ -31,7 +31,7 @@ The following properties are used when creating components:
 | `removed` |  | `function` | Invoked each time the component is disconnected from the DOM |
 
 ```js
-// import the createComponent function
+// import the createCustomElement function
 import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
 
 // import the renderer and html tagged template literal from the htm renderer

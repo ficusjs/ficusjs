@@ -21,7 +21,7 @@ const allStores = {
 }
 
 // Pass a relevant store to a component
-createComponent(
+createCustomElement(
   'my-component',
   withStore(allStores.drinks, {
     ...
@@ -29,7 +29,7 @@ createComponent(
 )
 
 // Or pass all the stores to a component
-createComponent(
+createCustomElement(
   'my-component',
   withStore(allStores, {
     ...
@@ -37,7 +37,7 @@ createComponent(
 )
 
 // Or just pass the required stores to a component
-createComponent(
+createCustomElement(
   'my-component',
   withStore({
     food: allStores.food,

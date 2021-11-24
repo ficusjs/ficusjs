@@ -8,7 +8,7 @@ The following example shows how to consume a module from a shared library.
 
 ```js
 // import the required FicusJS functions
-import { createComponent, use } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, use } from 'https://cdn.skypack.dev/ficusjs@3'
 
 // import the renderer and html tagged template literal from the uhtml renderer
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
@@ -20,7 +20,7 @@ import { module } from './path/to/component-module.esm.js'
 use(module, { renderer, html })
 
 // in your template, use the component
-createComponent('my-component', {
+createCustomElement('my-component', {
   renderer,
   render () {
     return html`<div>

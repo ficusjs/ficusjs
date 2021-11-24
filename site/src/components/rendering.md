@@ -68,7 +68,7 @@ renderer (what, where)
 If your `renderer` function accepts a different argument order, simply pass a wrapper function to the component:
 
 ```js
-createComponent('test-comp', {
+createCustomElement('test-comp', {
   renderer (what, where) {
     // the uhtml renderer requires a different argument order
     renderer(where, what)

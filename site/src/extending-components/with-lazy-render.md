@@ -14,7 +14,7 @@ When the component becomes visible, it triggers a render which then calls the co
 
 ```js
 // import it with all other features
-import { createComponent, withLazyRender } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, withLazyRender } from 'https://cdn.skypack.dev/ficusjs@3'
 
 // alternatively, import the function directly
 // import { withLazyRender } from 'https://cdn.skypack.dev/ficusjs@3/with-lazy-render'
@@ -24,7 +24,7 @@ import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uht
 
 // as there is no initial content rendered, the `mounted` method
 // is triggered when the component is visible
-createComponent(
+createCustomElement(
   'lazy-component',
   withLazyRender({
     renderer,
@@ -41,7 +41,7 @@ createComponent(
 
 // as there is initial rendered content, the `updated` method
 // is triggered when the component is visible
-createComponent(
+createCustomElement(
   'lazy-component-with-placeholder',
   withLazyRender({
     renderer,

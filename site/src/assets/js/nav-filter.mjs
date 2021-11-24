@@ -1,4 +1,4 @@
-import { createComponent, use } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, use } from 'https://cdn.skypack.dev/ficusjs@3'
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
 import { module as formModule } from 'https://cdn.skypack.dev/@ficusjs/components/custom-elements/form'
 import { module as inputModule } from 'https://cdn.skypack.dev/@ficusjs/components/custom-elements/form-input'
@@ -16,7 +16,7 @@ function debounce (fn, time) {
   }
 }
 
-createComponent('nav-filter', {
+createCustomElement('nav-filter', {
   renderer,
   filter (e) {
     this.filterDebounced(e.detail.value)

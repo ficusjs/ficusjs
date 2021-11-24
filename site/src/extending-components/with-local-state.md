@@ -10,7 +10,7 @@ When using the `withLocalState` function, the `state` property of your config ob
 This makes the component reactive to state changes. Every time a value of your `state` is updated, your component will re-render.
 
 ```js
-// import the createComponent function
+// import the createCustomElement function
 import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
 
 // import the withLocalState function

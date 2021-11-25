@@ -1,7 +1,7 @@
-import { createCustomElement, use } from 'https://cdn.skypack.dev/ficusjs@3'
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
-import { module as formModule } from 'https://cdn.skypack.dev/@ficusjs/components/custom-elements/form'
-import { module as inputModule } from 'https://cdn.skypack.dev/@ficusjs/components/custom-elements/form-input'
+import { createCustomElement, use } from './lib/ficus.mjs'
+import { html, renderer } from './lib/uhtml.mjs'
+import { module as formModule } from './lib/form.mjs'
+import { module as inputModule } from './lib/form-input.mjs'
 use(formModule, { renderer, html })
 use(inputModule, { renderer, html })
 

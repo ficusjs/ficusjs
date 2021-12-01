@@ -23,6 +23,7 @@ module.exports = {
     { url: '/extending-components/with-event-bus/', title: 'withEventBus function' },
     { url: '/extending-components/with-i18n/', title: 'withI18n function' },
     { url: '/extending-components/with-lazy-render/', title: 'withLazyRender function' },
+    { url: '/extending-components/with-breakpoint-render/', title: 'withBreakpointRender function' },
     { url: '/extending-components/with-local-state/', title: 'withLocalState function' },
     { url: '/extending-components/with-store/', title: 'withStore function' },
     { url: '/extending-components/with-styles/', title: 'withStyles function' },

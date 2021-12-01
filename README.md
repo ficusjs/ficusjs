@@ -14,6 +14,7 @@ FicusJS provides the following features for building modern web applications.
   - with local state
   - with styles
   - with lazy rendering
+  - with breakpoint rendering
   - with a state machine
   - with an XState service
   - with an application state store

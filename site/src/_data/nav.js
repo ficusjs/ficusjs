@@ -27,7 +27,8 @@ module.exports = {
     { url: '/extending-components/with-local-state/', title: 'withLocalState function' },
     { url: '/extending-components/with-store/', title: 'withStore function' },
     { url: '/extending-components/with-styles/', title: 'withStyles function' },
-    { url: '/extending-components/with-worker-store/', title: 'withWorkerStore function' }
+    { url: '/extending-components/with-worker-store/', title: 'withWorkerStore function' },
+    { url: '/extending-components/extension-builder/', title: 'Extension builder' }
   ],
   Renderers: [
     { url: '/renderers/', title: 'Introduction' },

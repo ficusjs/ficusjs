@@ -1,18 +1,18 @@
 {
   "name": "ficusjs",
-  "version": "3.13.1",
+  "version": "3.14.0",
   "description": "FicusJS is a set of lightweight functions for developing applications using web components",
   "type": "module",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
   "types": "types/index.d.ts",
-  "sideEffects": false,
   "scripts": {
     "build": "run-p build:*",
     "build:all": "rollup -i src/index.mjs -o dist/index.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:custom-element": "rollup -i src/custom-element.mjs -o dist/custom-element.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:component": "rollup -i src/component.mjs -o dist/component.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:event-bus": "rollup -i src/event-bus.mjs -o dist/event-bus.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
+    "build:extension-builder": "rollup -i src/extension-builder.mjs -o dist/extension-builder.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:i18n": "rollup -i src/i18n.mjs -o dist/i18n.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:app-state": "rollup -i src/app-state.mjs -o dist/app-state.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
     "build:store": "rollup -i src/store.mjs -o dist/store.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",
@@ -98,6 +98,9 @@
     },
     "./event-bus": {
       "import": "./dist/event-bus.mjs"
+    },
+    "./extension-builder": {
+      "import": "./dist/extension-builder.mjs"
     },
     "./i18n": {
       "import": "./dist/i18n.mjs"

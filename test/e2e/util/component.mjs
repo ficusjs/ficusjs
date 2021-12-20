@@ -5,6 +5,8 @@ import { withStore, withWorkerStore, withStateTransactions, withStyles, withEven
 import { createStore, getStore } from '../../../src/store.mjs'
 import { createAppState, getAppState } from '../../../src/app-state.mjs'
 import { createEventBus, getEventBus } from '../../../src/event-bus.mjs'
+import { createI18n, getI18n } from '../../../src/i18n.mjs'
+import { ExtensionBuilder } from '../../../src/extension-builder.mjs'
 
 function createComponent (tagName, options) {
   componentCreator(tagName, withLocalState({ ...options, renderer }))
@@ -40,5 +42,8 @@ export {
   createAppState,
   getAppState,
   withLazyRender,
-  withXStateService
+  withXStateService,
+  ExtensionBuilder,
+  createI18n,
+  getI18n
 }

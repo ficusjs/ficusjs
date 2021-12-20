@@ -6,6 +6,7 @@
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
   "types": "types/index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "build": "run-p build:*",
     "build:all": "rollup -i src/index.mjs -o dist/index.mjs -f es -p \"terser={mangle: { keep_fnames: true, toplevel: true, module: true }}\" -p \"filesize={}\"",

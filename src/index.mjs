@@ -3,6 +3,7 @@ import { createComponent } from './component.mjs'
 import { withEventBus } from './with-event-bus.mjs'
 import { withStateTransactions } from './with-state-transactions.mjs'
 import { withLazyRender } from './with-lazy-render.mjs'
+import { ExtensionBuilder } from './extension-builder.mjs'
 import { withBreakpointRender } from './with-breakpoint-render.mjs'
 import { withStore } from './with-store.mjs'
 import { withWorkerStore } from './with-worker-store.mjs'
@@ -62,6 +63,7 @@ export {
   createComponent,
 
   // extending components
+  ExtensionBuilder,
   withLocalState,
   withStyles,
   withLazyRender,

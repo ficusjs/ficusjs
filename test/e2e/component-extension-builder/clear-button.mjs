@@ -6,9 +6,15 @@ createComponent(
   'clear-button',
   ExtensionBuilder
     .newInstance()
+    .withLocalState()
     .withStore(store)
     .withI18n(i18n)
     .create({
+      state () {
+        return {
+          button: 'test'
+        }
+      },
       clear () {
         this.store.clear()
       },

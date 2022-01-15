@@ -2,6 +2,7 @@ import test from 'ava'
 import { withEventBus } from '../../src/with-event-bus.mjs'
 import { withI18n } from '../../src/with-i18n.mjs'
 import { withBreakpointRender } from '../../src/with-breakpoint-render.mjs'
+import { withLocalState } from '../../src/with-local-state.mjs'
 
 class ExtensionBuilder {
   constructor () {
@@ -24,10 +25,16 @@ class ExtensionBuilder {
 
 test('builds any extension', t => {
   const options = new ExtensionBuilder()
+    .with(withLocalState)
     .with(withEventBus, { eventBus: true })
     .with(withI18n, { i18n: true })
     .with(withBreakpointRender, { breakpointConfig: true })
     .create({
+      state () {
+        return {
+          view: '/'
+        }
+      },
       render () {
         return 'test'
       }

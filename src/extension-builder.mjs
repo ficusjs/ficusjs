@@ -56,7 +56,7 @@ class ExtensionBuilderClass {
     return Object.keys(this.extensions)
       .reduce((prev, current) => {
         const extension = this.extensions[current]
-        return extension.func(extension.arg, prev)
+        return extension.arg ? extension.func(extension.arg, prev) : extension.func(prev)
       }, options)
   }
 }

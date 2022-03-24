@@ -33,7 +33,7 @@ Create an `index.html` file and copy the following between the `<body>` tags.
 <script type="module">
 import { createRouter } from 'https://cdn.skypack.dev/@ficusjs/router@2'
 import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3'
-import { renderer, html } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/lit-html'
+import { renderer, html } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/lit-html'
 
 createCustomElement('home-page', {
   renderer,

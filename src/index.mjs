@@ -58,8 +58,6 @@ function use (module, { renderer, ...args }) {
 export {
   // components
   createCustomElement,
-
-  // components - DEPRECATED
   createComponent,
 
   // extending components

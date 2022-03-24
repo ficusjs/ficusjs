@@ -20,7 +20,7 @@ import { createCustomElement, withBreakpointRender } from 'https://cdn.skypack.d
 // import { withBreakpointRender } from 'https://cdn.skypack.dev/ficusjs@3/with-breakpoint-render'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
 
 // define a breakpoint configuration
 const breakpointConfig = {

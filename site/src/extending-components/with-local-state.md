@@ -17,7 +17,7 @@ import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-el
 import { withLocalState } from 'https://cdn.skypack.dev/ficusjs@3/with-local-state'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
 
 createCustomElement(
   'with-state-example',

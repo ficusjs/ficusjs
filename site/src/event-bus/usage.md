@@ -14,7 +14,7 @@ See [extending components](/composition) for more on the `withEventBus` function
 
 ```js
 import { createCustomElement, createEventBus, withEventBus } from 'https://cdn.skypack.dev/ficusjs@3'
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
 
 const eventBus = createEventBus()
 

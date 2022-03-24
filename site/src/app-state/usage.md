@@ -11,7 +11,7 @@ See [extending components](/composition) for more on the `withStore` function.
 
 ```js
 import { createCustomElement, withStore } from 'https://cdn.skypack.dev/ficusjs@3'
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
 
 // An initialised store. Params omitted for brevity
 const store = createAppState('an.example.store', {

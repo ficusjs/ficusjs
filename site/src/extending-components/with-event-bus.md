@@ -14,7 +14,7 @@ import { createCustomElement, withEventBus } from 'https://cdn.skypack.dev/ficus
 // import { withEventBus } from 'https://cdn.skypack.dev/ficusjs@3/with-event-bus'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
 
 // import an event bus from a local file
 import { eventBus } from './event-bus.js'

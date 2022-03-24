@@ -485,7 +485,7 @@ See [extending components](/docs/composition) for more on the `withStore` functi
 
 ```js
 import { createCustomElement, withStore } from 'https://cdn.skypack.dev/ficusjs@3'
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/lit-html'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/lit-html'
 
 // An initialised store. Params omitted for brevity
 const store = createStore('an.example.store', {

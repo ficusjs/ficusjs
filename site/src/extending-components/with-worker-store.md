@@ -7,7 +7,7 @@ title: FicusJS documentation - Extending components - withWorkerStore function
 The `withWorkerStore` function extends a component and makes working with stores in web workers easier.
 
 ```js
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/htm'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/htm'
 import { createCustomElement, withWorkerStore } from 'https://cdn.skypack.dev/ficusjs@3'
 
 // import the worker

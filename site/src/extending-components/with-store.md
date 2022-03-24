@@ -14,7 +14,7 @@ import { createCustomElement, withStore } from 'https://cdn.skypack.dev/ficusjs@
 // import { withStore } from 'https://cdn.skypack.dev/ficusjs@3/with-store'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
 
 // import a single store or object of stores from a local file
 import { store } from './store.js'

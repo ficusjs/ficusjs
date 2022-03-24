@@ -7,7 +7,7 @@ title: FicusJS documentation - State machines - withStateMachine function
 The `withStateMachine` function extends a component to provide a lightweight state machine run-time for component state.
 
 ```js
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/htm'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/htm'
 import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
 import { withStateMachine } from 'https://cdn.skypack.dev/ficusjs@3/with-state-machine'
 

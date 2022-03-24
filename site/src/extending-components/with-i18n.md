@@ -14,7 +14,7 @@ import { createCustomElement, withI18n } from 'https://cdn.skypack.dev/ficusjs@3
 // import { withI18n } from 'https://cdn.skypack.dev/ficusjs@3/with-i18n'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
 
 // import an I18n instance from a local file
 import { i18n } from './i18n.js'

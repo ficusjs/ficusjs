@@ -111,7 +111,7 @@ Example component using `setState` method
 import { createComponent } from 'https://cdn.skypack.dev/ficusjs@3/component'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
 
 createComponent('set-state-example', {
   renderer,

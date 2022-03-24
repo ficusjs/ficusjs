@@ -35,7 +35,7 @@ The following properties are used when creating components:
 import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
 
 // import the renderer and html tagged template literal from the htm renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/htm'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/htm'
 
 createCustomElement('my-component', {
   renderer,

@@ -71,7 +71,7 @@ Next, create one or more components using the `withWorkerStore` function.
 **component.js**
 
 ```js
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/htm'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/htm'
 import { createCustomElement, withWorkerStore } from 'https://cdn.skypack.dev/ficusjs@3'
 
 // import the worker

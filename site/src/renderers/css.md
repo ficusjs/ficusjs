@@ -6,7 +6,7 @@ title: FicusJS documentation - Renderers - css
 
 The `css` tagged template literal is available in the [`@ficusjs/renderers`](https://www.npmjs.com/package/@ficusjs/renderers) package and is intended for rendering CSS styles within a component.
 
-This renderer is used in conjunction with the [`withStyles`]() component extension.
+This renderer is used in conjunction with the [`withStyles`](/extending-components/with-styles/) component extension.
 
 ```js
 // import the css tagged template literal

@@ -18,7 +18,7 @@ import { createComponent, withStateTransactions } from 'https://cdn.skypack.dev/
 // import { withStateTransactions } from 'https://cdn.skypack.dev/ficusjs@3/with-state-transactions'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/lit-html'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/lit-html'
 
 createComponent(
   'my-like-component',

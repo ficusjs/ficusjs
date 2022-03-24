@@ -15,7 +15,7 @@ The service is provided to the `withXStateService` function to automatically sub
 import { createMachine, interpret } from 'https://cdn.skypack.dev/xstate'
 
 // import the html tagged template literal and renderer from htm
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/htm'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/htm'
 
 // import the custom element creator function
 import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'

@@ -1,7 +1,8 @@
 module.exports = {
   'Getting started': [
     { url: '/getting-started/', title: 'Getting started' },
-    { url: '/installation/', title: 'Installation' }
+    { url: '/installation/', title: 'Installation' },
+    { url: '/editor/', title: 'Editor set-up' }
   ],
   Components: [
     { url: '/components/', title: 'Introduction' },
@@ -35,7 +36,8 @@ module.exports = {
     { url: '/renderers/uhtml/', title: 'uhtml' },
     { url: '/renderers/lit-html/', title: 'lit-html' },
     { url: '/renderers/htm/', title: 'htm' },
-    { url: '/renderers/htm-preact/', title: 'htm with preact' }
+    { url: '/renderers/htm-preact/', title: 'htm with preact' },
+    { url: '/renderers/css/', title: 'css' }
   ],
   'State machines': [
     { url: '/state-machines/', title: 'Introduction' },

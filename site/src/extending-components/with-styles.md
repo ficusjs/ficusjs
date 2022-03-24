@@ -15,14 +15,17 @@ import { createCustomElement, withStyles } from 'https://cdn.skypack.dev/ficusjs
 // import { withStyles } from 'https://cdn.skypack.dev/ficusjs@3/with-styles'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
+
+// import the css tagged template literal
+import { css } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/css'
 
 createCustomElement(
   'my-component',
   withStyles({
     renderer,
     styles () {
-      return `
+      return css`
         my-component button {
           background-color: yellow;
           color: black;
@@ -43,9 +46,15 @@ The `withStyles` function automatically handles loading styles based on the comp
 The `styles` function must be provided when using the `withStyles` function. This function is invoked and injects CSS into the `<head>`
 once for all component instances.
 
-The `styles` function can return a `String` or Array of strings containing either styles or URL to an external stylesheet.
+The `styles` function can return:
 
-### String styles
+- a CSS `String`
+- URL to an external stylesheet
+- a `css` tagged template literal
+- `style` element
+- Array containing any combination of the above!
+
+### CSS string styles
 
 Return a string containing styles.
 
@@ -66,6 +75,8 @@ Return a string containing styles.
 
 Return a URL to a stylesheet - must be a fully qualified URL, not a relative path.
 
+External stylesheets are injected into the `head` as `link[rel=stylesheet]` tags.
+
 ```js
 {
   styles () {
@@ -74,9 +85,46 @@ Return a URL to a stylesheet - must be a fully qualified URL, not a relative pat
 }
 ```
 
+### css tagged template literal
+
+Return a [`css`](/renderers/css/) tagged template literal.
+
+```js
+{
+  styles () {
+    return css`
+      my-component button {
+        background-color: yellow;
+        color: black;
+      }
+    `
+  }
+}
+```
+
+### style element
+
+Return a style element.
+
+```js
+{
+  styles () {
+    const cssText = `
+      my-component button {
+        background-color: yellow;
+        color: black;
+      }
+    `
+    const style = document.createElement('style')
+    style.appendChild(document.createTextNode(cssText))
+    return style
+  }
+}
+```
+
 ### Mixed
 
-Return a mixed array containing both URL and string styles.
+Return a mixed array containing multiple combinations of styles.
 
 ```js
 {
@@ -85,6 +133,12 @@ Return a mixed array containing both URL and string styles.
       'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css',
       `
         my-component button {
+          background-color: yellow;
+          color: black;
+        }
+      `,
+      css`
+        my-other-component button {
           background-color: yellow;
           color: black;
         }

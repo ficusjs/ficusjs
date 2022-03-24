@@ -12,7 +12,7 @@ Create an `index.html` file and copy the following between the `<body>` tags.
 <hello-world></hello-world>
 
 <script type="module">
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/htm'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/htm'
 import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
 
 createCustomElement('hello-world', {

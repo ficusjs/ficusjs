@@ -41,13 +41,17 @@ import {
   createComponent,
 
   // extending components
+  ExtensionBuilder,
   withLocalState,
   withStyles,
   withLazyRender,
+  withBreakpointRender,
   withStateMachine,
   withXStateService,
   withStore,
+  withWorkerStore,
   withEventBus,
+  withI18n,
 
   // extending components - DEPRECATED
   withStateTransactions,
@@ -64,6 +68,10 @@ import {
   // stores - DEPRECATED
   createStore,
   getStore,
+
+  // i18n
+  createI18n,
+  getI18n,
 
   // modules
   use
@@ -85,13 +93,17 @@ import { createComponent } from 'https://cdn.skypack.dev/ficusjs@3/component'
 ### Extending components
 
 ```js
+import { ExtensionBuilder } from 'https://cdn.skypack.dev/ficusjs@3/extension-builder'
 import { withLocalState } from 'https://cdn.skypack.dev/ficusjs@3/with-local-state'
 import { withStyles } from 'https://cdn.skypack.dev/ficusjs@3/with-styles'
 import { withLazyRender } from 'https://cdn.skypack.dev/ficusjs@3/with-lazy-render'
+import { withBreakpointRender } from 'https://cdn.skypack.dev/ficusjs@3/with-breakpoint-render'
 import { withStateMachine } from 'https://cdn.skypack.dev/ficusjs@3/with-state-machine'
 import { withXStateService } from 'https://cdn.skypack.dev/ficusjs@3/with-xstate-service'
 import { withStore } from 'https://cdn.skypack.dev/ficusjs@3/with-store'
+import { withWorkerStore } from 'https://cdn.skypack.dev/ficusjs@3/with-worker-store'
 import { withEventBus } from 'https://cdn.skypack.dev/ficusjs@3/with-event-bus'
+import { withI18n } from 'https://cdn.skypack.dev/ficusjs@3/with-i18n'
 ```
 
 ### Extending components <span class="fd-deprecated" style="font-size: 1rem">DEPRECATED</span>
@@ -116,4 +128,10 @@ import { createAppState, getAppState, createPersist } from 'https://cdn.skypack.
 
 ```js
 import { createStore, getStore } from 'https://cdn.skypack.dev/ficusjs@3/store'
+```
+
+### Internationalization (i18n)
+
+```js
+import { createI18n, getI18n } from 'https://cdn.skypack.dev/ficusjs@3/i18n'
 ```

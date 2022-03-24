@@ -47,7 +47,7 @@ describe('App with styles', () => {
     })
 
     it('has head styles', () => {
-      cy.get('head > style[data-tag="single-link"]')
+      cy.get('head > link[data-tag="single-link"]')
         .should('have.length', 1)
     })
   })

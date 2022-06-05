@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2022-06-05
+
+### Updates
+- Bump @ficusjs/core to v1.3.2
+- Bump @ficusjs/component-extensions to v1.2.1
+- Bump @ficusjs/event-bus to v1.2.1
+- Bump @ficusjs/i18n to v1.0.1
+- Bump @ficusjs/renderers to v5.0.0
+- Bump @ficusjs/state to v2.0.0
+- Uplift devDependencies
+
 ## [3.18.0] - 2022-03-24
 
 ### Updates

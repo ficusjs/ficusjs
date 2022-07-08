@@ -9,7 +9,7 @@ By default your `render` function must return a DOM element or HTML string for r
 **Example using an HTML string**
 
 ```js
-import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
+import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@5/custom-element'
 
 createCustomElement('test-comp', {
   props: {
@@ -26,7 +26,7 @@ createCustomElement('test-comp', {
 **Example using a DOM element**
 
 ```js
-import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
+import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@5/custom-element'
 
 createCustomElement('test-comp', {
   props: {

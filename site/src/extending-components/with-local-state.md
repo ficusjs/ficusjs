@@ -11,13 +11,13 @@ This makes the component reactive to state changes. Every time a value of your `
 
 ```js
 // import the createCustomElement function
-import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
+import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@5/custom-element'
 
 // import the withLocalState function
-import { withLocalState } from 'https://cdn.skypack.dev/ficusjs@3/with-local-state'
+import { withLocalState } from 'https://cdn.skypack.dev/ficusjs@5/with-local-state'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uhtml'
 
 createCustomElement(
   'with-state-example',

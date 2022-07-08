@@ -8,7 +8,7 @@ The [lit-html](https://www.npmjs.com/package/lit-html) renderer is available in 
 
 ```js
 // import the renderer function and the html tagged template literal
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/lit-html'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/lit-html'
 
 createCustomElement('test-comp', {
   renderer,

@@ -19,7 +19,7 @@ const store = createAppState('an.example.store', {
 You can optionally save state to `window.localStorage` (for persistence across browser sessions) using the `createPersist` function:
 
 ```js
-import { createAppState, createPersist } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createAppState, createPersist } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // An initialised store. Params omitted for brevity
 const store = createAppState('an.example.store', {
@@ -40,7 +40,7 @@ When using the `createPersist` function, the following arguments must be supplie
 Options can be provided when creating persistence.
 
 ```js
-import { createAppState, createPersist } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createAppState, createPersist } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // An initialised store. Params omitted for brevity
 const store = createAppState('an.example.store', {
@@ -103,7 +103,7 @@ Four methods must be implemented:
 | `removeState()`   | Remove the state from the persistence store                                      |
 
 ```js
-import { createAppState } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createAppState } from 'https://cdn.skypack.dev/ficusjs@5'
 
 class MyCustomPersist {
   setState (state) {

@@ -9,16 +9,16 @@ by providing a `styles` function which is invoked injecting CSS into the `<head>
 
 ```js
 // import it with all other features
-import { createCustomElement, withStyles } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, withStyles } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // alternatively, import the function directly
-// import { withStyles } from 'https://cdn.skypack.dev/ficusjs@3/with-styles'
+// import { withStyles } from 'https://cdn.skypack.dev/ficusjs@5/with-styles'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uhtml'
 
 // import the css tagged template literal
-import { css } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/css'
+import { css } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/css'
 
 createCustomElement(
   'my-component',

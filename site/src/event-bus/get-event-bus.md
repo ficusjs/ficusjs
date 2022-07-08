@@ -9,7 +9,7 @@ If the event bus has not yet been created, `getEventBus` will create a new insta
 
 ```js
 // import the function
-import { createCustomElement, getEventBus, withEventBus } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, getEventBus, withEventBus } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // use it within a component
 createCustomElement(

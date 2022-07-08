@@ -8,7 +8,7 @@ The [uhtml](https://www.npmjs.com/package/uhtml) renderer is available in the [`
 
 ```js
 // import the renderer function and the html tagged template literal
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uhtml'
 
 createCustomElement('test-comp', {
   renderer,

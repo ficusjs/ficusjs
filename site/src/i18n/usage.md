@@ -9,8 +9,8 @@ Once you have created the i18n instance, the `withI18n` function extends a compo
 See [extending components](/composition) for more on the `withI18n` function.
 
 ```js
-import { createCustomElement, createI18n, withI18n } from 'https://cdn.skypack.dev/ficusjs@3'
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
+import { createCustomElement, createI18n, withI18n } from 'https://cdn.skypack.dev/ficusjs@5'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uhtml'
 
 // create the i18n instance
 const i18n = createI18n()

@@ -32,10 +32,10 @@ The following properties are used when creating components:
 
 ```js
 // import the createCustomElement function
-import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
+import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@5/custom-element'
 
 // import the renderer and html tagged template literal from the htm renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/htm'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/htm'
 
 createCustomElement('my-component', {
   renderer,

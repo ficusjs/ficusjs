@@ -10,7 +10,7 @@ This renderer is used in conjunction with the [`withStyles`](/extending-componen
 
 ```js
 // import the css tagged template literal
-import { css } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/css'
+import { css } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/css'
 
 createCustomElement(
   'test-comp',

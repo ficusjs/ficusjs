@@ -10,7 +10,7 @@ This class provides methods for working with multiple languages and localisation
 **The i18n instance will be created as a singleton - this ensures only one instance exists.**
 
 ```js
-import { createI18n } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createI18n } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // create the i18n instance and add the messages
 const i18n = createI18n()

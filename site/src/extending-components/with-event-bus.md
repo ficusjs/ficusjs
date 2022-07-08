@@ -8,13 +8,13 @@ The `withEventBus` function extends a component and makes working with an event 
 
 ```js
 // import it with all other features
-import { createCustomElement, withEventBus } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, withEventBus } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // alternatively, import the function directly
-// import { withEventBus } from 'https://cdn.skypack.dev/ficusjs@3/with-event-bus'
+// import { withEventBus } from 'https://cdn.skypack.dev/ficusjs@5/with-event-bus'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uhtml'
 
 // import an event bus from a local file
 import { eventBus } from './event-bus.js'

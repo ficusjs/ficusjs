@@ -8,10 +8,10 @@ The following example shows how to consume a module from a shared library.
 
 ```js
 // import the required FicusJS functions
-import { createCustomElement, use } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, use } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uhtml'
 
 // import component library from a local path
 import { module } from './path/to/component-module.esm.js'
@@ -36,10 +36,10 @@ The `use` function will import a module of components into your application read
 
 ```js
 // import the use function
-import { use } from 'https://cdn.skypack.dev/ficusjs@3'
+import { use } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uhtml'
 
 // import component module from a local path
 import { module } from './path/to/component-module.esm.js'

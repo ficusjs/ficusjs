@@ -12,13 +12,13 @@ The `withStateTransactions` function extends a component with transactions so mu
 
 ```js
 // import it with all other features
-import { createComponent, withStateTransactions } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createComponent, withStateTransactions } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // alternatively, import the function directly
-// import { withStateTransactions } from 'https://cdn.skypack.dev/ficusjs@3/with-state-transactions'
+// import { withStateTransactions } from 'https://cdn.skypack.dev/ficusjs@5/with-state-transactions'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/lit-html'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/lit-html'
 
 createComponent(
   'my-like-component',

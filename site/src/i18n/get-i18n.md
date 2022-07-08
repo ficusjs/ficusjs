@@ -9,7 +9,7 @@ If the i18n instance has not yet been created, `getI18n` will create a new insta
 
 ```js
 // import the function
-import { createCustomElement, getI18n, withI18n } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, getI18n, withI18n } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // use it within a component
 createCustomElement(

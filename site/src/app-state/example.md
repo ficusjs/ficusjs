@@ -9,7 +9,7 @@ Import the `createAppState` function into your Javascript main file:
 **main.js**
 
 ```js
-import { createAppState } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createAppState } from 'https://cdn.skypack.dev/ficusjs@5'
 ```
 
 Create a new store instance with `initialState` and `action` functions:

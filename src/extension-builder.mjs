@@ -6,6 +6,7 @@ import { withI18n } from './with-i18n.mjs'
 import { withLocalState } from './with-local-state.mjs'
 import { withStore } from './with-store.mjs'
 import { withWorkerStore } from './with-worker-store.mjs'
+import { withXStateService } from './with-xstate-service.mjs'
 
 class ExtensionBuilderClass {
   constructor () {
@@ -49,6 +50,11 @@ class ExtensionBuilderClass {
 
   withWorkerStore (worker) {
     this.extensions[withWorkerStore] = { func: withWorkerStore, arg: worker }
+    return this
+  }
+
+  withXStateService (service) {
+    this.extensions[withXStateService] = { func: withXStateService, arg: service }
     return this
   }
 

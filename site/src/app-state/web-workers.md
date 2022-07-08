@@ -14,15 +14,15 @@ To communicate with the user interface, data is sent between workers and the mai
 
 ## Creating a store
 
-The package `@ficusjs/state` provides a script named `worker-app-state.iife.js` specifically for creating stores in a web worker.
+The `@ficusjs/state` package provides a script named `worker-app-state.iife.js` specifically for creating stores in a web worker.
 
-It is available at [https://cdn.skypack.dev/@ficusjs/state@1.2.0/dist/worker-app-state.iife.js](https://cdn.skypack.dev/@ficusjs/state@1.2.0/dist/worker-app-state.iife.js)
+It is available at [https://cdn.skypack.dev/@ficusjs/state@3/dist/worker-app-state.iife.js](https://cdn.skypack.dev/@ficusjs/state@3/dist/worker-app-state.iife.js)
 
 Create a worker script `worker.js` for managing your application state.
 
 ```js
 // import the app state creator function
-importScripts('https://cdn.skypack.dev/@ficusjs/state@1.2.0/dist/worker-app-state.iife.js')
+importScripts('https://cdn.skypack.dev/@ficusjs/state@3/dist/worker-app-state.iife.js')
 
 // create the store
 const store = globalThis.ficusjs.createAppState({
@@ -71,8 +71,8 @@ Next, create one or more components using the `withWorkerStore` function.
 **component.js**
 
 ```js
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/htm'
-import { createCustomElement, withWorkerStore } from 'https://cdn.skypack.dev/ficusjs@3'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/htm'
+import { createCustomElement, withWorkerStore } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // import the worker
 import { worker } from './worker-store.js'
@@ -81,7 +81,7 @@ createCustomElement('example-component',
   withWorkerStore(worker, {
     renderer,
     increment () {
-      this.dispatch('increment', this.state.count + 1)
+      this.store.dispatch('increment', this.state.count + 1)
     },
     render () {
       return html`<button type="button" onclick=${this.increment}>Increment</button>`
@@ -94,6 +94,6 @@ createCustomElement('example-component',
 
 The `withWorkerStore` function extends a component and makes working with stores in web workers easier.
 
-The `withWorkerStore` function provides a `this.state` property within the component as well as a `this.dispatch()` method for invoking store actions.
+The `withWorkerStore` function provides a `this.state` property within the component as well as a `this.store.dispatch()` method for invoking store actions.
 It also makes the component reactive to store changes as well as handling automatic store subscriptions based on the component lifecycle hooks.
 It will also refresh computed getters when store state changes.

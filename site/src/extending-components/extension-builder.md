@@ -8,13 +8,13 @@ Working with multiple component extensions can be made easier by using the `Exte
 
 ```js
 // import it with all other features
-import { createCustomElement, ExtensionBuilder } from 'https://cdn.skypack.dev/ficusjs@3'
+import { createCustomElement, ExtensionBuilder } from 'https://cdn.skypack.dev/ficusjs@5'
 
 // Alternatively, import the ExtensionBuilder function
-// import { ExtensionBuilder } from 'https://cdn.skypack.dev/ficusjs@3/extension-builder'
+// import { ExtensionBuilder } from 'https://cdn.skypack.dev/ficusjs@5/extension-builder'
 
 // import the renderer and html tagged template literal from the uhtml renderer
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@4/uhtml'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uhtml'
 
 import { store } from './store.mjs'
 import { i18n } from './i18n.mjs'
@@ -145,6 +145,20 @@ import { worker } from './worker-store.mjs'
 const builder = ExtensionBuilder
   .newInstance()
   .withWorkerStore(worker)
+```
+
+### withXStateService(service)
+
+Use the [`withXStateService`](/state-machines/with-xstate-service/) extension function.
+
+```js
+import { getXStateService } from 'https://cdn.skypack.dev/@ficusjs/state@3/xstate-service'
+
+const service = getXStateService('toggle.service')
+
+const builder = ExtensionBuilder
+  .newInstance()
+  .withXStateService(service)
 ```
 
 ### create(options)

@@ -29,6 +29,7 @@ module.exports = {
     { url: '/extending-components/with-store/', title: 'withStore function' },
     { url: '/extending-components/with-styles/', title: 'withStyles function' },
     { url: '/extending-components/with-worker-store/', title: 'withWorkerStore function' },
+    { url: '/state-machines/with-xstate-service/', title: 'withXStateService function' },
     { url: '/extending-components/extension-builder/', title: 'Extension builder' }
   ],
   Renderers: [
@@ -41,8 +42,12 @@ module.exports = {
   ],
   'State machines': [
     { url: '/state-machines/', title: 'Introduction' },
-    { url: '/state-machines/with-state-machine/', title: 'withStateMachine function' },
-    { url: '/state-machines/with-xstate-service/', title: 'withXStateService function' }
+    { url: '/state-machines/defining-state-machines/', title: 'Defining state machines' },
+    { url: '/state-machines/create-xstate-service/', title: 'createXStateService function' },
+    { url: '/state-machines/get-xstate-service/', title: 'getXStateService function' },
+    { url: '/state-machines/with-xstate-service/', title: 'withXStateService function' },
+    { url: '/state-machines/assign/', title: 'assign function' },
+    { url: '/state-machines/interpret/', title: 'interpret function' }
   ],
   'Application state': [
     { url: '/app-state/', title: 'Introduction' },

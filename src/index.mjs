@@ -15,6 +15,7 @@ import { createEventBus, getEventBus } from './event-bus.mjs'
 import { createStore, getStore } from './store.mjs'
 import { createAppState, getAppState, createPersist } from './app-state.mjs'
 import { createI18n, getI18n, withI18n } from './i18n.mjs'
+import { assign, createMachine, createXStateService, getXStateService, interpret, wrapXStateService } from './xstate-service.mjs'
 
 /**
  * Function to use another FicusJS module
@@ -49,6 +50,14 @@ function use (module, { renderer, ...args }) {
       createI18n,
       getI18n,
 
+      // finite state machines
+      assign,
+      createMachine,
+      createXStateService,
+      getXStateService,
+      interpret,
+      wrapXStateService,
+
       // modules
       use
     })
@@ -62,16 +71,16 @@ export {
 
   // extending components
   ExtensionBuilder,
-  withLocalState,
-  withStyles,
-  withLazyRender,
   withBreakpointRender,
-  withStateMachine,
-  withXStateService,
-  withStore,
-  withWorkerStore,
   withEventBus,
   withI18n,
+  withLazyRender,
+  withLocalState,
+  withStateMachine,
+  withStore,
+  withStyles,
+  withWorkerStore,
+  withXStateService,
 
   // extending components - DEPRECATED
   withStateTransactions,
@@ -92,6 +101,14 @@ export {
   // i18n
   createI18n,
   getI18n,
+
+  // finite state machines
+  assign,
+  createMachine,
+  createXStateService,
+  getXStateService,
+  interpret,
+  wrapXStateService,
 
   // modules
   use

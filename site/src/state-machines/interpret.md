@@ -4,9 +4,8 @@ title: FicusJS documentation - Finite state machines and statecharts - interpret
 ---
 # interpret function
 
-The `interpret` function creates an [XState](https://xstate.js.org) service (a running instance of a state machine) that can be used within components.
+The `interpret` function creates an instance of an interpreted machine, also known as a service. This is a stateful representation of the running machine, which you can subscribe to, send events to, start, and stop.
 
-A service is created using the `createMachine` first followed by the `interpret` function. It is an instance created using the [`@xstate/fsm`](https://xstate.js.org/docs/packages/xstate-fsm/) package.
 
 ```js
 import { createMachine, interpret } from 'https://cdn.skypack.dev/@ficusjs/state@3/xstate-service'
@@ -34,7 +33,7 @@ Getters are useful if you want to return a projection of the extended state (the
 
 Getters are memoized functions which means the result of the getter is cached for subsequent executions. This is useful when creating projections from large sets of data. State changes will automatically reset the getter cache.
 
-To provide getters for creating projections, create an object containing functions and pass it to the `createXStateService` function when creating the service.
+To provide getters for creating projections, create an object containing functions and pass it to the `interpret` function.
 
 ```js
 const getters = {
@@ -49,3 +48,5 @@ const getters = {
 // interpret the state machine to create a service
 const service = interpret(machine, getters)
 ```
+
+The `interpret` function extends the one provided by the [`@xstate/fsm`](https://xstate.js.org/docs/packages/xstate-fsm/#api) package. The decorated function extends to provide the getters feature.

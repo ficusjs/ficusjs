@@ -2,7 +2,8 @@ module.exports = {
   'Getting started': [
     { url: '/getting-started/', title: 'Getting started' },
     { url: '/installation/', title: 'Installation' },
-    { url: '/editor/', title: 'Editor set-up' }
+    { url: '/editor/', title: 'Editor set-up' },
+    { url: '/examples/', title: 'Examples' }
   ],
   Components: [
     { url: '/components/', title: 'Introduction' },

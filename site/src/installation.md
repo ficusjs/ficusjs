@@ -42,16 +42,16 @@ import {
 
   // extending components
   ExtensionBuilder,
-  withLocalState,
-  withStyles,
-  withLazyRender,
   withBreakpointRender,
-  withStateMachine,
-  withXStateService,
-  withStore,
-  withWorkerStore,
   withEventBus,
   withI18n,
+  withLazyRender,
+  withLocalState,
+  withStateMachine,
+  withStore,
+  withStyles,
+  withWorkerStore,
+  withXStateService,
 
   // extending components - DEPRECATED
   withStateTransactions,
@@ -72,6 +72,13 @@ import {
   // i18n
   createI18n,
   getI18n,
+
+  // finite state machines and statecharts
+  assign,
+  createMachine,
+  createXStateService,
+  getXStateService,
+  interpret,
 
   // modules
   use
@@ -94,16 +101,16 @@ import { createComponent } from 'https://cdn.skypack.dev/ficusjs@5/component'
 
 ```js
 import { ExtensionBuilder } from 'https://cdn.skypack.dev/ficusjs@5/extension-builder'
-import { withLocalState } from 'https://cdn.skypack.dev/ficusjs@5/with-local-state'
-import { withStyles } from 'https://cdn.skypack.dev/ficusjs@5/with-styles'
-import { withLazyRender } from 'https://cdn.skypack.dev/ficusjs@5/with-lazy-render'
 import { withBreakpointRender } from 'https://cdn.skypack.dev/ficusjs@5/with-breakpoint-render'
-import { withStateMachine } from 'https://cdn.skypack.dev/ficusjs@5/with-state-machine'
-import { withXStateService } from 'https://cdn.skypack.dev/ficusjs@5/with-xstate-service'
-import { withStore } from 'https://cdn.skypack.dev/ficusjs@5/with-store'
-import { withWorkerStore } from 'https://cdn.skypack.dev/ficusjs@5/with-worker-store'
 import { withEventBus } from 'https://cdn.skypack.dev/ficusjs@5/with-event-bus'
 import { withI18n } from 'https://cdn.skypack.dev/ficusjs@5/with-i18n'
+import { withLazyRender } from 'https://cdn.skypack.dev/ficusjs@5/with-lazy-render'
+import { withLocalState } from 'https://cdn.skypack.dev/ficusjs@5/with-local-state'
+import { withStateMachine } from 'https://cdn.skypack.dev/ficusjs@5/with-state-machine'
+import { withStore } from 'https://cdn.skypack.dev/ficusjs@5/with-store'
+import { withStyles } from 'https://cdn.skypack.dev/ficusjs@5/with-styles'
+import { withWorkerStore } from 'https://cdn.skypack.dev/ficusjs@5/with-worker-store'
+import { withXStateService } from 'https://cdn.skypack.dev/ficusjs@5/with-xstate-service'
 ```
 
 ### Extending components <span class="fd-deprecated" style="font-size: 1rem">DEPRECATED</span>
@@ -134,4 +141,10 @@ import { createStore, getStore } from 'https://cdn.skypack.dev/ficusjs@5/store'
 
 ```js
 import { createI18n, getI18n } from 'https://cdn.skypack.dev/ficusjs@5/i18n'
+```
+
+### Finite state machines and statecharts
+
+```js
+import { assign, createMachine, createXStateService, getXStateService, interpret, wrapXStateService } from 'https://cdn.skypack.dev/ficusjs@5/xstate-service'
 ```

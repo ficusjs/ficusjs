@@ -65,3 +65,16 @@ This is triggered by the custom element [`disconnectedCallback`](https://develop
   }
 }
 ```
+
+### propsDidUpdate function
+
+The `propsDidUpdate` hook will be invoked each time the component props are updated.
+This is triggered by the custom element [`attributeChangedCallback`](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) lifecycle callback.
+
+```js
+{
+  propsDidUpdate () {
+    // do something when the component props are updated!
+  }
+}
+```

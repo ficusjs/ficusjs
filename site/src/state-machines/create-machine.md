@@ -1,16 +1,32 @@
 ---
 layout: main.njk
-title: FicusJS documentation - Finite state machines and statecharts - assign function
+title: FicusJS documentation - Finite state machines and statecharts - createMachine function
 ---
-# assign function
+# createMachine function
 
-The `assign` function is used to update data within a state machine.
-
-State machines can hold data known as extended state using a `context` object. This makes the state machine useful in applications where storage of data is required in addition to the finite states.
+The `createMachine` function is used to define a state machine.
 
 ```js
-import { assign, createMachine } from 'https://cdn.skypack.dev/ficusjs@5/xstate-service'
+import { createMachine } from 'https://cdn.skypack.dev/ficusjs@5/xstate-service'
 
+const machine = createMachine({
+  id: 'toggle',
+  initial: 'inactive',
+  states: {
+    inactive: { on: { TOGGLE: 'active' } },
+    active: { on: { TOGGLE: 'inactive' } }
+  }
+})
+```
+
+## Options
+
+Actions and guards can be implemented within an options object passed as the second argument to `createMachine`.
+
+`actions` - the mapping of action names to their implementation
+`guards` - the mapping of transition guard (`cond`) names to their implementation
+
+```js
 const definition = {
   context: { amount: 0 },
   id: 'glass',

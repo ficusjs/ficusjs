@@ -1,22 +1,24 @@
 ---
 layout: main.njk
-title: FicusJS documentation - Finite state machines and statecharts - createXStateService function
+title: FicusJS documentation - Finite state machines and statecharts - wrapXStateService function
 ---
-# createXStateService function
+# wrapXStateService function
 
-The `createXStateService` function creates an [XState](https://xstate.js.org) service (a running instance of a state machine) that can be used within components.
+The `wrapXStateService` function wraps an [XState](https://xstate.js.org) service (a running instance of a state machine) that can be used within components.
+It is ideal for use in conjunction with the full [XState](https://xstate.js.org) library which supports complex state machines and statecharts.
 
-A service is created using the `createMachine` function first followed by the `createXStateService` function. It is an instance created using the [`@xstate/fsm`](https://xstate.js.org/docs/packages/xstate-fsm/) package.
+The `wrapXStateService` function takes three arguments:
 
-The `createXStateService` function takes four arguments:
-
-1. service key (for example `an.example.service`) - keys must be unique and are used to retrieve services later (required)
-2. machine created with the `createMachine` function (required)
-3. an object of getter functions (optional)
-4. a persistence string, object or custom class (optional)
+1. the service created with the `interpret` function (required)
+2. an object of getter functions (optional)
+3. a persistence string, object or custom class (optional)
 
 ```js
-import { createMachine, createXStateService } from 'https://cdn.skypack.dev/ficusjs@5/xstate-service'
+// import full XState library
+import { createMachine, interpret } from 'https://cdn.skypack.dev/xstate'
+
+// import the required function
+import { wrapXStateService } from 'https://cdn.skypack.dev/ficusjs@5/xstate-service'
 
 const definition = {
   /* define the machine definition */
@@ -30,10 +32,13 @@ const options = {
 const machine = createMachine(definition, options)
 
 // interpret the state machine to create a service
-const service = createXStateService('toggle.service', machine)
+const serviceInstance = interpret(machine)
+
+// add the service
+wrapXStateService(service)
 ```
 
-A service can then be passed to as many components as required using the [`withXStateService`](/state-machines/with-xstate-service) function.
+The wrapped service can then be passed to as many components as required using the [`withXStateService`](/state-machines/with-xstate-service) function.
 
 ## Getters
 
@@ -41,7 +46,7 @@ Getters are useful if you want to return a projection of the extended state (the
 
 Getters are memoized functions which means the result of the getter is cached for subsequent executions. This is useful when creating projections from large sets of data. State changes will automatically reset the getter cache.
 
-To provide getters for creating projections, create an object containing functions and pass it to the `createXStateService` function as the third argument.
+To provide getters for creating projections, create an object containing functions and pass it to the `wrapXStateService` function as the second argument.
 
 ```js
 const getters = {
@@ -53,8 +58,8 @@ const getters = {
   }
 }
 
-// interpret the state machine to create a service
-const service = createXStateService('toggle.service', machine, getters)
+// wrap the XState service instance and extend it with getters
+const service = wrapXStateService(serviceInstance, getters)
 ```
 
 ## Persistence
@@ -65,7 +70,7 @@ This will re-hydrate your state machine on initialisation.
 Passing a string as the persistence argument provides a namespace for persisting the state.
 
 ```js
-const service = createXStateService('toggle.service', machine, getters, 'food')
+const service = wrapXStateService(serviceInstance, getters, 'food')
 ```
 
 ### createPersist function
@@ -75,7 +80,7 @@ You can optionally save state to `window.localStorage` (for persistence across b
 ```js
 import { createPersist } from 'https://cdn.skypack.dev/ficusjs@5'
 
-const service = createXStateService('toggle.service', machine, getters, createPersist('food', 'local'))
+const service = wrapXStateService(serviceInstance, getters, createPersist('food', 'local'))
 ```
 
 When using the `createPersist` function, the following arguments must be supplied:
@@ -93,7 +98,7 @@ Options can be provided when creating persistence.
 ```js
 import { createPersist } from 'https://cdn.skypack.dev/ficusjs@5'
 
-const service = createXStateService('toggle.service', machine, getters, createPersist('food', 'local', {
+const service = wrapXStateService(serviceInstance, getters, createPersist('food', 'local', {
   clearOnReload: true,
   saveState (state) {
     return {
@@ -166,5 +171,5 @@ class MyCustomPersist {
   }
 }
 
-const service = createXStateService('toggle.service', machine, getters, new MyCustomPersist())
+const service = wrapXStateService(serviceInstance, getters, new MyCustomPersist())
 ```

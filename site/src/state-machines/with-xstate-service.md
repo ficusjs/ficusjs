@@ -12,7 +12,7 @@ The service is provided to the `withXStateService` function to automatically sub
 
 ```js
 // import XState functions
-import { createMachine, createXStateService } from 'https://cdn.skypack.dev/@ficusjs/state@3/xstate-service'
+import { createMachine, createXStateService } from 'https://cdn.skypack.dev/ficusjs@5/xstate-service'
 
 // import the html tagged template literal and renderer from htm
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uhtml'
@@ -21,7 +21,7 @@ import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uht
 import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@5/custom-element'
 
 // import the withXStateService function
-import { withXStateService } from 'https://cdn.skypack.dev/@ficusjs/state@3/with-xstate-service'
+import { withXStateService } from 'https://cdn.skypack.dev/ficusjs@5/with-xstate-service'
 
 // create a state machine
 const machine = createMachine({
@@ -88,7 +88,7 @@ import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@5/uht
 import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@5/custom-element'
 
 // import the withXStateService function
-import { withXStateService } from 'https://cdn.skypack.dev/@ficusjs/state@3/with-xstate-service'
+import { withXStateService } from 'https://cdn.skypack.dev/ficusjs@5/with-xstate-service'
 
 // create a state machine
 const machine = createMachine({

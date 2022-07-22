@@ -8,7 +8,7 @@ The `getXStateService` function is a quick way to retrieve a finite state machin
 
 ```js
 // import the function
-import { getXStateService } from 'https://cdn.skypack.dev/@ficusjs/state@3/xstate-service'
+import { getXStateService } from 'https://cdn.skypack.dev/ficusjs@5/xstate-service'
 
 // retrieve a store instance
 const service = getXStateService('toggle.service')

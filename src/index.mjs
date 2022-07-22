@@ -15,7 +15,7 @@ import { createEventBus, getEventBus } from './event-bus.mjs'
 import { createStore, getStore } from './store.mjs'
 import { createAppState, getAppState, createPersist } from './app-state.mjs'
 import { createI18n, getI18n, withI18n } from './i18n.mjs'
-import { assign, createMachine, createXStateService, getXStateService, interpret, wrapXStateService } from './xstate-service.mjs'
+import { assign, createMachine, createXStateService, getXStateService, interpret, wrapXStateService, XStateServiceStatus } from './xstate-service.mjs'
 
 /**
  * Function to use another FicusJS module
@@ -57,6 +57,7 @@ function use (module, { renderer, ...args }) {
       getXStateService,
       interpret,
       wrapXStateService,
+      XStateServiceStatus,
 
       // modules
       use
@@ -109,6 +110,7 @@ export {
   getXStateService,
   interpret,
   wrapXStateService,
+  XStateServiceStatus,
 
   // modules
   use

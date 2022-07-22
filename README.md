@@ -11,12 +11,17 @@ FicusJS provides the following features for building modern web applications.
 - Fast lightweight web components
 - Extending web components
   - with renderers
+    - [htm](https://www.npmjs.com/package/htm) (JSX-like syntax - no transpiler necessary)
+    - [htm](https://www.npmjs.com/package/htm) with [Preact](https://www.npmjs.com/package/preact) (JSX-like syntax - no transpiler necessary)
+    - [lit-html](https://www.npmjs.com/package/lit-html)
+    - [uhtml](https://www.npmjs.com/package/uhtml)
+    - css
   - with local state
   - with styles
   - with lazy rendering
   - with breakpoint rendering
-  - with a state machine
-  - with an XState service
+  - with a finite state machine
+  - with an [XState](https://xstate.js.org/) service
   - with an application state store
   - with an event bus
   - with internationalization (i18n)

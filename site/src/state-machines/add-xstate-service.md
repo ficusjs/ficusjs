@@ -17,7 +17,7 @@ When using the `addXStateService` function, you **must** pass two parameters:
 import { createMachine, interpret } from 'https://cdn.skypack.dev/xstate'
 
 // import the required function
-import { addXStateService } from 'https://cdn.skypack.dev/@ficusjs/state@3/xstate-service'
+import { addXStateService } from 'https://cdn.skypack.dev/ficusjs@5/xstate-service'
 
 const definition = {
   /* define the machine definition */

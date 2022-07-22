@@ -152,7 +152,7 @@ const builder = ExtensionBuilder
 Use the [`withXStateService`](/state-machines/with-xstate-service/) extension function.
 
 ```js
-import { getXStateService } from 'https://cdn.skypack.dev/@ficusjs/state@3/xstate-service'
+import { getXStateService } from 'https://cdn.skypack.dev/ficusjs@5/xstate-service'
 
 const service = getXStateService('toggle.service')
 

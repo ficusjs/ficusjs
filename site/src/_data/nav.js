@@ -47,8 +47,9 @@ module.exports = {
     { url: '/state-machines/create-xstate-service/', title: 'createXStateService function' },
     { url: '/state-machines/get-xstate-service/', title: 'getXStateService function' },
     { url: '/state-machines/with-xstate-service/', title: 'withXStateService function' },
-    { url: '/state-machines/assign/', title: 'assign function' },
-    { url: '/state-machines/interpret/', title: 'interpret function' }
+    { url: '/state-machines/create-machine/', title: 'createMachine function' },
+    { url: '/state-machines/interpret/', title: 'interpret function' },
+    { url: '/state-machines/assign/', title: 'assign function' }
   ],
   'Application state': [
     { url: '/app-state/', title: 'Introduction' },

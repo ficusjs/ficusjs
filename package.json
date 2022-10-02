@@ -60,7 +60,7 @@
     "@ficusjs/component-extensions": "1.2.1",
     "@ficusjs/event-bus": "1.2.1",
     "@ficusjs/i18n": "1.0.1",
-    "@ficusjs/renderers": "5.0.0",
+    "@ficusjs/renderers": "5.1.0",
     "@ficusjs/state": "3.2.1"
   },
   "devDependencies": {
@@ -68,7 +68,7 @@
     "@ficusjs/component-extensions": "1.2.1",
     "@ficusjs/event-bus": "1.2.1",
     "@ficusjs/i18n": "1.0.1",
-    "@ficusjs/renderers": "5.0.0",
+    "@ficusjs/renderers": "5.1.0",
     "@ficusjs/state": "3.2.1",
     "ava": "4.3.3",
     "c8": "7.12.0",

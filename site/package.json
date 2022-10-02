@@ -46,7 +46,7 @@
     "rollup-plugin-terser": "7.0.2",
     "slugify": "1.6.5",
     "standard": "17.0.0",
-    "terser": "5.14.1",
+    "terser": "5.15.0",
     "workbox-cli": "6.5.3"
   }
 }

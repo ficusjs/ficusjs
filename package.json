@@ -61,7 +61,7 @@
     "@ficusjs/event-bus": "1.2.1",
     "@ficusjs/i18n": "1.0.1",
     "@ficusjs/renderers": "5.1.0",
-    "@ficusjs/state": "3.2.1"
+    "@ficusjs/state": "3.3.0"
   },
   "devDependencies": {
     "@ficusjs/core": "1.4.0",
@@ -69,7 +69,7 @@
     "@ficusjs/event-bus": "1.2.1",
     "@ficusjs/i18n": "1.0.1",
     "@ficusjs/renderers": "5.1.0",
-    "@ficusjs/state": "3.2.1",
+    "@ficusjs/state": "3.3.0",
     "ava": "4.3.3",
     "c8": "7.12.0",
     "cypress": "10.9.0",

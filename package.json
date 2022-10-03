@@ -74,7 +74,7 @@
     "c8": "7.12.0",
     "cypress": "10.9.0",
     "http-server": "14.1.1",
-    "jsdom": "20.0.0",
+    "jsdom": "20.0.1",
     "node-sessionstorage": "1.0.0",
     "npm-run-all": "4.1.5",
     "open-cli": "7.0.1",

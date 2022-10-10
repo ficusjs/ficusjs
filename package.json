@@ -57,7 +57,7 @@
   "homepage": "https://docs.ficusjs.org",
   "dependencies": {
     "@ficusjs/core": "1.4.0",
-    "@ficusjs/component-extensions": "1.2.1",
+    "@ficusjs/component-extensions": "1.3.0",
     "@ficusjs/event-bus": "1.2.1",
     "@ficusjs/i18n": "1.0.1",
     "@ficusjs/renderers": "5.1.0",
@@ -65,7 +65,7 @@
   },
   "devDependencies": {
     "@ficusjs/core": "1.4.0",
-    "@ficusjs/component-extensions": "1.2.1",
+    "@ficusjs/component-extensions": "1.3.0",
     "@ficusjs/event-bus": "1.2.1",
     "@ficusjs/i18n": "1.0.1",
     "@ficusjs/renderers": "5.1.0",

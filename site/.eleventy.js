@@ -6,6 +6,7 @@ const slugify = require("slugify")
 const pluginTOC = require('eleventy-plugin-nesting-toc')
 const markdownItAnchor = require('markdown-it-anchor')
 const markdownItToc = require('markdown-it-table-of-contents')
+const markdownItNamedHeadings = require("markdown-it-named-headings")
 const markdownItEmoji = require('markdown-it-emoji')
 
 module.exports = function(eleventyConfig) {
@@ -52,14 +53,7 @@ module.exports = function(eleventyConfig) {
     html: true,
     breaks: true
   })
-    .use(markdownItAnchor, {
-      permalink: true,
-      slugify: markdownItSlugify,
-      permalinkBefore: false,
-      permalinkClass: "fd-direct-link",
-      permalinkSymbol: "#",
-      level: [1,2,3,4,5]
-    })
+    .use(markdownItNamedHeadings)
     .use(markdownItToc, {
       includeLevel: [2, 3, 4, 5],
       slugify: markdownItSlugify,

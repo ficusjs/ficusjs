@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.1.0] - 2022-11-15
+
+### Updates
+- Bump @ficusjs/core to [v3.1.1](https://github.com/ficusjs/ficusjs-core/blob/3.1.1/CHANGELOG.md)
+- Bump @ficusjs/event-bus to [v1.3.1](https://github.com/ficusjs/ficusjs-event-bus/blob/1.3.1/CHANGELOG.md)
+- Bump @ficusjs/i18n to [v1.2.0](https://github.com/ficusjs/ficusjs-i18n/blob/1.2.0/CHANGELOG.md)
+
 ## [6.0.0] - 2022-11-12
 
 ### Updates

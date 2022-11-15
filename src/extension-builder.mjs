@@ -2,7 +2,7 @@ import { withBreakpointRender } from './with-breakpoint-render.mjs'
 import { withLazyRender } from './with-lazy-render.mjs'
 import { withStyles } from './with-styles.mjs'
 import { withEventBus } from './with-event-bus.mjs'
-import { withI18n } from './with-i18n.mjs'
+import { withI18n, withI18nReactive } from './with-i18n.mjs'
 import { withLocalState } from './with-local-state.mjs'
 import { withStore } from './with-store.mjs'
 import { withWorkerStore } from './with-worker-store.mjs'
@@ -25,6 +25,11 @@ class ExtensionBuilderClass {
 
   withI18n (i18n) {
     this.extensions[withI18n] = { func: withI18n, arg: i18n }
+    return this
+  }
+
+  withI18nReactive (i18n) {
+    this.extensions[withI18nReactive] = { func: withI18nReactive, arg: i18n }
     return this
   }
 

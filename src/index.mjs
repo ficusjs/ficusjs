@@ -14,7 +14,7 @@ import { withXStateService } from './with-xstate-service.mjs'
 import { createEventBus, getEventBus } from './event-bus.mjs'
 import { createStore, getStore } from './store.mjs'
 import { createAppState, getAppState, createPersist } from './app-state.mjs'
-import { createI18n, getI18n, withI18n } from './i18n.mjs'
+import { createI18n, getI18n, withI18n, withI18nReactive } from './i18n.mjs'
 import { assign, createMachine, createXStateService, getXStateService, interpret, wrapXStateService, XStateServiceStatus } from './xstate-service.mjs'
 
 /**
@@ -75,6 +75,7 @@ export {
   withBreakpointRender,
   withEventBus,
   withI18n,
+  withI18nReactive,
   withLazyRender,
   withLocalState,
   withStateMachine,

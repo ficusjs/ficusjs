@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.2.0] - 2022-11-29
+
+### Updates
+- Bump @ficusjs/state to [v4.0.0](https://github.com/ficusjs/ficusjs-state/blob/4.0.0/CHANGELOG.md)
+- Bump @ficusjs/component-extensions to [v2.0.0](https://github.com/ficusjs/ficusjs-component-extensions/blob/2.0.0/CHANGELOG.md)
+
+### Fixes
+- Fix extension types
+
 ## [6.1.1] - 2022-11-15
 
 ### Fixes

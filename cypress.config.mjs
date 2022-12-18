@@ -9,5 +9,7 @@ export default defineConfig({
     rootSuiteTitle: 'FicusJS Integration Tests',
     testsuitesTitle: 'Cypress Tests'
   },
-  e2e: {}
+  e2e: {
+    testIsolation: false
+  }
 })

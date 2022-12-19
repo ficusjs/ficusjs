@@ -59,7 +59,7 @@
     "@ficusjs/core": "3.1.2",
     "@ficusjs/component-extensions": "2.0.0",
     "@ficusjs/event-bus": "1.3.1",
-    "@ficusjs/i18n": "1.2.1",
+    "@ficusjs/i18n": "1.2.2",
     "@ficusjs/renderers": "5.4.1",
     "@ficusjs/state": "4.0.0"
   },
@@ -67,7 +67,7 @@
     "@ficusjs/core": "3.1.2",
     "@ficusjs/component-extensions": "2.0.0",
     "@ficusjs/event-bus": "1.3.1",
-    "@ficusjs/i18n": "1.2.1",
+    "@ficusjs/i18n": "1.2.2",
     "@ficusjs/renderers": "5.4.1",
     "@ficusjs/state": "4.0.0",
     "ava": "5.1.0",

@@ -72,7 +72,7 @@
     "@ficusjs/state": "4.0.0",
     "ava": "5.1.0",
     "c8": "7.12.0",
-    "cypress": "12.1.0",
+    "cypress": "12.2.0",
     "http-server": "14.1.1",
     "jsdom": "20.0.3",
     "node-sessionstorage": "1.0.0",

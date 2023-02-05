@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    box-sizing: border-box;
+    font-family: Saira, sans-serif;
+    background-color: #121212;
+    color: #fff
+  }
+}
+
+@layer utilities {
+  .primary-color {
+    color: #43b6b7
+  }
+
+  .center-div {
+    @apply flex justify-center items-center;
+  }
+
+  .full-space {
+    @apply w-full h-full;
+  }
+
+  .container__header {
+    @apply text-xl text-center w-full h-1/6 flex justify-center items-end;
+  }
+
+  .container__content {
+    @apply w-full h-5/6;
+    @apply center-div;
+  }
+
+  .container__button {
+    @apply bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded;
+  }
+}

@@ -3,7 +3,7 @@ export function createFormSubmissionExample ({ createCustomElement, html, render
     renderer,
     render () {
       return html`
-        <container-wrapper header="FORM - EXAMPLE">
+        <container-wrapper header="Form - example">
         </container-wrapper>
       `
     }

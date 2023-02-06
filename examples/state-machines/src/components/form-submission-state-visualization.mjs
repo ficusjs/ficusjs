@@ -3,7 +3,7 @@ export function createFormSubmissionStateVisualization ({ createCustomElement, h
     renderer,
     render () {
       return html`
-        <container-wrapper header="FORM - STATE VISUALIZATION">
+        <container-wrapper header="Form - state visualization">
         </container-wrapper>
       `
     }

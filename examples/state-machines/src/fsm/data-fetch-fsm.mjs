@@ -23,7 +23,13 @@ const definition = {
         }
       }
     },
-    loaded: {},
+    loaded: {
+      on: {
+        REFRESH: {
+          target: 'loading'
+        }
+      }
+    },
     error: {
       on: {
         RETRY: {
@@ -42,7 +48,12 @@ const options = {
   }
 }
 
+const getters = {
+  data (context) {
+    return context.data
+  }
+}
+
 const machine = createMachine(definition, options)
 
-export const dataFetchStateMachine = createXStateService('data.fetch', machine)
-
+export const dataFetchStateMachine = createXStateService('data.fetch', machine, getters)

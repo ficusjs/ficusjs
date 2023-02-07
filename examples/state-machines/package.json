@@ -2,6 +2,7 @@
   "name": "ficusjs-state-machines-example",
   "version": "1.0.0",
   "scripts": {
+    "lint": "standard \"src/**/*.mjs\"",
     "start": "run-p start:*",
     "start:tailwind": "tailwindcss -w -i ./src/styles/main.css -o ./public/assets/css/main.css",
     "start:app": "vite"

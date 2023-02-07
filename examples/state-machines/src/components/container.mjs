@@ -3,7 +3,7 @@ export function createContainerWrapper ({ createCustomElement, html, renderer })
     renderer,
     props: {
       header: {
-        type: String,
+        type: String
       }
     },
     render () {

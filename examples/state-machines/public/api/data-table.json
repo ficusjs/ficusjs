@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "name": "John Doe",
+      "company": "Acme",
+      "country": "USA"
+    },
+    {
+      "name": "Marcus Bergson",
+      "company": "Spotify",
+      "country": "Sweden"
+    },
+    {
+      "name": "Craig Lubitz",
+      "company": "Google",
+      "country": "Switzerland"
+    }
+  ]
+}

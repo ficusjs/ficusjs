@@ -545,6 +545,7 @@ html {
 
 .container__button {
   margin-top: 1rem;
+  width: auto;
   border-radius: 0.25rem;
   --tw-bg-opacity: 1;
   background-color: rgb(71 85 105 / var(--tw-bg-opacity));
@@ -560,6 +561,97 @@ html {
 .container__button:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+}
+
+.container__button--disabled {
+  pointer-events: none;
+  margin-top: 1rem;
+  width: auto;
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(71 85 105 / var(--tw-bg-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.container__button--disabled:disabled {
+  opacity: 0.75;
+}
+
+.form__input {
+  width: 100%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0.25rem;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  line-height: 1.25;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.form__input:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(168 85 247 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.form__input--disabled {
+  pointer-events: none;
+  width: 100%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0.25rem;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  line-height: 1.25;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.form__input--disabled:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(168 85 247 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.form__input--disabled:disabled {
+  opacity: 0.75;
+}
+
+.form__label {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
 }
 
 .container__label--active {
@@ -583,6 +675,10 @@ html {
   display: flex;
 }
 
+.table {
+  display: table;
+}
+
 .h-screen {
   height: 100vh;
 }
@@ -601,6 +697,10 @@ html {
 
 .w-full {
   width: 100%;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .flex-row {
@@ -623,12 +723,20 @@ html {
   justify-content: space-evenly;
 }
 
+.self-center {
+  align-self: center;
+}
+
 .rounded-lg {
   border-radius: 0.5rem;
 }
 
 .border-2 {
   border-width: 2px;
+}
+
+.border-dashed {
+  border-style: dashed;
 }
 
 .border-teal-500 {
@@ -677,4 +785,9 @@ html {
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.white-borders tr, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
 }

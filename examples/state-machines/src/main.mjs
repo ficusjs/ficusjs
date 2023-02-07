@@ -7,6 +7,6 @@ import { createContainerWrapper } from './components/container.mjs'
 
 createDataFetchExample({ createCustomElement, html, renderer, withXStateService })
 createDataFetchStateVisualization({ createCustomElement, html, renderer, withXStateService })
-createFormSubmissionStateVisualization({ createCustomElement, html, renderer })
-createFormSubmissionExample({ createCustomElement, html, renderer })
+createFormSubmissionStateVisualization({ createCustomElement, html, renderer, withXStateService })
+createFormSubmissionExample({ createCustomElement, html, renderer, withXStateService })
 createContainerWrapper({ createCustomElement, html, renderer })

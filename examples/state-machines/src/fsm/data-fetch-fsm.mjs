@@ -1,8 +1,8 @@
-import { createMachine, createXStateService, assign } from '../../util/ficus.mjs'
+import { createMachine, createXStateService, assign } from '../util/ficus.mjs'
 
 const definition = {
   id: 'data-fetch',
-  context: { data: null },
+  context: { data: null, error: null },
   initial: 'idle',
   states: {
     idle: {
@@ -19,7 +19,8 @@ const definition = {
           actions: ['dataHandler']
         },
         ERROR: {
-          target: 'error'
+          target: 'error',
+          actions: ['errorHandler']
         }
       }
     },
@@ -42,8 +43,17 @@ const definition = {
 
 const options = {
   actions: {
-    dataHandler: assign({
-      data: (context, event) => event.data
+    dataHandler: assign((context, event) => {
+      return {
+        data: event.data,
+        error: null
+      }
+    }),
+    errorHandler: assign((context, event) => {
+      return {
+        data: null,
+        error: event.error
+      }
     })
   }
 }
@@ -51,6 +61,9 @@ const options = {
 const getters = {
   data (context) {
     return context.data
+  },
+  error (context) {
+    return context.error
   }
 }
 

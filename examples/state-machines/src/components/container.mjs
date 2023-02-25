@@ -8,8 +8,8 @@ export function createContainerWrapper ({ createCustomElement, html, renderer })
     },
     render () {
       return html`
-        <div class="full-space p-4">
-          <div class="full-space border-2 border-teal-500 rounded-lg">
+        <div class="full-space p-2">
+          <div class="full-space teal-borders">
             <h2 class="container__header">${this.props.header}</h2>
             <div class="container__content">
                 ${this.slots.default}

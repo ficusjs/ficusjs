@@ -5,30 +5,46 @@ export function createDataFetchExample ({ createCustomElement, html, renderer, w
   createCustomElement('data-fetch-example',
     withXStateService(dataFetchStateMachine, {
       renderer,
-      async load () {
+      fetchSuccess () {
         this.fsm.send('LOAD')
-        await new Promise(resolve => setTimeout(resolve, 4000))
-        const response = await httpGet('api/data-table.json')
-        const randomNumber = Math.floor(Math.random() * 100)
-        response && randomNumber > 50 ? this.fsm.send({ type: 'SUCCESS', data: response.data }) : this.fsm.send('ERROR')
+        this.fetchData('api/data-table.json')
+      },
+      fetchError () {
+        this.fsm.send('LOAD')
+        this.fetchData('api/wrong-url.json')
+      },
+      async fetchData (url) {
+        try {
+          // using setTimeout to simulate a slow api call
+          await new Promise(resolve => setTimeout(resolve, 4000))
+          const response = await httpGet(url)
+          this.fsm.send({ type: 'SUCCESS', data: response.data })
+        } catch (error) {
+          this.fsm.send({ type: 'ERROR', error })
+        }
       },
       async retry () {
         this.fsm.send('RETRY')
-        await this.load()
+        this.fetchData('api/data-table.json')
       },
       async refresh () {
         this.fsm.send('REFRESH')
-        await this.load()
+        this.fetchData('api/data-table.json')
       },
-      getContent () {
+      render () {
         switch (this.fsm && this.fsm.state.value) {
           case 'idle':
-            return html`<button class="container__button" onclick="${this.load}">Fetch Data</button>`
+            return html`
+              <section class="flex-col-center">
+                <button class="container__button" onclick="${this.fetchSuccess}">Fetch Data - Success</button>
+                <button class="container__button" onclick="${this.fetchError}">Fetch Data - Error</button>
+              </section>
+            `
           case 'loading':
-            return html`<img src="assets/gifs/loading.gif" style="width: 10vh">`
+            return html`<img src="assets/gifs/loading.gif" style="width: 15vh">`
           case 'loaded':
             return html`
-              <div class="flex-col-center justify-evenly h-full w-full">
+              <div class="flex-col-center justify-evenly full-space">
                 <table class="white-borders w-1/2 h-1/2">
                   <tr>
                     <th>Name</th>
@@ -57,13 +73,6 @@ export function createDataFetchExample ({ createCustomElement, html, renderer, w
               </div>
           `
         }
-      },
-      render () {
-        return html`
-          <container-wrapper header="Data fetch - example">
-            ${this.getContent()}
-          </container-wrapper>
-        `
       }
     })
   )

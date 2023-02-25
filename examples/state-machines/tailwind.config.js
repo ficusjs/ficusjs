@@ -4,11 +4,11 @@ module.exports = {
     relative: true,
     files: [
       './src/**/*.{html,mjs}',
-      './src/components/other.js',
-    ],
+      './src/components/other.js'
+    ]
   },
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
+  plugins: []
 }

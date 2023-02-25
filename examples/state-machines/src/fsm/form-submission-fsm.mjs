@@ -1,4 +1,4 @@
-import { createMachine, createXStateService } from '../../util/ficus.mjs'
+import { createMachine, createXStateService } from '../util/ficus.mjs'
 
 const definition = {
   id: 'form-submission',

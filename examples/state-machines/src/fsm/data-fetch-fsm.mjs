@@ -16,11 +16,11 @@ const definition = {
       on: {
         SUCCESS: {
           target: 'loaded',
-          actions: ['dataHandler']
+          actions: assign((_, event) => ({ data: event.data, error: null }))
         },
         ERROR: {
           target: 'error',
-          actions: ['errorHandler']
+          actions: assign((_, event) => ({ data: null, error: event.error }))
         }
       }
     },
@@ -41,32 +41,11 @@ const definition = {
   }
 }
 
-const options = {
-  actions: {
-    dataHandler: assign((context, event) => {
-      return {
-        data: event.data,
-        error: null
-      }
-    }),
-    errorHandler: assign((context, event) => {
-      return {
-        data: null,
-        error: event.error
-      }
-    })
-  }
-}
-
 const getters = {
-  data (context) {
-    return context.data
-  },
-  error (context) {
-    return context.error
-  }
+  data: (context) => context.data,
+  error: (context) => context.error
 }
 
-const machine = createMachine(definition, options)
+const machine = createMachine(definition)
 
 export const dataFetchStateMachine = createXStateService('data.fetch', machine, getters)

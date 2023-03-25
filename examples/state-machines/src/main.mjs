@@ -4,6 +4,7 @@ import { createDataFetchStateVisualization } from './components/data-fetch-state
 import { createFormSubmissionStateVisualization } from './components/form-submission-state-visualization.mjs'
 import { createFormSubmissionExample } from './components/form-submission-example.mjs'
 import { createContainerWrapper } from './components/container.mjs'
+import { createTable } from './components/table.mjs'
 import { createFsmExamplesPage } from './pages/fsm-examples.mjs'
 
 createDataFetchExample({ createCustomElement, html, renderer, withXStateService })
@@ -12,3 +13,4 @@ createFormSubmissionStateVisualization({ createCustomElement, html, renderer, wi
 createFormSubmissionExample({ createCustomElement, html, renderer, withXStateService })
 createContainerWrapper({ createCustomElement, html, renderer })
 createFsmExamplesPage({ createCustomElement, html, renderer })
+createTable({ createCustomElement, html, renderer })

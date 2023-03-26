@@ -38,6 +38,6 @@ const definition = {
   }
 }
 
-const machine = createMachine(definition)
+export const machine = createMachine(definition)
 
 export const formSubmissionStateMachine = createXStateService('form.submission', machine)

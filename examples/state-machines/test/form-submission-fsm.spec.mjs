@@ -1,46 +1,26 @@
 // @vitest-environment jsdom
-import { describe, it, expect, beforeEach } from 'vitest'
-import { formSubmissionStateMachine as fsm } from '../src/fsm/form-submission-fsm.mjs'
+import { describe, it, expect } from 'vitest'
+import { machine as fsm } from '../src/fsm/form-submission-fsm.mjs'
 
-beforeEach(async () => {
-  // Reset the state machine before each test
-  fsm.start()
-})
-
-describe('Data Fetch State Machine', () => {
-  it('When on "idle", if "SUBMIT" event occurs, fsm should reach "submitting"', t => {
-    fsm.send('SUBMIT')
-
-    expect(fsm.state.value).toEqual('submitting')
+describe('Form Submission State Machine', () => {
+  it('From idle, on SUBMIT', () => {
+    const { value } = fsm.transition('idle', { type: 'SUBMIT' })
+    expect(value).toEqual('submitting')
   })
-
-  it('When on "submitting", if "SUCCESS" event occurs, fsm should reach "success"', t => {
-    fsm.send('SUBMIT')
-    fsm.send('SUCCESS')
-
-    expect(fsm.state.value).toEqual('success')
+  it('From submitting, on SUCCESS', () => {
+    const { value } = fsm.transition('submitting', { type: 'SUCCESS' })
+    expect(value).toEqual('success')
   })
-
-  it('When on "submitting", if "ERROR" event occurs, fsm should reach "error"', t => {
-    fsm.send('SUBMIT')
-    fsm.send('ERROR')
-
-    expect(fsm.state.value).toEqual('error')
+  it('From submitting, on ERROR', () => {
+    const { value } = fsm.transition('submitting', { type: 'ERROR' })
+    expect(value).toEqual('error')
   })
-
-  it('When on "success", if "CLEAR" event occurs, fsm should reach "idle"', t => {
-    fsm.send('SUBMIT')
-    fsm.send('SUCCESS')
-    fsm.send('CLEAR')
-
-    expect(fsm.state.value).toEqual('idle')
+  it('From success, on CLEAR', () => {
+    const { value } = fsm.transition('success', { type: 'CLEAR' })
+    expect(value).toEqual('idle')
   })
-
-  it('When on "error", if "SUBMIT" event occurs, fsm should reach "submitting"', t => {
-    fsm.send('SUBMIT')
-    fsm.send('ERROR')
-    fsm.send('SUBMIT')
-
-    expect(fsm.state.value).toEqual('submitting')
+  it('From error, on SUBMIT', () => {
+    const { value } = fsm.transition('error', { type: 'SUBMIT' })
+    expect(value).toEqual('submitting')
   })
 })

@@ -46,6 +46,6 @@ const getters = {
   error: (context) => context.error
 }
 
-const machine = createMachine(definition)
+export const machine = createMachine(definition)
 
 export const dataFetchStateMachine = createXStateService('data.fetch', machine, getters)

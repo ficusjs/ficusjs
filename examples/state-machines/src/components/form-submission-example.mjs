@@ -11,14 +11,16 @@ export function createFormSubmissionExample ({ createCustomElement, html, render
         this.fsm.send('SUBMIT')
         // simulating a network request
         await new Promise(resolve => setTimeout(resolve, 4000))
-        // if one of the fields is empty or the password does not contain numbers,
-        // send an error event. Otherwise, send success and then clear the form
-        !username.length || !password.length || !/\d/.test(password) ? this.fsm.send('ERROR') : this.clearForm(e.target)
+        if (!username.length || !password.length || !/\d/.test(password)) {
+          this.fsm.send('ERROR')
+        } else {
+          this.fsm.send('SUCCESS')
+          // adding a delay here just to show that this state occurs in the fsm visualization
+          await new Promise(resolve => setTimeout(resolve, 2000))
+          this.clearForm(e.target)
+        }
       },
-      async clearForm (form) {
-        this.fsm.send('SUCCESS')
-        // delaying the clearing of the form to show the success state
-        await new Promise(resolve => setTimeout(resolve, 2000))
+      clearForm (form) {
         this.fsm.send('CLEAR')
         form.reset()
       },

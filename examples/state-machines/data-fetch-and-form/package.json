@@ -1,5 +1,5 @@
 {
-  "name": "ficusjs-state-machines-example",
+  "name": "fsm-example-data-fetch-and-form",
   "version": "1.0.0",
   "scripts": {
     "lint": "standard \"src/**/*.mjs\"",

@@ -29,12 +29,12 @@ export function createFormSubmissionExample ({ createCustomElement, html, render
           <form onsubmit="${this.submit}" class="flex-col-center justify-evenly">
             <fieldset class="flex-col-center">
               <label class="form__label" for="username">Username</label>
-              <input name="username" class="${this.fsm.state.value !== 'submitting' ? 'form__input' : 'form__input--disabled'}" id="username" type="text">
+              <input name="username" class="${this.fsm.state.value === 'submitting' ? 'form__input--disabled' : 'form__input'}" id="username" type="text">
               <label class="form__label" for="password">Password</label>
-              <input name="password" class="${this.fsm.state.value !== 'submitting' ? 'form__input' : 'form__input--disabled'}" id="password" type="password">
+              <input name="password" class="${this.fsm.state.value === 'submitting' ? 'form__input--disabled' : 'form__input'}" id="password" type="password">
             </fieldset>
             <p class="mt-4">* Password should contain at least one number</p>
-            <input class="${this.fsm.state.value !== 'submitting' ? 'container__button' : 'container__button--disabled'}" type="submit" value="Sign Up">
+            <input class="${this.fsm.state.value === 'submitting' ? 'container__button--disabled' : 'container__button'}" type="submit" value="Sign Up">
           </form>
         `
       }

@@ -8,7 +8,7 @@ export function createTable ({ createCustomElement, html, renderer }) {
     renderer,
     render () {
       return html`
-        <table class="white-borders w-full">
+        <table class="white-borders full-space">
           <tr>
             <th>Name</th>
             <th>Company</th>
